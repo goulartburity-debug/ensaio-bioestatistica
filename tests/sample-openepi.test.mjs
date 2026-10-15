@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import {calculate} from '../sample-size/engine.mjs';import {defaults} from '../sample-size/methods.mjs';
+const fixture=JSON.parse(fs.readFileSync(new URL('./openepi-reference.json',import.meta.url)));
+for(const {input,expected,tolerance,source,blocked} of fixture.cases)test('Original OpenEpi: '+source+' '+JSON.stringify(input),()=>{if(blocked){assert.throws(()=>calculate({...defaults(),...input}),/menos de 10/);return;}const r=calculate({...defaults(),...input});assert.equal(r.units.length,expected.length);r.units.forEach((u,i)=>assert.ok(Math.abs(u.n-expected[i])<=tolerance,`${u.n} vs ${expected[i]}`));});

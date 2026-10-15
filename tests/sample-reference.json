@@ -1,0 +1,572 @@
+{
+  "reference": "SciPy 1.17.0; independent Python reference equations",
+  "cases": [
+    {
+      "input": {
+        "method": "mean",
+        "sd": "8",
+        "margin": "2"
+      },
+      "expected": {
+        "n": 62,
+        "units": [
+          62
+        ],
+        "total": 62,
+        "initialTotal": 62,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "mean",
+        "sd": "8",
+        "margin": "0.01",
+        "confidence": "99"
+      },
+      "expected": {
+        "n": 4246334,
+        "units": [
+          4246334
+        ],
+        "total": 4246334,
+        "initialTotal": 4246334,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "mean",
+        "sd": "8",
+        "margin": "2",
+        "population": "finite",
+        "populationN": "500",
+        "loss": "10"
+      },
+      "expected": {
+        "n": 55,
+        "units": [
+          55
+        ],
+        "total": 55,
+        "initialTotal": 62,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "proportion",
+        "p": "50",
+        "margin": "5"
+      },
+      "expected": {
+        "n": 385,
+        "units": [
+          385
+        ],
+        "total": 385,
+        "initialTotal": 385,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "proportion",
+        "p": "1",
+        "margin": "0.2"
+      },
+      "expected": {
+        "n": 9508,
+        "units": [
+          9508
+        ],
+        "total": 9508,
+        "initialTotal": 9508,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "proportion",
+        "p": "99",
+        "margin": "0.2"
+      },
+      "expected": {
+        "n": 9508,
+        "units": [
+          9508
+        ],
+        "total": 9508,
+        "initialTotal": 9508,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "proportion",
+        "p": "50",
+        "margin": "5",
+        "population": "finite",
+        "populationN": "1000"
+      },
+      "expected": {
+        "n": 278,
+        "units": [
+          278
+        ],
+        "total": 278,
+        "initialTotal": 278,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "means",
+        "delta": "5.42",
+        "sd1": "15.34",
+        "sd2": "18.23"
+      },
+      "expected": {
+        "n": 152,
+        "units": [
+          152,
+          152
+        ],
+        "total": 304,
+        "initialTotal": 304,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "means",
+        "delta": "5",
+        "sd1": "8",
+        "sd2": "8",
+        "ratio": "2.3",
+        "loss": "12"
+      },
+      "expected": {
+        "n": 29,
+        "units": [
+          29,
+          67
+        ],
+        "total": 96,
+        "initialTotal": 110,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "means",
+        "delta": "-5",
+        "sd1": "8",
+        "sd2": "12",
+        "ratio": "0.5",
+        "sides": "less"
+      },
+      "expected": {
+        "n": 88,
+        "units": [
+          88,
+          44
+        ],
+        "total": 132,
+        "initialTotal": 132,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "means",
+        "delta": "0.1",
+        "sd1": "8",
+        "sd2": "8"
+      },
+      "expected": {
+        "n": 100466,
+        "units": [
+          100466,
+          100466
+        ],
+        "total": 200932,
+        "initialTotal": 200932,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "means",
+        "scale": "standard",
+        "d": "0.5",
+        "comparisons": "3"
+      },
+      "expected": {
+        "n": 84,
+        "units": [
+          84,
+          84
+        ],
+        "total": 168,
+        "initialTotal": 168,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "paired",
+        "delta": "5",
+        "sd": "8"
+      },
+      "expected": {
+        "n": 23,
+        "units": [
+          23
+        ],
+        "total": 23,
+        "initialTotal": 23,
+        "power": 0.8171073856858179
+      }
+    },
+    {
+      "input": {
+        "method": "paired",
+        "delta": "5",
+        "pairScale": "correlation",
+        "sd1": "8",
+        "sd2": "10",
+        "rho": "0.6",
+        "loss": "15"
+      },
+      "expected": {
+        "n": 24,
+        "units": [
+          24
+        ],
+        "total": 24,
+        "initialTotal": 29,
+        "power": 0.8117852440890035
+      }
+    },
+    {
+      "input": {
+        "method": "paired",
+        "scale": "standard",
+        "d": "0.02"
+      },
+      "expected": {
+        "n": 19625,
+        "units": [
+          19625
+        ],
+        "total": 19625,
+        "initialTotal": 19625,
+        "power": 0.8000185442152037
+      }
+    },
+    {
+      "input": {
+        "method": "paired",
+        "scale": "standard",
+        "d": "-0.5",
+        "sides": "less"
+      },
+      "expected": {
+        "n": 27,
+        "units": [
+          27
+        ],
+        "total": 27,
+        "initialTotal": 27,
+        "power": 0.811831551708168
+      }
+    },
+    {
+      "input": {
+        "method": "proportions",
+        "p1": "60",
+        "p2": "75"
+      },
+      "expected": {
+        "n": 152,
+        "units": [
+          152,
+          152
+        ],
+        "total": 304,
+        "initialTotal": 304,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "proportions",
+        "p1": "2",
+        "p2": "4",
+        "ratio": "2"
+      },
+      "expected": {
+        "n": 891,
+        "units": [
+          891,
+          1781
+        ],
+        "total": 2672,
+        "initialTotal": 2672,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "proportions",
+        "p1": "98",
+        "p2": "96",
+        "ratio": "0.5",
+        "sides": "less"
+      },
+      "expected": {
+        "n": 1298,
+        "units": [
+          1298,
+          649
+        ],
+        "total": 1947,
+        "initialTotal": 1947,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "anova",
+        "groups": "3",
+        "means": "10;12;15",
+        "sd": "8"
+      },
+      "expected": {
+        "n": 50,
+        "units": [
+          50
+        ],
+        "total": 150,
+        "initialTotal": 150,
+        "power": 0.8026385957150611
+      }
+    },
+    {
+      "input": {
+        "method": "anova",
+        "groups": "5",
+        "scale": "standard",
+        "f": "0.1",
+        "loss": "10"
+      },
+      "expected": {
+        "n": 240,
+        "units": [
+          240
+        ],
+        "total": 1200,
+        "initialTotal": 1335,
+        "power": 0.8006464011091071
+      }
+    },
+    {
+      "input": {
+        "method": "factorial",
+        "a": "2",
+        "b": "3",
+        "means": "10;12;14;10;14;18",
+        "sd": "4",
+        "effect": "AB"
+      },
+      "expected": {
+        "n": 40,
+        "units": [
+          40
+        ],
+        "total": 240,
+        "initialTotal": 240,
+        "power": 0.8101558589663279
+      }
+    },
+    {
+      "input": {
+        "method": "factorial",
+        "a": "2",
+        "b": "3",
+        "means": "10;12;14;10;14;18",
+        "sd": "4",
+        "effect": "A"
+      },
+      "expected": {
+        "n": 22,
+        "units": [
+          22
+        ],
+        "total": 132,
+        "initialTotal": 132,
+        "power": 0.8133642579221549
+      }
+    },
+    {
+      "input": {
+        "method": "factorial",
+        "a": "2",
+        "b": "3",
+        "means": "10;12;14;10;14;18",
+        "sd": "4",
+        "effect": "B",
+        "comparisons": "3"
+      },
+      "expected": {
+        "n": 7,
+        "units": [
+          7
+        ],
+        "total": 42,
+        "initialTotal": 42,
+        "power": 0.8502354498757829
+      }
+    },
+    {
+      "input": {
+        "method": "blocks",
+        "groups": "3",
+        "means": "10;12;15",
+        "sd": "4",
+        "loss": "10"
+      },
+      "expected": {
+        "n": 14,
+        "units": [
+          14
+        ],
+        "total": 42,
+        "initialTotal": 48,
+        "power": 0.8093603501735614
+      }
+    },
+    {
+      "input": {
+        "method": "blocks",
+        "groups": "2",
+        "scale": "standard",
+        "f": "0.3"
+      },
+      "expected": {
+        "n": 46,
+        "units": [
+          46
+        ],
+        "total": 92,
+        "initialTotal": 92,
+        "power": 0.80390011527936
+      }
+    },
+    {
+      "input": {
+        "method": "correlation",
+        "r": "0.3"
+      },
+      "expected": {
+        "n": 85,
+        "units": [
+          85
+        ],
+        "total": 85,
+        "initialTotal": 85,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "correlation",
+        "r": "-0.1",
+        "sides": "less"
+      },
+      "expected": {
+        "n": 618,
+        "units": [
+          618
+        ],
+        "total": 618,
+        "initialTotal": 618,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "regression",
+        "predictors": "3",
+        "tested": "2",
+        "r2full": "0.25",
+        "r2reduced": "0.1"
+      },
+      "expected": {
+        "n": 52,
+        "units": [
+          52
+        ],
+        "total": 52,
+        "initialTotal": 52,
+        "power": 0.8055755901655721
+      }
+    },
+    {
+      "input": {
+        "method": "regression",
+        "predictors": "5",
+        "tested": "5",
+        "effectMode": "f2",
+        "f2": "0.02"
+      },
+      "expected": {
+        "n": 647,
+        "units": [
+          647
+        ],
+        "total": 647,
+        "initialTotal": 647,
+        "power": 0.8000445188594226
+      }
+    },
+    {
+      "input": {
+        "method": "cluster",
+        "p": "50",
+        "margin": "5",
+        "clusterSize": "20",
+        "icc": "0.05",
+        "loss": "10"
+      },
+      "expected": {
+        "n": 38,
+        "units": [
+          38
+        ],
+        "total": 760,
+        "initialTotal": 860,
+        "power": null
+      }
+    },
+    {
+      "input": {
+        "method": "cluster",
+        "p": "10",
+        "margin": "2",
+        "clusterSize": "10",
+        "icc": "0"
+      },
+      "expected": {
+        "n": 87,
+        "units": [
+          87
+        ],
+        "total": 870,
+        "initialTotal": 870,
+        "power": null
+      }
+    }
+  ]
+}

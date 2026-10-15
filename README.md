@@ -2,31 +2,36 @@
 
 Projeto de monitoria de Bernardo Goulart Burity, baseado nos materiais da Profa. Ana Paula Madureira e nas referências acadêmicas vinculadas na interface.
 
-## Atualização das explicações — outubro de 2026
+## Nova versão: tamanho amostral 1.0.0 — 15/10/2026
 
-Os percursos de planejamento e análise agora apresentam um exemplo curto antes de cada escolha, a opção “Entender melhor esta escolha” e uma explicação do significado das respostas selecionadas. A ajuda se adapta, por exemplo, a blocos, medidas pareadas e grupos já existentes. Não foram acrescentadas perguntas ou análises calculadas no site.
+Nova entrada **Tamanho amostral**, independente do planejamento e integrada a ele mediante prévia e confirmação. São 11 rotas de cálculo: precisão de média/proporção; duas médias independentes/pareadas; duas proporções; ANOVA; fatorial balanceado; DBC completo; correlação; regressão linear; estimação de proporção em conglomerados iguais. Há métodos exatos sob modelos normais e aproximações, sempre identificados.
 
-As explicações são originais, com inspiração pedagógica nos trechos pertinentes de Intuitive Biostatistics, de Harvey Motulsky (Oxford University Press, 1995). O livro não está incluído neste pacote. As referências acadêmicas dos métodos continuam acessíveis no site.
+Mantidos planejamento, exemplos, glossário, orientação de análises e explicações junto às escolhas. O site não importa dados nem executa análises de dados coletados. A calculadora usa parâmetros de planejamento, com hipóteses explícitas, cenários, perdas e resumo copiável.
 
-## Como atualizar o site que já está publicado
+Documentação:
+- [Métodos e limitações](docs/TAMANHO-AMOSTRAL.md)
+- [Código aberto e licenças](docs/CODIGO-ABERTO.md)
+- [Validação e exemplos numéricos](docs/VALIDACAO-AMOSTRAL.md)
 
-1. Extraia o ZIP em seu computador.
-2. Abra https://github.com/goulartburity-debug/ensaio-bioestatistica e selecione a aba Code e a branch main.
-3. Clique em Add file > Upload files (Adicionar arquivo > Enviar arquivos).
-4. Arraste todos os 10 arquivos de dentro da pasta extraída. Não arraste a pasta inteira nem o ZIP. index.html, app.mjs, teaching.mjs e styles.css devem ficar lado a lado na raiz do repositório.
-5. Aguarde os uploads terminarem. Os arquivos com o mesmo nome vão atualizar os existentes. teaching.mjs é um arquivo novo necessário para esta versão.
-6. Em Commit changes, escreva “Melhora das explicações de planejamento e análise”. Mantenha a opção de gravar diretamente na branch main e confirme em Commit changes.
-7. O GitHub Pages publicará novamente usando a configuração existente. Não é necessário mudar Settings > Pages. Confira o andamento na aba Actions. A publicação pode levar até 10 minutos.
-8. Abra https://goulartburity-debug.github.io/ensaio-bioestatistica/ e recarregue com Ctrl+F5. No planejamento, procure “Um exemplo para decidir” e “Entender melhor esta escolha”. Teste também o percurso Escolher uma análise.
+## Atualizar o site que já está no GitHub Pages
 
-O endereço permanece o mesmo. Este pacote preparado não altera o site publicado até você enviar os arquivos e confirmar a alteração.
+1. Baixe e extraia o ZIP em uma pasta no computador.
+2. Abra https://github.com/goulartburity-debug/ensaio-bioestatistica na aba **Code**, branch **main**.
+3. Selecione **Add file → Upload files**.
+4. Arraste **todos os arquivos e pastas de dentro da pasta extraída**, mantendo a organização. Não envie o ZIP nem a pasta externa que o envolve. `index.html`, `app.mjs` e `styles.css` ficam na raiz. As pastas novas `sample-size`, `docs` e `tests` ficam nesse mesmo nível. Não retire os arquivos de dentro dessas pastas.
+5. Espere o upload concluir. Arquivos de mesmo nome atualizam os existentes. Em **Commit changes**, escreva “Adiciona calculadora de tamanho amostral” e confirme diretamente na **main**.
+6. O GitHub Pages publica usando a configuração existente. Não refaça Settings → Pages. Acompanhe a execução na aba **Actions** e aguarde a conclusão.
+7. Abra https://goulartburity-debug.github.io/ensaio-bioestatistica/ e recarregue com **Ctrl+F5** (ou teste em uma aba anônima). O menu deverá exibir **Tamanho amostral**.
+8. Teste: Calcular diretamente → comparar tratamentos → duas médias independentes → Carregar exemplo fictício → Calcular. O exemplo deve mostrar 41 unidades por grupo. Teste também “Preciso calcular essa quantidade” dentro do planejamento.
 
-## Para testar e manter
+O link dos alunos permanece igual. Este pacote não altera o site publicado até o envio e a confirmação no GitHub. Os arquivos de documentação, testes e licenças devem acompanhar a distribuição. Não é necessário instalar programas para publicar.
 
-O site orienta a metodologia; não executa análises nem recebe tabelas de dados. As respostas ficam somente no navegador do visitante. O tamanho amostral não é calculado; o critério didático de significância é 5%.
+## Manutenção
 
-Os módulos JavaScript precisam ser servidos por HTTP(S). Abrir index.html por duplo clique não substitui a publicação. Não é necessário instalar programas para atualizar pelo GitHub.
+Publicação estática, sem build, servidor ou CDN. Módulos JavaScript precisam de HTTP(S); abrir `index.html` por duplo clique não substitui a publicação. Código estatístico separado da interface e das regras de integração em `sample-size/`.
 
-As regras estatísticas de guide.mjs e analysis.mjs foram preservadas nesta revisão. Foram verificados os percursos condicionais e a renderização em testes automatizados; a avaliação didática com alunos permanece essencial.
+Rodar regressão: `node --test tests/*.test.mjs`. Referências numéricas reprodutíveis em `tests/`, sem uso de Python/R em produção. Validação desta entrega: 153 testes aprovados; sem inspeção visual em navegador real.
 
-Documentação de envio: https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository
+Os parâmetros da calculadora são salvos apenas no navegador e os resultados precisam ser recalculados após reabertura. Aplicações confirmadas ao planejamento registram método, parâmetros e versão; mudanças de plano geram aviso para revisão.
+
+As partes reaproveitadas de jStat e OpenEpi têm licença MIT e seus avisos foram preservados. Não foi incorporado código GPL do WebPower. Consulte a documentação de proveniência antes de acrescentar novas dependências.

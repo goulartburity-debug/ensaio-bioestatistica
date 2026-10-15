@@ -1,0 +1,188 @@
+{
+  "snapshot": "2026-10-15 download bundle",
+  "hashes": {
+    "SSMean.js": "4596fc810d0436928ae2d92cc5017229a0909885c08a8fb616c5ff6cabe63de7",
+    "SSCohort.js": "01e77ebe0eb7b84efbdedb9fd4ebe98ec21e11f41369e1d3afe27bd8ea44a163",
+    "SSPropor.js": "07f6ca099a4f9b88079e2177f7f304184f11a06cd0684e7a73cf56991a8ad20b"
+  },
+  "cases": [
+    {
+      "input": {
+        "method": "means",
+        "delta": "5.42",
+        "sd1": "15.34",
+        "sd2": "18.23",
+        "ratio": "1",
+        "alpha": "5",
+        "power": "80"
+      },
+      "expected": [
+        152,
+        152
+      ],
+      "tolerance": 1,
+      "source": "SSMean.js CalcPower; original rounded quantile constants"
+    },
+    {
+      "input": {
+        "method": "means",
+        "delta": "5",
+        "sd1": "8",
+        "sd2": "12",
+        "ratio": "2",
+        "alpha": "5",
+        "power": "90"
+      },
+      "expected": [
+        58,
+        116
+      ],
+      "tolerance": 1,
+      "source": "SSMean.js CalcPower; original rounded quantile constants"
+    },
+    {
+      "input": {
+        "method": "means",
+        "delta": "3",
+        "sd1": "4",
+        "sd2": "5",
+        "ratio": "0.5",
+        "alpha": "1",
+        "power": "80"
+      },
+      "expected": [
+        86,
+        43
+      ],
+      "tolerance": 1,
+      "source": "SSMean.js CalcPower; original rounded quantile constants"
+    },
+    {
+      "input": {
+        "method": "means",
+        "delta": "1",
+        "sd1": "5",
+        "sd2": "6",
+        "ratio": "2.3",
+        "alpha": "5",
+        "power": "80"
+      },
+      "expected": [
+        320,
+        736
+      ],
+      "tolerance": 1,
+      "source": "SSMean.js CalcPower; original rounded quantile constants"
+    },
+    {
+      "input": {
+        "method": "proportions",
+        "p1": "60",
+        "p2": "75",
+        "ratio": "1",
+        "alpha": "5",
+        "power": "80"
+      },
+      "expected": [
+        152,
+        152
+      ],
+      "blocked": false,
+      "tolerance": 1,
+      "source": "SSCohort.js Calc; Fleiss column without continuity correction"
+    },
+    {
+      "input": {
+        "method": "proportions",
+        "p1": "2",
+        "p2": "4",
+        "ratio": "2",
+        "alpha": "5",
+        "power": "80"
+      },
+      "expected": [
+        891,
+        1781
+      ],
+      "blocked": false,
+      "tolerance": 1,
+      "source": "SSCohort.js Calc; Fleiss column without continuity correction"
+    },
+    {
+      "input": {
+        "method": "proportions",
+        "p1": "5",
+        "p2": "25",
+        "ratio": "0.33",
+        "alpha": "1",
+        "power": "90"
+      },
+      "expected": [
+        164,
+        54
+      ],
+      "blocked": true,
+      "tolerance": 1,
+      "source": "SSCohort.js Calc; Fleiss column without continuity correction"
+    },
+    {
+      "input": {
+        "method": "proportions",
+        "p1": "98",
+        "p2": "96",
+        "ratio": "0.5",
+        "alpha": "5",
+        "power": "80"
+      },
+      "expected": [
+        1634,
+        817
+      ],
+      "blocked": false,
+      "tolerance": 1,
+      "source": "SSCohort.js Calc; Fleiss column without continuity correction"
+    },
+    {
+      "input": {
+        "method": "proportion",
+        "p": "50",
+        "margin": "5",
+        "population": "finite",
+        "populationN": "1000"
+      },
+      "expected": [
+        278
+      ],
+      "tolerance": 1,
+      "source": "SSPropor.js Calc/ssx; original ANorm quantile"
+    },
+    {
+      "input": {
+        "method": "proportion",
+        "p": "1",
+        "margin": "0.2",
+        "population": "finite",
+        "populationN": "10000000"
+      },
+      "expected": [
+        9499
+      ],
+      "tolerance": 1,
+      "source": "SSPropor.js Calc/ssx; original ANorm quantile"
+    },
+    {
+      "input": {
+        "method": "proportion",
+        "p": "99",
+        "margin": "0.2",
+        "population": "finite",
+        "populationN": "10000000"
+      },
+      "expected": [
+        9499
+      ],
+      "tolerance": 1,
+      "source": "SSPropor.js Calc/ssx; original ANorm quantile"
+    }
+  ]
+}
