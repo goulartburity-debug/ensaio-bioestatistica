@@ -13,19 +13,6 @@ Documentação:
 - [Código aberto e licenças](docs/CODIGO-ABERTO.md)
 - [Validação e exemplos numéricos](docs/VALIDACAO-AMOSTRAL.md)
 
-## Atualizar o site que já está no GitHub Pages
-
-1. Baixe e extraia o ZIP em uma pasta no computador.
-2. Abra https://github.com/goulartburity-debug/ensaio-bioestatistica na aba **Code**, branch **main**.
-3. Selecione **Add file → Upload files**.
-4. Arraste **todos os arquivos e pastas de dentro da pasta extraída**, mantendo a organização. Não envie o ZIP nem a pasta externa que o envolve. `index.html`, `app.mjs` e `styles.css` ficam na raiz. As pastas novas `sample-size`, `docs` e `tests` ficam nesse mesmo nível. Não retire os arquivos de dentro dessas pastas.
-5. Espere o upload concluir. Arquivos de mesmo nome atualizam os existentes. Em **Commit changes**, escreva “Adiciona calculadora de tamanho amostral” e confirme diretamente na **main**.
-6. O GitHub Pages publica usando a configuração existente. Não refaça Settings → Pages. Acompanhe a execução na aba **Actions** e aguarde a conclusão.
-7. Abra https://goulartburity-debug.github.io/ensaio-bioestatistica/ e recarregue com **Ctrl+F5** (ou teste em uma aba anônima). O menu deverá exibir **Tamanho amostral**.
-8. Teste: Calcular diretamente → comparar tratamentos → duas médias independentes → Carregar exemplo fictício → Calcular. O exemplo deve mostrar 41 unidades por grupo. Teste também “Preciso calcular essa quantidade” dentro do planejamento.
-
-O link dos alunos permanece igual. Este pacote não altera o site publicado até o envio e a confirmação no GitHub. Os arquivos de documentação, testes e licenças devem acompanhar a distribuição. Não é necessário instalar programas para publicar.
-
 ## Manutenção
 
 Publicação estática, sem build, servidor ou CDN. Módulos JavaScript precisam de HTTP(S); abrir `index.html` por duplo clique não substitui a publicação. Código estatístico separado da interface e das regras de integração em `sample-size/`.
