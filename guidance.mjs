@@ -131,7 +131,26 @@ guidance.replicatedBlocks={
  care:'O cálculo mantém a mesma quantidade por tratamento em todos os blocos. Datas, subamostras, vasos tratados coletivamente, blocos incompletos e dois fatores nessa estrutura exigem outros modelos. O poder global não garante cada comparação de médias.'
 };
 
+guidance.repeated={
+ question:'Os tratamentos mudam a trajetória da altura das mesmas plantas em três datas?',
+ idea:'Conte as unidades acompanhadas e descreva as médias esperadas em cada data. Escolha a pergunta e uma hipótese sobre a relação entre as avaliações.',
+ count:'Uma planta acompanhada em cinco datas fornece uma unidade independente e cinco registros vinculados. Não são cinco repetições experimentais.',
+ find:'Busque médias por grupo e data, o desvio-padrão marginal da resposta e correlações entre avaliações de um estudo semelhante ou piloto. Confira se as mesmas unidades são acompanhadas. Plantas diferentes retiradas a cada data não formam uma série repetida da mesma unidade.',
+ example:'Dois tratamentos, três datas nas mesmas plantas. Médias de altura de 10; 12; 14 cm no grupo 1 e 10; 14; 18 cm no grupo 2; DP de 4 cm e correlação comum de 0,6. O exemplo dimensiona a interação grupo × tempo.',
+ care:'Os testes globais disponíveis pressupõem correlação comum para todos os pares e variâncias iguais. AR(1), com intervalos iguais, está disponível apenas para um contraste definido antes da coleta. Não cobre mortalidade cumulativa ou sobrevivência, dados incompletos ou indivíduos agrupados dentro das unidades acompanhadas.'
+};
+guidance.clusterTrial={
+ question:'Quantas gaiolas tratadas separadamente são necessárias para comparar as médias?',
+ idea:'O tratamento vai para o conjunto inteiro. O cálculo considera tanto a quantidade de conjuntos independentes quanto a semelhança dos indivíduos dentro deles.',
+ count:'Conte gaiolas, parcelas ou turmas independentes como unidades de atribuição. Dez indivíduos dentro da mesma gaiola tratada não equivalem a dez gaiolas.',
+ find:'Defina quantos indivíduos analisáveis haverá por conjunto. Procure o DP marginal da resposta e a ICC em estudo semelhante. A ICC é a proporção da variância associada às diferenças entre conjuntos; não é a correlação entre datas. Não adotamos 0,05 como uma verdade do seu experimento.',
+ example:'Duas condições, diferença relevante de 5 unidades, DP marginal de 8, dez indivíduos analisáveis por conjunto e ICC de 0,05. O cálculo dimensiona conjuntos por tratamento e usa as médias dos conjuntos na análise.',
+ care:'Esta rota compara médias de respostas contínuas com conjuntos iguais e grupos balanceados. Não calcula porcentagens binomiais, CL50, contagens ou mortalidade ao longo do tempo. Mais indivíduos na mesma gaiola não substituem livremente novas gaiolas. As perdas de conjuntos e de indivíduos são separadas.'
+};
+
 export const examples = {
+  repeated:{rmGroups:'2',rmOccasions:'3',rmCovariance:'cs',rmEffect:'interaction',means:'10;12;14;10;14;18',sd:'4',rho:'0,6'},
+  clusterTrial:{groups:'2',clusterAllocation:'group',delta:'5',sd:'8',clusterSize:'10',icc:'0,05'},
   splitplot:{a:'2',b:'3',effect:'A',means:'10;12;14;11;16;21',sdSub:'4',sdWhole:'3'},
   replicatedBlocks:{groups:'3',unitsPerCell:'2',cellKind:'independent',blockModel:'additive',means:'10;12;15',sd:'4'},
   mean: {sd:'8',margin:'2'}, proportion: {p:'50',margin:'5'},

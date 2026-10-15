@@ -40,3 +40,7 @@ Navegação lateral com recolhimento automático nos módulos em computadores, e
 ## Tipografia e apresentação
 
 Títulos usam Impact quando instalada no dispositivo, com fontes de reserva. Anonymous Pro regular e negrito estão incluídas localmente sob SIL Open Font License 1.1 (assets/fonts/OFL.txt), sem requisições a fontes externas. Removidos slogans e subtítulos introdutórios das páginas, preservadas as explicações das escolhas. Cards da home recebem cantos assimétricos; botões e tags usam cápsulas, com gradientes leves nos painéis. Arquivo de verificação do Google preservado na raiz.
+
+## Transições de etapas
+
+Conteúdo das perguntas com cross-fade de 240 ms, altura mínima e preservação da rolagem no mesmo módulo. Movimento reduzido respeitado. Conteúdo longo permanece acessível por rolagem normal. Detalhes em docs/TRANSICOES.md.

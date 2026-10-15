@@ -1,4 +1,4 @@
-// Ensaio: balanced normal-model equations; no R package code is incorporated.
+// CoDel-Stat: balanced normal-model equations; no R package code is incorporated.
 // Distribution evaluation reuses numeric.mjs and jStat (MIT).
 // Sources and the derivation are recorded in docs/CICLO-3-ESTRUTURAS.md.
 import {fPower,integerSearch} from './numeric.mjs';

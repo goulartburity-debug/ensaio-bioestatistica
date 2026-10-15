@@ -54,3 +54,14 @@ p,.question-intro{font-size:16px;line-height:1.65}.tiny,.sample-hint{font-size:1
 .sample-field input,.sample-field select,.sample-field textarea,.field input,.field select,.field textarea,.search{border-radius:10px}
 .page-heading{margin-bottom:22px}.page-heading h1{margin-bottom:0}.sample-form-intro h2{font-size:28px}
 @media(max-width:720px){.hero{gap:24px}.hero h1{font-size:46px}.cards>.entry-card{padding:23px;border-radius:26px 40px 24px 30px}.question-card{padding:20px}.page-heading h1{font-size:32px}.hero-figure{border-radius:22px 36px 24px 30px}}
+
+/* Etapas ancoradas; a altura é mínima, nunca um limite que esconda controles. */
+html{scrollbar-gutter:stable}
+.question-card{position:relative;overflow:hidden;overflow-anchor:none;min-height:760px}
+.question-content{position:relative;min-width:0;display:flex;flex-direction:column}
+.question-content>.question-footer{margin-top:auto;padding-top:20px}
+.question-outgoing{position:absolute;inset:28px;pointer-events:none;user-select:none;z-index:2}
+.work-layout{align-items:start}
+.sample-form-card{min-height:760px}
+@media(max-width:720px){.question-card,.sample-form-card{min-height:640px}.question-outgoing{inset:20px}}
+@media(prefers-reduced-motion:reduce){.question-content{animation:none!important;transition:none!important}}

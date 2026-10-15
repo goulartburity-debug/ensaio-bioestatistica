@@ -1,4 +1,4 @@
-# Código aberto, proveniência e licenças — tamanho amostral v1.2.0
+# Código aberto, proveniência e licenças — tamanho amostral v1.3.0
 
 Auditoria realizada em 15/10/2026. Esta documentação distingue código efetivamente distribuído, bibliotecas numéricas, fórmulas implementadas a partir da literatura e ferramentas apenas consultadas. A licença do módulo não altera automaticamente a titularidade dos materiais didáticos preexistentes.
 
@@ -43,6 +43,16 @@ Auditoria realizada em 15/10/2026. Esta documentação distingue código efetiva
 - Referências: documentação `scipy.stats.studentized_range`, Batista et al. (2017), DOI 10.1590/1413-70542017414047716; Dunnett (1955), JASA 50:1096–1121.
 - A verificação independente usa SciPy 1.17.0, `studentized_range`, `multivariate_t`, `nct` e `ncf`, além de uma integração adaptativa em Python. Essa verificação não é dependência do navegador.
 
+### Superpower 0.2.4.1 — porte restrito no quarto ciclo
+
+- Projeto: https://github.com/cran/Superpower ; versão CRAN 0.2.4.1; commit `4beaaf9fff3fba59b380a04dae180840e8a24c5e`.
+- Origem: [`R/power_oneway_within.R`](https://github.com/cran/Superpower/blob/4beaaf9fff3fba59b380a04dae180840e8a24c5e/R/power_oneway_within.R), função `power_oneway_within`. SHA-256 original: `f0757d727e8a6e2a1482af3ef481a1a3a4c5c84046840a8f35a212cc51c58d2c`.
+- Licença: `MIT + file LICENSE` em DESCRIPTION; LICENSE identifica YEAR 2021 e COPYRIGHT HOLDER Daniel Lakens and Aaron R. Caldwell. Não é GPL. Texto integral MIT e autoria preservados em `sample-size/licenses/Superpower-MIT.txt`.
+- Destino: `sample-size/vendor/superpower-within.mjs`, função `superpowerWithin`. Porte do centramento das médias, λ e graus de liberdade para um grupo e um fator intraunidade com simetria composta. Omite os objetos de desenho e os indicadores de efeito não usados. A avaliação `pf/qf` usa a F não central/quantil já validada do Ensaio; não a aproxima por uma normal.
+- Escopo reaproveitado: somente teste de tempo em um grupo. As fórmulas multigrupo e de contrastes são implementação do Ensaio a partir do modelo normal, identificadas separadamente. Não se declara que todo o módulo de medidas repetidas veio do Superpower.
+- Original R preservado, sem alterações, em `tests/reference-source/power_oneway_within.R`; hash conferido nos testes. O arquivo se submete à licença MIT acima.
+- Referência citada pela rotina original: Park & Schutz (1999), DOI 10.1207/s15327841mpee0304_5. Comparação contra saída publicada do Superpower, capítulo 4, tabela 4.7 (20 unidades, 3 condições, ρ=0,8, σ=1, f=0,25: λ=18,75 e poder 96,91634%). SciPy 1.17.0 e exemplo publicado do Stata para um grupo fornecem comparações adicionais. R e Stata não foram executados neste ambiente; suas saídas publicadas são distinguidas dos cálculos SciPy efetivamente executados.
+
 ## Métodos e origem, um a um
 
 | Método do Ensaio | Código reaproveitado | Implementação da regra estatística / referência |
@@ -62,6 +72,9 @@ Auditoria realizada em 15/10/2026. Esta documentação distingue código efetiva
 | Contraste planejado | jStat, MIT | Equações publicadas de variância do contraste (NIST), poder t²/F não central e busca inteira do Ensaio; nenhum código R de pwrss/Superpower foi portado |
 | Parcelas subdivididas em DBC | jStat 1.9.6, MIT; `fPower` e busca inteira do Ensaio, MIT | Equações próprias a partir do modelo e tabela ANOVA de Purdue STAT514/Montgomery; nenhum pacote R portado |
 | Várias unidades por tratamento e bloco | jStat 1.9.6, MIT; motor F do Ensaio, MIT | Modelo aditivo e modelo com componente aleatório tratamento × bloco; equações próprias, validadas por ANOVA simulada e SciPy |
+| Medidas repetidas, um grupo/tempo | Superpower 0.2.4.1 (MIT), centrar médias/λ/GL; jStat (MIT) e motor F existente | Porte específico; Park & Schutz (1999) e comparação com saída publicada do projeto |
+| Medidas repetidas multigrupo ou contraste | jStat (MIT) e motor F existente | Equações do Ensaio, modelo multivariado normal; Muller et al. (1992). CS global; CS/AR1 para um contraste |
+| Comparar médias em conjuntos iguais | jStat (MIT) e motor F existente | Variância da média de conjunto sob intercepto aleatório; ANOVA/t das médias, extensão balanceada do Ensaio. Donner & Klar (2000); Rutterford et al. (2015) |
 | Conglomerados descritivos | jStat, MIT | DEFF=1+(m−1)ICC de Kish (1965), implementação própria; Cochran (1977) |
 
 Os arquivos de autoria do Ensaio dentro de `sample-size/` são disponibilizados sob MIT em `sample-size/LICENSE.txt`. O arquivo adaptado de SciPy mantém BSD-3-Clause; os avisos dos terceiros permanecem com eles. Isso não relicencia o restante do site nem os livros, artigos ou materiais da professora.
@@ -92,6 +105,12 @@ Os arquivos de autoria do Ensaio dentro de `sample-size/` são disponibilizados 
 - As duas novas rotas reutilizam a distribuição F não central e a busca inteira existentes, com equações de modelos acadêmicos implementadas pelo Ensaio em `sample-size/structured.mjs`. Não acrescentam código de terceiros, dependência R/Python no navegador ou licença GPL ao pacote. O código novo segue `sample-size/LICENSE.txt` (MIT). Componentes MIT/BSD anteriores permanecem inalterados.
 - Fontes: [Purdue — parcelas subdivididas](https://www.stat.purdue.edu/~zhanghao/STAT514/Lecture_Notes/LectureNotes20-Split-plot-Designs-.html), [Purdue — blocos completos](https://www.stat.purdue.edu/~zhanghao/STAT514/Lecture_Notes/LectureNotes13-Complete-Block-Design-.html) e [Purdue — RCBD with Replication, pp. 7–8](https://www.stat.purdue.edu/~bacraig/notes1/topic11.pdf). As não centralidades são derivadas dessas estruturas de covariância e somas de quadrados; não são apresentadas como código copiado dessas páginas.
 - A verificação independente foi executada com SciPy 1.17.0; `tests/generate-structured-reference.py` e `tests/structured-reference.json` registram parâmetros, versão, tamanhos, poderes e simulações. Detalhes em [CICLO-3-ESTRUTURAS.md](CICLO-3-ESTRUTURAS.md).
+
+### Candidatas do quarto ciclo não incorporadas
+
+- **CRTSize 1.2:** commit `0c7bab585067f7edd6a9edfbe2d8afd359af710a`. Licença GPL (≥2), DESCRIPTION e `R/n4means.R` examinados. Usa equações aproximadas e iteração com quantis t; nenhum trecho foi portado. O cálculo exato da ANOVA/t das médias em conjuntos normais não é apresentado como execução dessa rotina.
+- **longpower 1.0.27:** commit `2f626d89aed9028e86c3a2cd796f5547d2b87f3b`, GPL (≥2); DESCRIPTION e famílias de métodos em `R/` examinados. Modelos de inclinação, MMRM e outras estruturas longitudinais não foram substituídos por CS sob seus nomes. Nenhum código incorporado.
+- A existência de uma licença permissiva no Superpower foi verificada no pacote efetivamente auditado; não se inferiu a licença apenas do caráter público do repositório. Dependências R importadas pelo pacote não são incluídas pelo porte restrito.
 
 ## Reproduzir a verificação
 

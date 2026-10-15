@@ -1,3 +1,4 @@
+import {isDependent,planDependence} from './dependence.mjs';
 import {isStructured,planStructured} from './structured.mjs';
 import {normalQuantile,fPower,pairedPower,integerSearch} from './numeric.mjs';
 import {openEpiMeans} from './vendor/openepi-means.mjs';
@@ -39,6 +40,11 @@ export function calculate(s){
   const planned=planComparison(s,{alpha,target,number,put});
   ({n,total,power,level,blocks,composition}=planned);units.push(...planned.units);warnings.push(...planned.warnings);
   details={dfResidual:planned.dfResidual,powerOnlyN:planned.powerOnlyN,minResidualDf:planned.minResidualDf,critical:planned.critical,powerMeaning:planned.powerMeaning,contrastWeights:planned.weights};
+ }
+ if(isDependent(method)){
+  const planned=planDependence(s,{number,meansList,put,alpha,target,loss});
+  ({n,total,power,level,clusters,composition}=planned);units.push(...planned.units);warnings.push(...planned.warnings);
+  const {warnings:ignoredWarnings,units:ignoredUnits,...dependent}=planned;details={...dependent};
  }
  if(isStructured(method)){
   const planned=planStructured(s,{number,meansList,put,alpha,target});
@@ -105,7 +111,8 @@ export function calculate(s){
  }
  if(!Number.isSafeInteger(total)||total>10000000||total<2)throw Error('O total excede a faixa permitida (até 10 milhões). Revise as hipóteses; não foi produzido um resultado utilizável.');
  const initialUnits=units.map(x=>({...x,n:Math.ceil(x.n/(1-loss))}));let initialTotal;
- if(isStructured(method))initialTotal=initialUnits[0].n*details.perBlock;
+ if(isDependent(method))initialTotal=details.initialTotal;
+ else if(isStructured(method))initialTotal=initialUnits[0].n*details.perBlock;
  else if(method==='blocks'||method==='anova'||isComparison(method))initialTotal=initialUnits[0].n*Number(s.groups);
  else if(method==='factorial')initialTotal=initialUnits[0].n*Number(s.a)*Number(s.b);
  else if(method==='cluster')initialTotal=initialUnits[0].n*Number(s.clusterSize);
@@ -113,8 +120,8 @@ export function calculate(s){
  if(s.population==='finite'&&['mean','proportion'].includes(method)&&initialTotal>Number(s.populationN))throw Error('O ajuste para perdas excede a população disponível. Revise a precisão ou a previsão de perdas.');
  if(isStructured(method)){const r=initialUnits[0].n;details.initialCounts=method==='splitplot'?{blocks:r,wholePlots:r*details.a,subplots:initialTotal,wholePlotsPerLevelA:r,subplotsPerCombination:r}:{blocks:r,unitsPerTreatment:r*details.unitsPerCell,units:initialTotal};}
  put('Perdas previstas (%)',loss*100);
- if(loss>0)warnings.push((isBlocked(s)||isStructured(method))?'Perdas ajustadas no nível de blocos inteiros. Perdas isoladas dentro de blocos exigem outro planejamento.':method==='cluster'?'Perdas ajustadas no nível de conglomerados inteiros; m é o número analisável dentro de cada um.':method==='paired'?'Perdas ajustadas no nível de pares completos; perder uma medida pode tornar o par incompleto.':'Ajuste aplicado por grupo ou combinação, preservando a organização planejada.');
+ if(loss>0)warnings.push(method==='repeated'?'Perdas ajustadas em unidades com acompanhamento completo. Ausência de apenas algumas datas requer outro modelo de planejamento.':method==='clusterTrial'?'Perdas ajustadas em conjuntos inteiros por tratamento; perdas internas são informadas separadamente.':(isBlocked(s)||isStructured(method))?'Perdas ajustadas no nível de blocos inteiros. Perdas isoladas dentro de blocos exigem outro planejamento.':method==='cluster'?'Perdas ajustadas no nível de conglomerados inteiros; m é o número analisável dentro de cada um.':method==='paired'?'Perdas ajustadas no nível de pares completos; perder uma medida pode tornar o par incompleto.':'Ajuste aplicado por grupo ou combinação, preservando a organização planejada.');
  warnings.push(meta.limits);
  return {version:VERSION,method,params,n,total,initialTotal,units,initialUnits,level,power,blocks,clusters,composition,type,warnings,source:meta.source,ref:meta.ref,url:meta.url,raw,inputs:{...s},...details};
 }
-export function summary(r){return `${methods[r.method].name}. Método: ${r.type}. Parâmetros: ${Object.entries(r.params).map(([k,v])=>`${k}: ${v}`).join('; ')}. Necessário analisável: ${r.units.map(x=>`${x.n} ${x.label.toLowerCase()}`).join('; ')}; total ${r.total}${r.method==='cluster'?' observações vinculadas, não independentes':r.method==='paired'?' pares':isStructured(r.method)?' unidades nos níveis descritos abaixo':' unidades independentes sob o modelo'}. Inclusão inicial: ${r.initialUnits.map(x=>`${x.n} ${x.label.toLowerCase()}`).join('; ')}; total ${r.initialTotal}. ${r.composition} ${r.power===null?'Poder não recalculado após arredondamento nesta aproximação.':`Poder na composição analisável: ${(100*r.power).toFixed(2)}%.`} Limitações: ${r.warnings.join(' ')} Fonte: ${r.source} ${r.ref} ${r.url}. Ensaio — cálculo v${r.version}. O tamanho não garante representatividade, significância ou validade do estudo.`;}
+export function summary(r){return `${methods[r.method].name}. Método: ${r.type}. Parâmetros: ${Object.entries(r.params).map(([k,v])=>`${k}: ${v}`).join('; ')}. Necessário analisável: ${r.units.map(x=>`${x.n} ${x.label.toLowerCase()}`).join('; ')}; total ${r.total}${r.method==='cluster'?' observações vinculadas, não independentes':r.method==='paired'?' pares':r.method==='clusterTrial'?' observações vinculadas':isStructured(r.method)?' unidades nos níveis descritos abaixo':' unidades independentes sob o modelo'}. Inclusão inicial: ${r.initialUnits.map(x=>`${x.n} ${x.label.toLowerCase()}`).join('; ')}; total ${r.initialTotal}. ${r.composition} ${r.power===null?'Poder não recalculado após arredondamento nesta aproximação.':`Poder na composição analisável: ${(100*r.power).toFixed(2)}%.`} Limitações: ${r.warnings.join(' ')} Fonte: ${r.source} ${r.ref} ${r.url}. CoDel-Stat — cálculo v${r.version}. O tamanho não garante representatividade, significância ou validade do estudo.`;}

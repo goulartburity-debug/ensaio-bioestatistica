@@ -1,6 +1,17 @@
-# Validação — tamanho amostral 1.2.0
+# Validação — tamanho amostral 1.3.0
 
-## Terceiro ciclo — resultado atual
+## Quarto ciclo — resultado atual
+
+**334 testes automatizados aprovados**, incluindo os percursos anteriores. Os novos testes cobrem cálculos, hipóteses/covariâncias, contagens, perdas, campos condicionais, persistência e integração confirmada ao planejamento.
+
+- **34 dimensionamentos** com SciPy 1.17.0 e projeções matriciais independentes em NumPy; igualdade de inteiros, totais e GL; tolerância absoluta do poder 2×10⁻⁷ e de λ 10⁻⁸.
+- **14 verificações de dados simulados**, 100.000 experimentos por verificação, semente 20261016. Estatísticas calculadas dos dados observados para medidas repetidas e conjuntos; nível sob H0 e poder sob H1. Critério: quatro erros-padrão Monte Carlo mais 1/100.000.
+- Quatro tamanhos publicados do Stata reproduzidos: 114, 3 e 27 por grupo para as três hipóteses do mesmo exemplo, e 20 unidades no exemplo de um grupo. Saída publicada do Superpower: λ=18,75 e poder 96,91634% conferidos. R/Stata não foram executados localmente; são referências publicadas, diferenciadas do SciPy/NumPy efetivamente executado.
+- **57 telas geradas** verificadas estruturalmente: IDs, rótulos, referências ARIA, disclosures, links e importações locais. Ajuda recolhida e ausência de quadro lateral, link de métodos/limites e texto pronto preservadas.
+
+Scripts, parâmetros, equações e limitações em [CICLO-4-DEPENDENCIA.md](CICLO-4-DEPENDENCIA.md). A inspeção visual em navegador real ou celular físico continua pendente.
+
+## Terceiro ciclo — registro da versão 1.2.0
 
 **276 testes automatizados aprovados**. Preserva os percursos anteriores e acrescenta 29 casos numéricos de parcelas subdivididas e várias unidades por tratamento e bloco, verificados com SciPy 1.17.0. Inteiros, totais e GL devem coincidir; tolerância absoluta do poder 2×10⁻⁷ e de λ 10⁻⁸. O script `tests/generate-structured-reference.py` gera os registros em `tests/structured-reference.json` de forma independente do JavaScript.
 
