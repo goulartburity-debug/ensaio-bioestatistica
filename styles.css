@@ -32,3 +32,25 @@
 .menu-collapsed .sidebar{z-index:25}
 }
 @media(max-width:720px){.sidebar{padding:10px 12px 0;gap:0}.menu-toggle{display:none}.mobile-nav{padding-bottom:10px}}
+
+/* Tipografia e superfícies suaves — títulos Impact; texto Anonymous Pro local. */
+@font-face{font-family:"Anonymous Pro";src:url("assets/fonts/AnonymousPro-Regular.ttf") format("truetype");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:"Anonymous Pro";src:url("assets/fonts/AnonymousPro-Bold.ttf") format("truetype");font-style:normal;font-weight:600 900;font-display:swap}
+:root{font-family:"Anonymous Pro",ui-monospace,Consolas,monospace;--mono:"Anonymous Pro",ui-monospace,Consolas,monospace}
+h1,h2,h3,.hero h1,.page-heading h1,.sample-form-intro h2,.sample-result .result-lead h2,.result-lead h2,.modal h2{font-family:Impact,"Haettenschweiler","Arial Narrow Bold",sans-serif;font-weight:400;letter-spacing:.2px;line-height:1.18}
+h1{font-size:clamp(34px,3.5vw,48px)}h2{font-size:27px}h3{font-size:21px}
+p,.question-intro{font-size:16px;line-height:1.65}.tiny,.sample-hint{font-size:13px}
+.hero{padding-top:8px;gap:44px}.hero h1{font-size:clamp(44px,5vw,68px);margin-bottom:24px}.hero-actions{margin-bottom:0}
+.hero-figure{border:1px solid #ffffffb0;border-radius:24px 50px 28px 42px;background:radial-gradient(ellipse at 15% 5%,#dbeafea6,transparent 72%),#ffffffb3;backdrop-filter:blur(8px)}
+.cards>.entry-card{border:1px solid #dbeafe70;border-radius:30px 54px 26px 38px;background:radial-gradient(ellipse at 5% 0%,#dbeafeb3,transparent 78%);padding:28px;box-shadow:none}
+.cards>.entry-card:nth-child(even){border-radius:48px 28px 42px 26px;background:radial-gradient(ellipse at 95% 0%,#e0f2feb3,transparent 78%)}
+.cards>.entry-card:hover{background-color:#f5f9ff;border-color:#93c5fd}
+.btn,.btn.small,.text-btn,.pill,.tag,.segmented button,.mobile-nav button,.nav button,.menu-toggle{border-radius:50px}
+.btn{padding:11px 20px}.pill,.tag{padding:6px 12px}
+.question-card,.result-panel,.aside-card,.example-card,.compare-column,.sample-category-grid .entry-card,.sample-entry-grid .result-panel{border-radius:18px;border:1px solid #dce7f080;background:radial-gradient(ellipse at 0% 0%,#eff6ff99,transparent 65%),#ffffffd9;box-shadow:none}
+.question-card{padding:28px}.choice{border-radius:14px;border-color:#dce7f0}.result-lead{border-radius:20px;background:linear-gradient(125deg,#eff6ff,#ffffff);border-color:#dce7f080}
+.result-lead h2,.result-lead p{color:var(--ink)}
+.topbar{background:#fffffff2;backdrop-filter:blur(8px)}
+.sample-field input,.sample-field select,.sample-field textarea,.field input,.field select,.field textarea,.search{border-radius:10px}
+.page-heading{margin-bottom:22px}.page-heading h1{margin-bottom:0}.sample-form-intro h2{font-size:28px}
+@media(max-width:720px){.hero{gap:24px}.hero h1{font-size:46px}.cards>.entry-card{padding:23px;border-radius:26px 40px 24px 30px}.question-card{padding:20px}.page-heading h1{font-size:32px}.hero-figure{border-radius:22px 36px 24px 30px}}

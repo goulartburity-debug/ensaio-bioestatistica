@@ -36,3 +36,7 @@ As partes reaproveitadas de jStat, OpenEpi e Superpower têm licença MIT. O nú
 ## Interface e abrangência
 
 Navegação lateral com recolhimento automático nos módulos em computadores, expansão manual e nomes acessíveis para os ícones. Identificação gráfica e créditos foram removidos da coluna lateral; autoria e fontes permanecem em Sobre e referências. A home apresenta o nome e a frase principal. Exemplos de educação, produção, materiais e saúde ampliam a aplicação didática para diferentes áreas, preservando os métodos e suas limitações.
+
+## Tipografia e apresentação
+
+Títulos usam Impact quando instalada no dispositivo, com fontes de reserva. Anonymous Pro regular e negrito estão incluídas localmente sob SIL Open Font License 1.1 (assets/fonts/OFL.txt), sem requisições a fontes externas. Removidos slogans e subtítulos introdutórios das páginas, preservadas as explicações das escolhas. Cards da home recebem cantos assimétricos; botões e tags usam cápsulas, com gradientes leves nos painéis. Arquivo de verificação do Google preservado na raiz.
