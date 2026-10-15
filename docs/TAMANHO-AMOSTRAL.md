@@ -1,4 +1,8 @@
-# Tamanho amostral no Ensaio — versão 1.1.0
+# Tamanho amostral no Ensaio — versão 1.3.0
+
+Quarto ciclo: medidas repetidas e comparação de médias entre conjuntos iguais estão disponíveis; ver [CICLO-4-DEPENDENCIA.md](CICLO-4-DEPENDENCIA.md).
+
+Terceiro ciclo: parcelas subdivididas clássicas em DBC e várias unidades por tratamento e bloco estão disponíveis; ver [CICLO-3-ESTRUTURAS.md](CICLO-3-ESTRUTURAS.md).
 
 Revisão de interface da fase 1: ver [FASE-1-INTERFACE.md](FASE-1-INTERFACE.md). No segundo ciclo, o motor foi ampliado para 1.1.0; ver [CICLO-2-COMPARACOES.md](CICLO-2-COMPARACOES.md). Os resultados dos métodos anteriores foram preservados, e os resultados aplicados sob a versão antiga precisam ser recalculados. O resumo copiável citado no registro da entrega original foi retirado da interface por solicitação do responsável pelo projeto; exemplos e ajustes avançados passaram a ser opcionais e recolhidos.
 
@@ -19,11 +23,15 @@ Implementação de 15/10/2026, baseada no site existente no commit `860ed312a95a
 | Dunnett | Valor crítico t multivariado e poder marginal por t/F não central | Unidades por tratamento ou blocos completos | Bilateral, 2–10 tratamentos, mesma variância residual e alocação igual; testemunha incluída no total |
 | Tukey | Amplitude estudentizada e poder marginal de um par por t/F não central | Unidades por tratamento ou blocos completos | Poder por comparação, não de todos os pares; grupos iguais e resposta contínua normal |
 | Contraste planejado | Pesos que somam zero, diferença relevante, DP e t/F não central | Unidades por tratamento ou blocos completos | Uma comparação definida antes da coleta; Bonferroni adicional explícito quando pertinente |
+| Parcelas subdivididas em DBC | F não central de A, B ou A×B, com erros separados | Blocos, parcelas principais e subparcelas | Modelo balanceado normal clássico; A na parcela, B na subparcela; uma subparcela por nível de B |
+| Várias unidades por tratamento e bloco | F não central, modelo aditivo ou com componente aleatório tratamento × bloco | Blocos com quantidade por célula fixa | Um fator, aplicações separadas, composição igual em todos os blocos; teste global |
+| Medidas repetidas | F não central para grupo/tempo/interação sob simetria composta; contraste sob CS ou AR(1) | Unidades acompanhadas por grupo, total de unidades e registros | Dados completos, grupos iguais e DP comum; AR(1) só para um contraste e intervalos iguais |
+| Tratamentos aplicados a conjuntos | ANOVA/t das médias de conjuntos normais com ICC comum | Conjuntos por tratamento, total independente e observações internas | Conjuntos e grupos iguais, resposta contínua; sem medidas repetidas ou respostas binomiais |
 | Correlação | Aproximação z de Fisher | Unidades com as duas variáveis | Pearson, H0: ρ = 0, normalidade bivariada; não Spearman ou correlação parcial |
 | Regressão linear | F não central, f² ou R² completo e reduzido | Unidades com todas as variáveis | Modelo fixo, erros normais independentes e homocedásticos; coeficientes excluem intercepto |
 | Proporção em conglomerados | Cochran + DEFF de Kish | Conglomerados iguais e observações dentro deles | Estimação descritiva, pesos iguais; não ensaio randomizado por conglomerados; alerta com menos de 30 conjuntos |
 
-“Exato sob o modelo” qualifica a distribuição de poder dos testes normais, avaliada numericamente. Não significa ausência de erro de planejamento, exatidão dos parâmetros fornecidos ou garantia de resultado significativo. As rotas normais e de Fisher são explicitamente aproximadas; não há simulação nesta versão.
+“Exato sob o modelo” qualifica a distribuição de poder dos testes normais, avaliada numericamente. Não significa ausência de erro de planejamento, exatidão dos parâmetros fornecidos ou garantia de resultado significativo. As rotas normais e de Fisher são explicitamente aproximadas; não há dimensionamento por simulação em produção. O terceiro ciclo usa simulação de dados apenas na validação independente dos modelos.
 
 ## Equações e convenções
 
@@ -69,13 +77,17 @@ A nova entrada “Tamanho amostral” funciona sem planejamento. “Usar meu pla
 
 Antes de aplicar, a interface mostra o valor anterior e o novo, exige confirmação de correspondência entre resposta, modelo e unidade, e reconfere a impressão digital de todas as respostas. Alocação desigual, números de tratamentos incompatíveis, subamostras, avaliações repetidas, blocos incorretos e modelos não representados impedem a transferência. Um conjunto tratado pode ser unidade experimental; ele não é convertido em indivíduos. As novas comparações permitem o DBC completo com confirmação da estrutura; a rejeição de tamanhos desiguais aplica-se quando a rota não os representa.
 
-DBC compatível, inclusive no fatorial e nas novas comparações, modifica `blockCount` e fixa explicitamente `replicates=1`; outras rotas compatíveis modificam apenas `replicates`. Se a avaliação ainda não estiver definida na etapa de quantidade, isso aparece no aviso e na confirmação. Alterações posteriores tornam a associação com o cálculo desatualizada.
+Na rota de várias unidades por tratamento e bloco, a prévia modifica `blockCount` e `replicates` para a composição escolhida, sem presumir que sejam subamostras. Parcelas subdivididas podem aproveitar os níveis dos fatores, mas não transferem resultados para o planejamento: faltam campos para os dois níveis de aplicação.
+
+DBC compatível de uma unidade por célula, inclusive no fatorial e nas novas comparações, modifica `blockCount` e fixa explicitamente `replicates=1`; outras rotas compatíveis modificam apenas `replicates`. Se a avaliação ainda não estiver definida na etapa de quantidade, isso aparece no aviso e na confirmação. Alterações posteriores tornam a associação com o cálculo desatualizada.
+
+Medidas repetidas compatíveis atualizam unidades por tratamento e preservam datas. Conjuntos compatíveis atualizam conjuntos por tratamento e indivíduos iniciais por conjunto, com prévia dos dois campos. Não se transferem números se houver blocos, estrutura combinada, datas ou tamanhos incompatíveis. Casos específicos em `CICLO-4-DEPENDENCIA.md`.
 
 Parâmetros ficam em `ensaio-sample-v1`, com versão; o resultado não é reutilizado ao reabrir o navegador. A aplicação confirmada registra método, versão, parâmetros, resultado, data e impressão digital em `ensaio-sample-applied-v1`. O planejamento exibe aviso se a versão ou suas respostas mudarem.
 
 ## Ainda não implementado
 
-Medidas repetidas com três ou mais ocasiões; interação grupo×tempo; ensaios randomizados por conglomerados; conglomerados desiguais/ponderados; parcelas subdivididas; blocos incompletos; várias unidades por tratamento e bloco; poder conjunto de comparações; testes não paramétricos; sobrevivência; modelos generalizados. Essas opções aparecem como ainda não calculadas, com o que falta especificar. Não são substituídas por testes independentes.
+Medidas repetidas com covariância geral, dados incompletos ou modelos mistos gerais; comparação de porcentagens/contagens em conglomerados; conglomerados desiguais/ponderados; conjuntos acompanhados em várias datas; parcelas subsubdivididas e outros modelos hierárquicos; blocos incompletos ou desbalanceados; várias unidades por célula com dois fatores; poder conjunto de comparações; testes não paramétricos; sobrevivência; modelos generalizados. Essas opções aparecem como ainda não calculadas, com o que falta especificar. Não são substituídas por testes independentes.
 
 ## Arquitetura e expansão
 
@@ -84,6 +96,8 @@ Medidas repetidas com três ou mais ocasiões; interação grupo×tempo; ensaios
 - `sample-size/methods.mjs`: catálogo, limitações, referências e versão.
 - `sample-size/integration.mjs`: correspondência, prévia e aplicação ao planejamento.
 - `sample-size/ui.mjs`: escolhas progressivas, explicações, cenários e prévia da integração.
+- `sample-size/dependence.mjs`: medidas repetidas e comparação de médias em conjuntos iguais, com contagens de cada nível.
+- `sample-size/structured.mjs`: parcelas subdivididas e várias unidades por tratamento e bloco, com modelo explícito.
 - `sample-size/comparisons.mjs`: Dunnett, Tukey, contraste planejado e organização balanceada.
 - `sample-size/multiple-numeric.mjs`: distribuições/quantis das famílias e poder de comparação.
 - `sample-size/calculation-jobs.mjs` e `calculation-worker.mjs`: execução das comparações fora da thread da interface, sem servidor.

@@ -1,8 +1,27 @@
-# Validação — tamanho amostral 1.1.0
+# Validação — tamanho amostral 1.3.0
+
+## Quarto ciclo — resultado atual
+
+**334 testes automatizados aprovados**, incluindo os percursos anteriores. Os novos testes cobrem cálculos, hipóteses/covariâncias, contagens, perdas, campos condicionais, persistência e integração confirmada ao planejamento.
+
+- **34 dimensionamentos** com SciPy 1.17.0 e projeções matriciais independentes em NumPy; igualdade de inteiros, totais e GL; tolerância absoluta do poder 2×10⁻⁷ e de λ 10⁻⁸.
+- **14 verificações de dados simulados**, 100.000 experimentos por verificação, semente 20261016. Estatísticas calculadas dos dados observados para medidas repetidas e conjuntos; nível sob H0 e poder sob H1. Critério: quatro erros-padrão Monte Carlo mais 1/100.000.
+- Quatro tamanhos publicados do Stata reproduzidos: 114, 3 e 27 por grupo para as três hipóteses do mesmo exemplo, e 20 unidades no exemplo de um grupo. Saída publicada do Superpower: λ=18,75 e poder 96,91634% conferidos. R/Stata não foram executados localmente; são referências publicadas, diferenciadas do SciPy/NumPy efetivamente executado.
+- **57 telas geradas** verificadas estruturalmente: IDs, rótulos, referências ARIA, disclosures, links e importações locais. Ajuda recolhida e ausência de quadro lateral, link de métodos/limites e texto pronto preservadas.
+
+Scripts, parâmetros, equações e limitações em [CICLO-4-DEPENDENCIA.md](CICLO-4-DEPENDENCIA.md). A inspeção visual em navegador real ou celular físico continua pendente.
+
+## Terceiro ciclo — registro da versão 1.2.0
+
+**276 testes automatizados aprovados**. Preserva os percursos anteriores e acrescenta 29 casos numéricos de parcelas subdivididas e várias unidades por tratamento e bloco, verificados com SciPy 1.17.0. Inteiros, totais e GL devem coincidir; tolerância absoluta do poder 2×10⁻⁷ e de λ 10⁻⁸. O script `tests/generate-structured-reference.py` gera os registros em `tests/structured-reference.json` de forma independente do JavaScript.
+
+Também passaram **10 verificações de ANOVA por simulação dos dados**, com 100.000 experimentos por verificação e semente 20261015: nível sob H0 e poder sob H1 para A/B/interação e os dois modelos de blocos. A tolerância é quatro erros-padrão Monte Carlo mais uma observação/100.000. Não se confunde essa validação com dimensionamento por simulação em produção.
+
+**42 telas geradas** foram verificadas estruturalmente: IDs únicos, rótulos, referências ARIA, disclosures, links e importações locais. Eventos com DOM simulado conferem campos condicionais, recuperação de parâmetros, bloqueio de subamostras e confirmação da aplicação ao plano. Não houve teste visual em navegador real/celular físico. Modelos, equações, proveniência e limites em [CICLO-3-ESTRUTURAS.md](CICLO-3-ESTRUTURAS.md).
 
 Revisão da interface — fase 1: **171 testes aprovados**, incluindo os 153 abaixo e 18 novos. Registro em [FASE-1-INTERFACE.md](FASE-1-INTERFACE.md). O motor foi preservado; o resumo copiável da entrega original foi retirado da interface. A verificação visual em navegador real continua pendente.
 
-## Segundo ciclo — resultado atual
+## Segundo ciclo — registro da versão 1.1.0
 
 **227 testes aprovados**. Novas referências: 12 valores críticos e 23 tamanhos/poderes contra SciPy 1.17.0, além de estados de interface, integração e execução do módulo de worker. Escopo, tolerâncias, limitações e exemplos em [CICLO-2-COMPARACOES.md](CICLO-2-COMPARACOES.md). Não houve teste visual em navegador real.
 

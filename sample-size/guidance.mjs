@@ -114,7 +114,45 @@ export const guidance = {
   }
 };
 
+guidance.splitplot={
+ question:'Irrigação na bandeja e adubação nos vasos: quantos blocos serão necessários?',
+ idea:'Um fator é aplicado ao conjunto inteiro; o outro, às partes dentro dele. Cada bloco terá todas as opções de A, e cada parcela de A terá todas as opções de B.',
+ count:'Conte blocos, parcelas principais e subparcelas separadamente. Mais vasos dentro de uma bandeja não viram mais bandejas independentes para testar a irrigação.',
+ find:'Defina A como o fator da parcela principal e B como o da subparcela. Busque as médias de cada combinação e os componentes residuais de um modelo de parcelas subdivididas. Para A, informe também a variação compartilhada pela parcela, ou o DP residual das médias das parcelas. Não substitua componentes por um DP geral.',
+ example:'Duas irrigações em bandejas × três adubações nos vasos. Alturas esperadas: 10; 12; 14; 11; 16; 21 cm. DP residual das subparcelas de 4 cm e componente de parcela com DP de 3 cm. O exemplo dimensiona a irrigação (A).',
+ care:'A e B têm erros experimentais diferentes. Não há garantia de que B terá mais poder em qualquer situação: isso depende do efeito, das variâncias e dos graus de liberdade. Este cálculo exige uma subparcela por nível de B em cada parcela e blocos completos.'
+};
+guidance.replicatedBlocks={
+ question:'Cada faixa terá dois vasos de cada adubação, tratados separadamente. Quantas faixas preciso?',
+ idea:'Fixe a quantidade por tratamento dentro do bloco; vamos calcular quantos blocos completos são necessários para o teste global.',
+ count:'Conte somente unidades que recebem o tratamento separadamente. Dez plantas em uma parcela pulverizada inteira continuam sendo observações de uma única unidade tratada.',
+ find:'Procure as médias esperadas e o DP residual em uma pesquisa com o mesmo modelo. Se o efeito dos tratamentos varia entre blocos, informe também o DP do componente tratamento × bloco. Escolher o modelo aditivo significa assumir que esse componente não existe.',
+ example:'Três adubações com alturas esperadas de 10; 12; 15 cm; dois vasos tratados separadamente por adubação em cada faixa e DP residual de 4 cm. O exemplo usa modelo aditivo sem interação tratamento × bloco.',
+ care:'O cálculo mantém a mesma quantidade por tratamento em todos os blocos. Datas, subamostras, vasos tratados coletivamente, blocos incompletos e dois fatores nessa estrutura exigem outros modelos. O poder global não garante cada comparação de médias.'
+};
+
+guidance.repeated={
+ question:'Os tratamentos mudam a trajetória da altura das mesmas plantas em três datas?',
+ idea:'Conte as unidades acompanhadas e descreva as médias esperadas em cada data. Escolha a pergunta e uma hipótese sobre a relação entre as avaliações.',
+ count:'Uma planta acompanhada em cinco datas fornece uma unidade independente e cinco registros vinculados. Não são cinco repetições experimentais.',
+ find:'Busque médias por grupo e data, o desvio-padrão marginal da resposta e correlações entre avaliações de um estudo semelhante ou piloto. Confira se as mesmas unidades são acompanhadas. Plantas diferentes retiradas a cada data não formam uma série repetida da mesma unidade.',
+ example:'Dois tratamentos, três datas nas mesmas plantas. Médias de altura de 10; 12; 14 cm no grupo 1 e 10; 14; 18 cm no grupo 2; DP de 4 cm e correlação comum de 0,6. O exemplo dimensiona a interação grupo × tempo.',
+ care:'Os testes globais disponíveis pressupõem correlação comum para todos os pares e variâncias iguais. AR(1), com intervalos iguais, está disponível apenas para um contraste definido antes da coleta. Não cobre mortalidade cumulativa ou sobrevivência, dados incompletos ou indivíduos agrupados dentro das unidades acompanhadas.'
+};
+guidance.clusterTrial={
+ question:'Quantas gaiolas tratadas separadamente são necessárias para comparar as médias?',
+ idea:'O tratamento vai para o conjunto inteiro. O cálculo considera tanto a quantidade de conjuntos independentes quanto a semelhança dos indivíduos dentro deles.',
+ count:'Conte gaiolas, parcelas ou turmas independentes como unidades de atribuição. Dez indivíduos dentro da mesma gaiola tratada não equivalem a dez gaiolas.',
+ find:'Defina quantos indivíduos analisáveis haverá por conjunto. Procure o DP marginal da resposta e a ICC em estudo semelhante. A ICC é a proporção da variância associada às diferenças entre conjuntos; não é a correlação entre datas. Não adotamos 0,05 como uma verdade do seu experimento.',
+ example:'Duas condições, diferença relevante de 5 unidades, DP marginal de 8, dez indivíduos analisáveis por conjunto e ICC de 0,05. O cálculo dimensiona conjuntos por tratamento e usa as médias dos conjuntos na análise.',
+ care:'Esta rota compara médias de respostas contínuas com conjuntos iguais e grupos balanceados. Não calcula porcentagens binomiais, CL50, contagens ou mortalidade ao longo do tempo. Mais indivíduos na mesma gaiola não substituem livremente novas gaiolas. As perdas de conjuntos e de indivíduos são separadas.'
+};
+
 export const examples = {
+  repeated:{rmGroups:'2',rmOccasions:'3',rmCovariance:'cs',rmEffect:'interaction',means:'10;12;14;10;14;18',sd:'4',rho:'0,6'},
+  clusterTrial:{groups:'2',clusterAllocation:'group',delta:'5',sd:'8',clusterSize:'10',icc:'0,05'},
+  splitplot:{a:'2',b:'3',effect:'A',means:'10;12;14;11;16;21',sdSub:'4',sdWhole:'3'},
+  replicatedBlocks:{groups:'3',unitsPerCell:'2',cellKind:'independent',blockModel:'additive',means:'10;12;15',sd:'4'},
   mean: {sd:'8',margin:'2'}, proportion: {p:'50',margin:'5'},
   means: {delta:'5',sd1:'8',sd2:'8'}, paired: {delta:'5',sd:'8'},
   proportions: {p1:'60',p2:'75'}, anova: {groups:'3',means:'10; 12; 15',sd:'8'},
