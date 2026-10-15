@@ -44,3 +44,7 @@ Títulos usam Impact quando instalada no dispositivo, com fontes de reserva. Ano
 ## Transições de etapas
 
 Conteúdo das perguntas com cross-fade de 240 ms, altura mínima e preservação da rolagem no mesmo módulo. Movimento reduzido respeitado. Conteúdo longo permanece acessível por rolagem normal. Detalhes em docs/TRANSICOES.md.
+
+## Paleta de leitura
+
+Fundo geral marfim #FBF9F5, superfícies claras e painéis de apoio em tons pastel dessaturados. Tipografia, navegação e transições preservadas.
