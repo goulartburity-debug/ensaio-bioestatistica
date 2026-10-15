@@ -1,0 +1,549 @@
+{
+  "reference": "SciPy 1.17.0: studentized_range, multivariate_t, nct, ncf; independent adaptive quadrature",
+  "criticalCases": [
+    {
+      "method": "tukey",
+      "k": 3,
+      "df": 2,
+      "alpha": 0.05,
+      "critical": 5.89075290132116
+    },
+    {
+      "method": "tukey",
+      "k": 4,
+      "df": 12,
+      "alpha": 0.05,
+      "critical": 2.968901121450582
+    },
+    {
+      "method": "tukey",
+      "k": 6,
+      "df": 80,
+      "alpha": 0.05,
+      "critical": 2.919934957928982
+    },
+    {
+      "method": "tukey",
+      "k": 10,
+      "df": 1000,
+      "alpha": 0.05,
+      "critical": 3.1708805404056153
+    },
+    {
+      "method": "tukey",
+      "k": 5,
+      "df": 10,
+      "alpha": 0.001,
+      "critical": 5.974512510794167
+    },
+    {
+      "method": "tukey",
+      "k": 5,
+      "df": 10,
+      "alpha": 0.2,
+      "critical": 2.372541665775251
+    },
+    {
+      "method": "dunnett",
+      "k": 3,
+      "df": 2,
+      "alpha": 0.05,
+      "critical": 5.417852786054189,
+      "independentMvtCDF": 0.9500000011467417
+    },
+    {
+      "method": "dunnett",
+      "k": 4,
+      "df": 12,
+      "alpha": 0.05,
+      "critical": 2.6828700628630258,
+      "independentMvtCDF": 0.9499999479994637
+    },
+    {
+      "method": "dunnett",
+      "k": 6,
+      "df": 80,
+      "alpha": 0.05,
+      "critical": 2.564431165911969,
+      "independentMvtCDF": 0.9499997984183414
+    },
+    {
+      "method": "dunnett",
+      "k": 10,
+      "df": 1000,
+      "alpha": 0.05,
+      "critical": 2.6910784566616037,
+      "independentMvtCDF": 0.9499997929508295
+    },
+    {
+      "method": "dunnett",
+      "k": 5,
+      "df": 10,
+      "alpha": 0.001,
+      "critical": 5.421767885482256,
+      "independentMvtCDF": 0.9989998862738053
+    },
+    {
+      "method": "dunnett",
+      "k": 5,
+      "df": 10,
+      "alpha": 0.2,
+      "critical": 2.018283840766297,
+      "independentMvtCDF": 0.8000000711468391
+    }
+  ],
+  "cases": [
+    {
+      "input": {
+        "method": "dunnett",
+        "groups": "4",
+        "delta": "5",
+        "sd": "8"
+      },
+      "expected": {
+        "n": 53,
+        "total": 212,
+        "initial": 53,
+        "initialTotal": 212,
+        "power": 0.8018554201236059,
+        "previousPower": 0.7932021518258893,
+        "dfResidual": 208,
+        "critical": 2.3662802927928586
+      }
+    },
+    {
+      "input": {
+        "method": "dunnett",
+        "groups": "4",
+        "delta": "5",
+        "sd": "8",
+        "design": "blocks",
+        "loss": "10"
+      },
+      "expected": {
+        "n": 54,
+        "total": 216,
+        "initial": 60,
+        "initialTotal": 240,
+        "power": 0.8083960002823851,
+        "previousPower": 0.7999792104661845,
+        "dfResidual": 159,
+        "critical": 2.3716597795502
+      }
+    },
+    {
+      "input": {
+        "method": "dunnett",
+        "groups": "2",
+        "delta": "5",
+        "sd": "8"
+      },
+      "expected": {
+        "n": 42,
+        "total": 84,
+        "initial": 42,
+        "initialTotal": 84,
+        "power": 0.8079737546922021,
+        "previousPower": 0.7983450575766275,
+        "dfResidual": 82,
+        "critical": 1.989318557136572
+      }
+    },
+    {
+      "input": {
+        "method": "dunnett",
+        "groups": "6",
+        "delta": "2",
+        "sd": "5",
+        "power": "90"
+      },
+      "expected": {
+        "n": 181,
+        "total": 1086,
+        "initial": 181,
+        "initialTotal": 1086,
+        "power": 0.9012368702621115,
+        "previousPower": 0.8993914526139661,
+        "dfResidual": 1080,
+        "critical": 2.515324472360821
+      }
+    },
+    {
+      "input": {
+        "method": "dunnett",
+        "groups": "3",
+        "delta": "12",
+        "sd": "4",
+        "alpha": "1"
+      },
+      "expected": {
+        "n": 5,
+        "total": 15,
+        "initial": 5,
+        "initialTotal": 15,
+        "power": 0.8798573023057317,
+        "previousPower": 0.7087951973941149,
+        "dfResidual": 12,
+        "critical": 3.387447328157142
+      }
+    },
+    {
+      "input": {
+        "method": "dunnett",
+        "groups": "4",
+        "delta": "5",
+        "sd": "8",
+        "differenceMode": "percent",
+        "referenceMean": "20",
+        "deltaPercent": "25"
+      },
+      "expected": {
+        "n": 53,
+        "total": 212,
+        "initial": 53,
+        "initialTotal": 212,
+        "power": 0.8018554201236059,
+        "previousPower": 0.7932021518258893,
+        "dfResidual": 208,
+        "critical": 2.3662802927928586
+      }
+    },
+    {
+      "input": {
+        "method": "dunnett",
+        "groups": "4",
+        "delta": "20",
+        "sd": "4",
+        "minResidualDf": "15"
+      },
+      "expected": {
+        "n": 5,
+        "total": 20,
+        "initial": 5,
+        "initialTotal": 20,
+        "power": 0.9999993053336719,
+        "previousPower": 0.9999421413827868,
+        "dfResidual": 16,
+        "critical": 2.5923207360642735
+      }
+    },
+    {
+      "input": {
+        "method": "tukey",
+        "groups": "4",
+        "delta": "5",
+        "sd": "8"
+      },
+      "expected": {
+        "n": 61,
+        "total": 244,
+        "initial": 61,
+        "initialTotal": 244,
+        "power": 0.8054562058788017,
+        "previousPower": 0.7974935219401532,
+        "dfResidual": 240,
+        "critical": 2.5871209629191374
+      }
+    },
+    {
+      "input": {
+        "method": "tukey",
+        "groups": "4",
+        "delta": "5",
+        "sd": "8",
+        "design": "blocks",
+        "loss": "10"
+      },
+      "expected": {
+        "n": 61,
+        "total": 244,
+        "initial": 68,
+        "initialTotal": 272,
+        "power": 0.8034913984362692,
+        "previousPower": 0.7954656872865895,
+        "dfResidual": 180,
+        "critical": 2.5931922344769585
+      }
+    },
+    {
+      "input": {
+        "method": "tukey",
+        "groups": "2",
+        "delta": "5",
+        "sd": "8"
+      },
+      "expected": {
+        "n": 42,
+        "total": 84,
+        "initial": 42,
+        "initialTotal": 84,
+        "power": 0.8079737546922021,
+        "previousPower": 0.7983450575766275,
+        "dfResidual": 82,
+        "critical": 1.989318557136572
+      }
+    },
+    {
+      "input": {
+        "method": "tukey",
+        "groups": "6",
+        "delta": "2",
+        "sd": "5",
+        "power": "90"
+      },
+      "expected": {
+        "n": 214,
+        "total": 1284,
+        "initial": 214,
+        "initialTotal": 1284,
+        "power": 0.9000973931031434,
+        "previousPower": 0.8983873334915132,
+        "dfResidual": 1278,
+        "critical": 2.8540424164956595
+      }
+    },
+    {
+      "input": {
+        "method": "tukey",
+        "groups": "3",
+        "delta": "12",
+        "sd": "4",
+        "alpha": "1"
+      },
+      "expected": {
+        "n": 5,
+        "total": 15,
+        "initial": 5,
+        "initialTotal": 15,
+        "power": 0.8444718639425419,
+        "previousPower": 0.6519639409325783,
+        "dfResidual": 12,
+        "critical": 3.56801466158953
+      }
+    },
+    {
+      "input": {
+        "method": "tukey",
+        "groups": "4",
+        "delta": "5",
+        "sd": "8",
+        "differenceMode": "percent",
+        "referenceMean": "20",
+        "deltaPercent": "25"
+      },
+      "expected": {
+        "n": 61,
+        "total": 244,
+        "initial": 61,
+        "initialTotal": 244,
+        "power": 0.8054562058788017,
+        "previousPower": 0.7974935219401532,
+        "dfResidual": 240,
+        "critical": 2.5871209629191374
+      }
+    },
+    {
+      "input": {
+        "method": "tukey",
+        "groups": "4",
+        "delta": "20",
+        "sd": "4",
+        "minResidualDf": "15"
+      },
+      "expected": {
+        "n": 5,
+        "total": 20,
+        "initial": 5,
+        "initialTotal": 20,
+        "power": 0.9999965561783889,
+        "previousPower": 0.9997820118809478,
+        "dfResidual": 16,
+        "critical": 2.861019840480606
+      }
+    },
+    {
+      "input": {
+        "method": "contrast",
+        "groups": "3",
+        "delta": "5",
+        "sd": "8"
+      },
+      "expected": {
+        "n": 31,
+        "total": 93,
+        "initial": 31,
+        "initialTotal": 93,
+        "power": 0.8025836498087858,
+        "previousPower": 0.7893440538412656,
+        "dfResidual": 90,
+        "critical": 1.9866745407037683
+      }
+    },
+    {
+      "input": {
+        "method": "contrast",
+        "groups": "4",
+        "delta": "5",
+        "sd": "8",
+        "contrastType": "pair"
+      },
+      "expected": {
+        "n": 41,
+        "total": 164,
+        "initial": 41,
+        "initialTotal": 164,
+        "power": 0.8031212548283941,
+        "previousPower": 0.793286735458253,
+        "dfResidual": 160,
+        "critical": 1.9749015600007986
+      }
+    },
+    {
+      "input": {
+        "method": "contrast",
+        "groups": "3",
+        "delta": "5",
+        "sd": "8",
+        "contrastType": "custom",
+        "weights": "-1;0.5;0.5"
+      },
+      "expected": {
+        "n": 31,
+        "total": 93,
+        "initial": 31,
+        "initialTotal": 93,
+        "power": 0.8025836498087858,
+        "previousPower": 0.7893440538412656,
+        "dfResidual": 90,
+        "critical": 1.9866745407037683
+      }
+    },
+    {
+      "input": {
+        "method": "contrast",
+        "groups": "3",
+        "delta": "10",
+        "sd": "8",
+        "contrastType": "custom",
+        "weights": "-2;1;1"
+      },
+      "expected": {
+        "n": 31,
+        "total": 93,
+        "initial": 31,
+        "initialTotal": 93,
+        "power": 0.8025836498087858,
+        "previousPower": 0.7893440538412656,
+        "dfResidual": 90,
+        "critical": 1.9866745407037683
+      }
+    },
+    {
+      "input": {
+        "method": "contrast",
+        "groups": "3",
+        "delta": "5",
+        "sd": "4",
+        "design": "blocks",
+        "loss": "10",
+        "comparisons": "3"
+      },
+      "expected": {
+        "n": 12,
+        "total": 36,
+        "initial": 14,
+        "initialTotal": 42,
+        "power": 0.8179987937315758,
+        "previousPower": 0.7719407347580783,
+        "dfResidual": 22,
+        "critical": 2.5912115559036564
+      }
+    },
+    {
+      "input": {
+        "method": "contrast",
+        "groups": "4",
+        "delta": "2",
+        "sd": "8",
+        "contrastType": "custom",
+        "weights": "-0.5;-0.5;0.5;0.5"
+      },
+      "expected": {
+        "n": 127,
+        "total": 508,
+        "initial": 127,
+        "initialTotal": 508,
+        "power": 0.8028995786300311,
+        "previousPower": 0.7997948104546346,
+        "dfResidual": 504,
+        "critical": 1.9646820033895744
+      }
+    },
+    {
+      "input": {
+        "method": "factorial",
+        "design": "blocks",
+        "a": "2",
+        "b": "3",
+        "means": "10;12;14;10;14;18",
+        "sd": "4",
+        "effect": "A",
+        "loss": "10"
+      },
+      "expected": {
+        "n": 22,
+        "total": 132,
+        "initial": 25,
+        "initialTotal": 150,
+        "power": 0.8121791883622118,
+        "previousPower": 0.7936744617177914,
+        "dfResidual": 105,
+        "critical": null
+      }
+    },
+    {
+      "input": {
+        "method": "factorial",
+        "design": "blocks",
+        "a": "2",
+        "b": "3",
+        "means": "10;12;14;10;14;18",
+        "sd": "4",
+        "effect": "B",
+        "loss": "10"
+      },
+      "expected": {
+        "n": 5,
+        "total": 30,
+        "initial": 6,
+        "initialTotal": 36,
+        "power": 0.8005308305607125,
+        "previousPower": 0.6772626434982957,
+        "dfResidual": 20,
+        "critical": null
+      }
+    },
+    {
+      "input": {
+        "method": "factorial",
+        "design": "blocks",
+        "a": "2",
+        "b": "3",
+        "means": "10;12;14;10;14;18",
+        "sd": "4",
+        "effect": "AB",
+        "loss": "10"
+      },
+      "expected": {
+        "n": 40,
+        "total": 240,
+        "initial": 45,
+        "initialTotal": 270,
+        "power": 0.8090931779781009,
+        "previousPower": 0.7983525002869121,
+        "dfResidual": 195,
+        "critical": null
+      }
+    }
+  ]
+}
