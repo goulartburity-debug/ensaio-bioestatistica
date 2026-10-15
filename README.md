@@ -1,8 +1,8 @@
-# Ensaio — guia didático de Bioestatística
+# CoDel-Stat — guia didático de Bioestatística
 
 Projeto de monitoria de Bernardo Goulart Burity, baseado nos materiais da Profa. Ana Paula Madureira e nas referências acadêmicas vinculadas na interface.
 
-## O que o Ensaio oferece
+## O que o CoDel-Stat oferece
 
 Nova entrada **Tamanho amostral**, independente do planejamento e integrada a ele mediante prévia e confirmação. São 18 rotas de cálculo: precisão de média/proporção; duas médias independentes/pareadas; duas proporções; ANOVA; fatorial balanceado com ou sem blocos; DBC completo; Dunnett; Tukey; contrastes planejados; correlação; regressão linear; estimação de proporção em conglomerados iguais; parcelas subdivididas em blocos completos; várias unidades tratadas separadamente por tratamento e bloco; medidas repetidas; comparação de médias com tratamentos aplicados a conjuntos. Há métodos exatos sob modelos normais e aproximações, sempre identificados.
 
@@ -18,6 +18,10 @@ Documentação:
 
 - [Código aberto e licenças](docs/CODIGO-ABERTO.md)
 - [Validação e exemplos numéricos](docs/VALIDACAO-AMOSTRAL.md)
+
+## Identidade visual
+
+Interface em preto/azul, navegação grafite e área de trabalho branca. O logotipo fornecido pelo responsável está em `assets/codel-stat-logo.png`, preservado sem alterações. Os esquemas mantêm rótulos e cores por tratamento. Dados previamente salvos e a versão 1.3.0 dos cálculos foram preservados.
 
 ## Sobre o código
 
