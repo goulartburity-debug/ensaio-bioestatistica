@@ -1,5 +1,7 @@
 # Tamanho amostral no Ensaio — versão 1.0.0
 
+Revisão de interface da fase 1: ver [FASE-1-INTERFACE.md](FASE-1-INTERFACE.md). O motor descrito abaixo foi preservado. O resumo copiável citado no registro da entrega original foi retirado da interface por solicitação do responsável pelo projeto; exemplos e ajustes avançados passaram a ser opcionais e recolhidos.
+
 Implementação de 15/10/2026, baseada no site existente no commit `860ed312a95ab359fe82f9d530a60ad2b00068a7`. O módulo executa no navegador, sem servidor, conta paga ou importação de dados. Nenhum cálculo de teste sobre dados coletados foi acrescentado. Os valores digitados são hipóteses de planejamento.
 
 ## Métodos disponíveis e o que contam

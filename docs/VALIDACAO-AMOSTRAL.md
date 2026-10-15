@@ -1,5 +1,7 @@
 # Validação — tamanho amostral 1.0.0
 
+Revisão da interface — fase 1: **171 testes aprovados**, incluindo os 153 abaixo e 18 novos. Registro em [FASE-1-INTERFACE.md](FASE-1-INTERFACE.md). O motor foi preservado; o resumo copiável da entrega original foi retirado da interface. A verificação visual em navegador real continua pendente.
+
 ## Resultado executado
 
 153 testes automatizados passaram em 15/10/2026. Incluem regressão dos percursos anteriores, cálculos, campos, armazenamento e integração. A verificação de interface usou renderização e eventos com DOM simulado. Não houve inspeção visual em navegador real nem teste em aparelho celular nesta entrega; o CSS preserva a identidade existente e contém regras responsivas. Recomenda-se testar a publicação no celular antes de divulgar à turma.
