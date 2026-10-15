@@ -1,4 +1,4 @@
-# CoDel-Stat — guia didático de Bioestatística
+# CoDel-Stat — guia didático de Estatística
 
 Projeto de monitoria de Bernardo Goulart Burity, baseado nos materiais da Profa. Ana Paula Madureira e nas referências acadêmicas vinculadas na interface.
 
@@ -32,3 +32,7 @@ Referências numéricas reprodutíveis e verificações de regressão em `tests/
 Os parâmetros da calculadora são salvos apenas no navegador e os resultados precisam ser recalculados após reabertura. Aplicações confirmadas ao planejamento registram método, parâmetros e versão; mudanças de plano geram aviso para revisão.
 
 As partes reaproveitadas de jStat, OpenEpi e Superpower têm licença MIT. O núcleo de integração da amplitude estudentizada utiliza código adaptado do SciPy sob BSD-3-Clause. Os avisos e as adaptações estão documentados. Não foi incorporado código GPL do WebPower. Consulte a documentação de proveniência antes de acrescentar novas dependências.
+
+## Interface e abrangência
+
+Navegação lateral com recolhimento automático nos módulos em computadores, expansão manual e nomes acessíveis para os ícones. Identificação gráfica e créditos foram removidos da coluna lateral; autoria e fontes permanecem em Sobre e referências. A home apresenta o nome e a frase principal. Exemplos de educação, produção, materiais e saúde ampliam a aplicação didática para diferentes áreas, preservando os métodos e suas limitações.
