@@ -1,6 +1,7 @@
 import {normalQuantile,fPower,pairedPower,integerSearch} from './numeric.mjs';
 import {openEpiMeans} from './vendor/openepi-means.mjs';
 import {methods,VERSION} from './methods.mjs';
+import {isComparison,isBlocked,planComparison,residualDf} from './comparisons.mjs';
 export function number(value,label,min=-Infinity,max=Infinity,integer=false){
  const s=String(value??'').trim();
  if(!/^[+-]?(?:\d+(?:[.,]\d*)?|[.,]\d+)$/.test(s))throw Error(`Informe ${label} como número (aceitamos vírgula decimal, sem separador de milhar).`);
@@ -27,12 +28,17 @@ function fEffect(s,kind,k,a,b){
 export function calculate(s){
  const meta=Object.hasOwn(methods,s.method)?methods[s.method]:null;if(!meta)throw Error('Escolha um método disponível.');
  const method=s.method,estimate=['mean','proportion','cluster'].includes(method),loss=number(s.loss,'perdas (%)',0,90)/100;
- const params={},warnings=[],units=[];let n,total,power=null,level='unidades',type=meta.type,blocks=null,clusters=null,composition='',raw=null;
+ const params={},warnings=[],units=[];let n,total,power=null,level='unidades',type=meta.type,blocks=null,clusters=null,composition='',raw=null,details={};
  const put=(key,value)=>{params[key]=value;return value;};
  const confidence=estimate?put('Confiança (%)',number(s.confidence,'confiança (%)',80,99.9)):null;
  let alpha,target,za,zb;
- if(!estimate){const comparisons=put('Hipóteses na família (Bonferroni)',number(s.comparisons,'número de hipóteses',1,100,true));alpha=number(s.alpha,'significância da família (%)',0.1,20)/100/comparisons;put('Significância da família (%)',Number(s.alpha.replace(',','.')));put('Significância por hipótese (%)',alpha*100);target=put('Poder desejado (%)',number(s.power,'poder (%)',50,99.9))/100;zb=normalQuantile(target);if(['means','paired','proportions','correlation'].includes(method)){direction(s,1*(s.sides==='less'?-1:1));put('Hipótese',s.sides==='two'?'Bilateral':s.sides==='greater'?'Unilateral: maior que zero':'Unilateral: menor que zero');za=normalQuantile(1-alpha/(s.sides==='two'?2:1));}else put('Hipótese','Teste F do efeito informado (cauda superior)');}
+ if(!estimate){const comparisons=put('Hipóteses na família (Bonferroni)',number(s.comparisons,'número de hipóteses',1,100,true));alpha=number(s.alpha,'significância da família (%)',0.1,20)/100/comparisons;put('Significância da família (%)',Number(s.alpha.replace(',','.')));put('Significância por hipótese (%)',alpha*100);target=put('Poder desejado (%)',number(s.power,'poder (%)',50,99.9))/100;zb=normalQuantile(target);if(['means','paired','proportions','correlation'].includes(method)){direction(s,1*(s.sides==='less'?-1:1));put('Hipótese',s.sides==='two'?'Bilateral':s.sides==='greater'?'Unilateral: maior que zero':'Unilateral: menor que zero');za=normalQuantile(1-alpha/(s.sides==='two'?2:1));}else put('Hipótese',isComparison(method)?'Comparação bilateral das médias ou do contraste':'Teste F do efeito informado (cauda superior)');}
  const z=estimate?normalQuantile((1+confidence/100)/2):null;
+ if(isComparison(method)){
+  const planned=planComparison(s,{alpha,target,number,put});
+  ({n,total,power,level,blocks,composition}=planned);units.push(...planned.units);warnings.push(...planned.warnings);
+  details={dfResidual:planned.dfResidual,powerOnlyN:planned.powerOnlyN,minResidualDf:planned.minResidualDf,critical:planned.critical,powerMeaning:planned.powerMeaning,contrastWeights:planned.weights};
+ }
  if(['mean','proportion','cluster'].includes(method)){
   const margin=put(method==='mean'?'Margem de erro (unidade da resposta)':'Margem de erro (pontos percentuais)',positive(s.margin,'margem de erro',method==='mean'?1e9:99));
   let variance;
@@ -76,8 +82,11 @@ export function calculate(s){
   if(method==='factorial'){a=put('Níveis de A',number(s.a,'níveis de A',2,10,true));b=put('Níveis de B',number(s.b,'níveis de B',2,10,true));k=a*b;if(!['A','B','AB'].includes(s.effect))throw Error('Escolha efeito A, B ou interação.');df1=s.effect==='A'?a-1:s.effect==='B'?b-1:(a-1)*(b-1);put('Efeito dimensionado',s.effect==='AB'?'Interação A × B':s.effect);}
   else{k=put('Tratamentos',number(s.groups,'número de tratamentos',method==='anova'?3:2,20,true));df1=k-1;}
   const f=put('Efeito f do termo escolhido',fEffect(s,method,k,a,b));if(s.scale!=='standard'){put('Médias esperadas',s.means);put('DP residual esperado',Number(s.sd.replace(',','.')));}
-  const fn=r=>fPower(df1,method==='blocks'?(k-1)*(r-1):k*(r-1),k*r*f*f,alpha),solution=integerSearch(fn,target,2,Math.floor(1000000/k));n=solution.n;power=solution.power;total=k*n;
-  if(method==='blocks'){blocks=n;level='blocos completos';units.push({label:'Blocos completos',n});composition=`${n} blocos × ${k} tratamentos × 1 unidade = ${total} unidades experimentais. São ${n} unidades por tratamento, uma em cada bloco.`;}
+  if(method==='factorial'&&!['independent','blocks'].includes(s.design))throw Error('Escolha o fatorial sem blocos ou em blocos completos.');
+  const blocked=isBlocked(s),fn=r=>fPower(df1,residualDf(k,r,blocked),k*r*f*f,alpha),solution=integerSearch(fn,target,2,Math.floor(1000000/k));n=solution.n;power=solution.power;total=k*n;
+  details.dfResidual=residualDf(k,n,blocked);put('GL do resíduo',details.dfResidual);
+  if(method==='factorial')put('Organização',blocked?'Blocos completos aditivos, uma unidade por combinação e bloco':'Fatorial completo sem blocos');
+  if(blocked){blocks=n;level='blocos completos';units.push({label:'Blocos completos',n});composition=`${n} blocos × ${k} ${method==='factorial'?'combinações':'tratamentos'} × 1 unidade = ${total} unidades experimentais. São ${n} unidades por ${method==='factorial'?'combinação':'tratamento'}, uma em cada bloco.`;}
   else{units.push({label:method==='factorial'?'Por combinação':'Por tratamento',n});level=method==='factorial'?'unidades por combinação':'unidades por tratamento';composition=`${k} ${method==='factorial'?'combinações':'tratamentos'} × ${n} unidades = ${total} unidades experimentais.`;}
  }
  if(method==='correlation'){
@@ -90,14 +99,14 @@ export function calculate(s){
  }
  if(!Number.isSafeInteger(total)||total>10000000||total<2)throw Error('O total excede a faixa permitida (até 10 milhões). Revise as hipóteses; não foi produzido um resultado utilizável.');
  const initialUnits=units.map(x=>({...x,n:Math.ceil(x.n/(1-loss))}));let initialTotal;
- if(method==='blocks'||method==='anova')initialTotal=initialUnits[0].n*Number(s.groups);
+ if(method==='blocks'||method==='anova'||isComparison(method))initialTotal=initialUnits[0].n*Number(s.groups);
  else if(method==='factorial')initialTotal=initialUnits[0].n*Number(s.a)*Number(s.b);
  else if(method==='cluster')initialTotal=initialUnits[0].n*Number(s.clusterSize);
  else initialTotal=initialUnits.reduce((sum,x)=>sum+x.n,0);
  if(s.population==='finite'&&['mean','proportion'].includes(method)&&initialTotal>Number(s.populationN))throw Error('O ajuste para perdas excede a população disponível. Revise a precisão ou a previsão de perdas.');
  put('Perdas previstas (%)',loss*100);
- if(loss>0)warnings.push(method==='blocks'?'Perdas ajustadas no nível de blocos inteiros. Perdas isoladas dentro de blocos exigem outro planejamento.':method==='cluster'?'Perdas ajustadas no nível de conglomerados inteiros; m é o número analisável dentro de cada um.':method==='paired'?'Perdas ajustadas no nível de pares completos; perder uma medida pode tornar o par incompleto.':'Ajuste aplicado por grupo ou combinação, preservando a organização planejada.');
+ if(loss>0)warnings.push(isBlocked(s)?'Perdas ajustadas no nível de blocos inteiros. Perdas isoladas dentro de blocos exigem outro planejamento.':method==='cluster'?'Perdas ajustadas no nível de conglomerados inteiros; m é o número analisável dentro de cada um.':method==='paired'?'Perdas ajustadas no nível de pares completos; perder uma medida pode tornar o par incompleto.':'Ajuste aplicado por grupo ou combinação, preservando a organização planejada.');
  warnings.push(meta.limits);
- return {version:VERSION,method,params,n,total,initialTotal,units,initialUnits,level,power,blocks,clusters,composition,type,warnings,source:meta.source,ref:meta.ref,url:meta.url,raw,inputs:{...s}};
+ return {version:VERSION,method,params,n,total,initialTotal,units,initialUnits,level,power,blocks,clusters,composition,type,warnings,source:meta.source,ref:meta.ref,url:meta.url,raw,inputs:{...s},...details};
 }
 export function summary(r){return `${methods[r.method].name}. Método: ${r.type}. Parâmetros: ${Object.entries(r.params).map(([k,v])=>`${k}: ${v}`).join('; ')}. Necessário analisável: ${r.units.map(x=>`${x.n} ${x.label.toLowerCase()}`).join('; ')}; total ${r.total}${r.method==='cluster'?' observações vinculadas, não independentes':r.method==='paired'?' pares':' unidades independentes sob o modelo'}. Inclusão inicial: ${r.initialUnits.map(x=>`${x.n} ${x.label.toLowerCase()}`).join('; ')}; total ${r.initialTotal}. ${r.composition} ${r.power===null?'Poder não recalculado após arredondamento nesta aproximação.':`Poder na composição analisável: ${(100*r.power).toFixed(2)}%.`} Limitações: ${r.warnings.join(' ')} Fonte: ${r.source} ${r.ref} ${r.url}. Ensaio — cálculo v${r.version}. O tamanho não garante representatividade, significância ou validade do estudo.`;}

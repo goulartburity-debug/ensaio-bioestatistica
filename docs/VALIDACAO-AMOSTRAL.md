@@ -1,8 +1,12 @@
-# Validação — tamanho amostral 1.0.0
+# Validação — tamanho amostral 1.1.0
 
 Revisão da interface — fase 1: **171 testes aprovados**, incluindo os 153 abaixo e 18 novos. Registro em [FASE-1-INTERFACE.md](FASE-1-INTERFACE.md). O motor foi preservado; o resumo copiável da entrega original foi retirado da interface. A verificação visual em navegador real continua pendente.
 
-## Resultado executado
+## Segundo ciclo — resultado atual
+
+**227 testes aprovados**. Novas referências: 12 valores críticos e 23 tamanhos/poderes contra SciPy 1.17.0, além de estados de interface, integração e execução do módulo de worker. Escopo, tolerâncias, limitações e exemplos em [CICLO-2-COMPARACOES.md](CICLO-2-COMPARACOES.md). Não houve teste visual em navegador real.
+
+## Registro original da versão 1.0.0
 
 153 testes automatizados passaram em 15/10/2026. Incluem regressão dos percursos anteriores, cálculos, campos, armazenamento e integração. A verificação de interface usou renderização e eventos com DOM simulado. Não houve inspeção visual em navegador real nem teste em aparelho celular nesta entrega; o CSS preserva a identidade existente e contém regras responsivas. Recomenda-se testar a publicação no celular antes de divulgar à turma.
 

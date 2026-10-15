@@ -62,7 +62,7 @@ export const guidance = {
     count: 'O resultado será por combinação. Duas variedades e três adubações formam seis combinações.',
     find: 'Informe uma média para cada combinação, em ordem, e o desvio-padrão residual. Primeiro escolha o efeito principal: variedade, adubação ou interação. Para detectar interação, o padrão de resposta precisa mudar entre os níveis do outro fator.',
     example: 'Duas variedades × três adubações. Médias na ordem A1B1, A1B2, A1B3, A2B1, A2B2, A2B3: 10; 12; 14; 10; 14; 18. Desvio-padrão residual: 4.',
-    care: 'Este caminho cobre fatores aplicados no mesmo nível, sem blocos. Parcelas subdivididas precisam de outro cálculo.'
+    care: 'Os fatores precisam ser aplicados no mesmo nível. Se usar blocos, todos devem ter uma unidade de cada combinação e o modelo é aditivo em blocos. Parcelas subdivididas precisam de outro cálculo.'
   },
   correlation: {
     question: 'Altura e massa das plantas apresentam uma associação?',
@@ -79,6 +79,30 @@ export const guidance = {
     find: 'Procure um estudo com a mesma resposta e variáveis semelhantes. R² indica a parcela da variação explicada: 0,25 corresponde a 25%. O modelo completo inclui tudo; o reduzido retira apenas os coeficientes que você quer testar. Se testar todos, o R² reduzido será zero.',
     example: 'Modelo com três coeficientes, dos quais dois são testados. R² esperado de 0,25 no modelo completo e de 0,10 no reduzido.',
     care: 'Este cálculo é para regressão linear com resposta contínua e erros independentes. Não dimensiona CL50, regressão logística ou contagens.'
+  },
+  dunnett: {
+    question: 'Cada adubação melhora a altura em relação à testemunha?',
+    idea: 'Compare cada tratamento com uma única referência, usando o ajuste de Dunnett. A testemunha entra na contagem de tratamentos.',
+    count: 'Conte unidades tratadas independentemente. Em blocos, cada bloco completo recebe todos os tratamentos, incluindo a testemunha.',
+    find: 'Informe a menor diferença entre um tratamento e a testemunha que teria importância prática. Busque o desvio-padrão residual em um estudo comparável. Se usar blocos, o desvio-padrão deve ser o que sobra após considerar esses blocos.',
+    example: 'Quatro tratamentos no total: uma testemunha e três adubações. Diferença relevante de 5 cm e desvio-padrão residual de 8 cm; poder de 80%, significância familiar de 5% e grupos iguais.',
+    care: 'O poder é de uma comparação com o efeito informado, usando o ajuste para a família inteira. Não significa 80% de chance de detectar todos os tratamentos eficazes. Este método é para médias de respostas contínuas, não para mortalidade binomial.'
+  },
+  tukey: {
+    question: 'Quero comparar cada adubação com todas as outras.',
+    idea: 'O ajuste de Tukey considera todos os pares. O cálculo busca poder para uma diferença do tamanho que você informar.',
+    count: 'O resultado conta todas as unidades do experimento, com a mesma quantidade em cada tratamento. Em DBC, conta blocos completos.',
+    find: 'Escolha a menor diferença entre duas médias que importa detectar e procure o desvio-padrão residual de um estudo semelhante. Uma diferença de 5 cm tem significado diferente conforme a variação entre unidades.',
+    example: 'Quatro adubações, diferença relevante de 5 cm e desvio-padrão residual de 8 cm. O ajuste cobre os seis pares, com poder de 80% por comparação e significância familiar de 5%.',
+    care: 'O valor crítico de Tukey, sozinho, não calcula poder. Aqui também usamos a distribuição do efeito esperado. O poder por comparação não é a probabilidade de detectar todos os pares nem pelo menos um. Tamanhos desiguais ainda não são dimensionados nesta rota.'
+  },
+  contrast: {
+    question: 'A média das adubações difere da testemunha?',
+    idea: 'Defina antes da coleta uma comparação que responde à sua pergunta, sem precisar comparar todos os tratamentos entre si.',
+    count: 'Todos os tratamentos informados entram no total, mesmo quando algum tem peso zero no contraste. Eles compartilham a estimativa da variância residual neste modelo.',
+    find: 'Você pode comparar dois tratamentos, a testemunha com a média dos demais ou definir pesos. Ex.: −1; 0,5; 0,5 compara a média de T2 e T3 com T1. A diferença relevante deve estar na escala desse contraste: mudar todos os pesos muda essa escala.',
+    example: 'Três tratamentos: testemunha, adubação A e adubação B. Comparação: média de A e B menos a testemunha. Diferença relevante de 5 cm e desvio-padrão residual de 8 cm.',
+    care: 'O contraste precisa ser escolhido antes da coleta. Este cálculo trata um contraste bilateral em desenho balanceado. Para outras hipóteses na mesma família, o ajuste de Bonferroni precisa ser informado nas opções; o poder conjunto não é calculado.'
   },
   cluster: {
     question: 'Qual porcentagem apresenta uma característica, avaliando indivíduos dentro de conjuntos?',
@@ -97,5 +121,8 @@ export const examples = {
   factorial: {a:'2',b:'3',effect:'AB',means:'10; 12; 14; 10; 14; 18',sd:'4'},
   blocks: {groups:'3',means:'10; 12; 15',sd:'4'}, correlation: {r:'0,3'},
   regression: {predictors:'3',tested:'2',r2full:'0,25',r2reduced:'0,10'},
-  cluster: {p:'50',margin:'5',clusterSize:'20',icc:'0,05'}
+  cluster: {p:'50',margin:'5',clusterSize:'20',icc:'0,05'},
+  dunnett: {groups:'4',delta:'5',sd:'8'},
+  tukey: {groups:'4',delta:'5',sd:'8'},
+  contrast: {groups:'3',delta:'5',sd:'8',contrastType:'control-average'}
 };

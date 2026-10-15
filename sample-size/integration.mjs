@@ -1,10 +1,12 @@
 import {defaults,VERSION} from './methods.mjs';
 import {blank} from '../guide.mjs';
+import {isComparison,isBlocked} from './comparisons.mjs';
 export const fingerprint=plan=>JSON.stringify(Object.fromEntries(Object.keys(blank()).sort().map(k=>[k,String(plan[k]??'')])));
 export function fromPlan(plan){
  const d=defaults();d.stage='choose';d.unitName=plan.unit||'';d.contextNote=`Planejamento consultado: ${plan.unit||'unidade ainda não definida'}; ${plan.response||'resposta ainda não definida'}. Quantidade atual: ${plan.replicates||'não informada'}. Nenhum valor foi alterado. Confirme abaixo o tipo de resposta e a estrutura.`;
  if(plan.unitKind==='multilevel'||plan.unitKind==='equipment'||['sub','time','both','unknown'].includes(plan.measurement)){d.category='structured';d.contextNote+=' Esta estrutura exige conferir dependência e nível de aplicação. Não foi selecionado um cálculo de grupos independentes.';return d;}
- if(plan.factorCount==='two'){d.category='structured';d.method=plan.cross==='yes'&&plan.environment==='similar'?'factorial':'';d.a=plan.levelsA;d.b=plan.levelsB;}
+ d.design=plan.environment==='blocks'?'blocks':'independent';
+ if(plan.factorCount==='two'){d.category='structured';d.method=plan.cross==='yes'&&(plan.environment==='similar'||plan.environment==='blocks'&&plan.complete==='yes'&&(!plan.replicates||plan.replicates==='1'))?'factorial':'';d.a=plan.levelsA;d.b=plan.levelsB;}
  else if(plan.environment==='blocks'){d.category='structured';d.method=plan.complete==='yes'&&(!plan.replicates||plan.replicates==='1')?'blocks':'';d.groups=plan.levelsA;}
  else if(Number(plan.levelsA)>=2){d.category='compare';d.groups=plan.levelsA;/* Response type is not encoded in the existing plan: user must choose. */}
  return d;
@@ -17,15 +19,18 @@ export function transferProposal(plan,result,snapshot){
  if(!['individual','group'].includes(plan.unitKind)||!plan.unit?.trim())return fail('Defina primeiro a unidade experimental no planejamento. Equipamentos e aplicações em vários níveis precisam de dimensionamento próprio.');
  if(plan.measurement&&plan.measurement!=='once')return fail('O planejamento contém subamostras, avaliações repetidas ou uma avaliação ainda indefinida. Não vamos converter observações vinculadas em repetições. Defina uma resposta por unidade e um modelo compatível antes de transferir.');
  const changes=[],r=result,method=r.method,input=r.inputs,initial=r.initialUnits[0].n;
- if(method==='blocks'){
-  if(plan.environment!=='blocks'||plan.factorCount!=='one'||plan.complete!=='yes'||Number(plan.levelsA)!==Number(input.groups)||plan.replicates&&Number(plan.replicates)!==1)return fail('Este cálculo requer DBC completo, um fator, o mesmo número de tratamentos e uma unidade por tratamento dentro de cada bloco.');
+ if(isBlocked(input)){
+  if(plan.environment!=='blocks'||plan.complete!=='yes'||plan.replicates&&Number(plan.replicates)!==1)return fail('Este cálculo requer DBC completo e uma unidade por tratamento ou combinação dentro de cada bloco.');
+  if(method==='factorial'){
+   if(plan.factorCount!=='two'||plan.cross!=='yes'||Number(plan.levelsA)!==Number(input.a)||Number(plan.levelsB)!==Number(input.b))return fail('O fatorial em blocos deve ter os mesmos níveis de A e B e todas as combinações em cada bloco.');
+  }else if(plan.factorCount!=='one'||Number(plan.levelsA)!==Number(input.groups))return fail('Este cálculo requer DBC completo, um fator e o mesmo número de tratamentos.');
   changes.push({key:'blockCount',label:'Número de blocos',before:plan.blockCount,after:String(initial)},{key:'replicates',label:'Unidades de cada tratamento dentro de cada bloco',before:plan.replicates,after:'1'});
  }else{
   if(plan.environment!=='similar')return fail('Este cálculo sem blocos não pode preencher um planejamento com blocos ou ambiente indefinido.');
   if(method==='factorial'){
    if(plan.factorCount!=='two'||plan.cross!=='yes'||Number(plan.levelsA)!==Number(input.a)||Number(plan.levelsB)!==Number(input.b))return fail('O fatorial deve ter os mesmos níveis de A e B, todas as combinações e nenhum bloco.');
-  }else if(['means','proportions','anova'].includes(method)){
-   const groups=method==='anova'?Number(input.groups):2;
+  }else if(['means','proportions','anova'].includes(method)||isComparison(method)){
+   const groups=method==='anova'||isComparison(method)?Number(input.groups):2;
    if(plan.factorCount!=='one'||Number(plan.levelsA)!==groups)return fail('O número de tratamentos ou fatores do planejamento não corresponde ao cálculo.');
    if(['means','proportions'].includes(method)&&Number(input.ratio.replace(',','.'))!==1)return fail('A calculadora admite alocação desigual, mas o planejamento atual usa uma quantidade igual por tratamento. A transferência foi bloqueada.');
   }else return fail('O planejamento atual não representa diretamente este resultado. Pares, estimação, correlação, regressão e conglomerados permanecem como cálculos independentes.');

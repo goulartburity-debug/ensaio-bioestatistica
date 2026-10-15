@@ -3,7 +3,7 @@ MIT License
 Copyright (c) 2026 Ensaio contributors
 
 This license covers the new first-party files in the sample-size directory.
-Third-party components retain their own copyright notices and MIT licenses in
+Third-party components retain their own copyright notices and MIT/BSD licenses in
 licenses/ and vendor/. It does not relicense the pre-existing Ensaio website,
 teaching materials, books, articles or referenced content.
 

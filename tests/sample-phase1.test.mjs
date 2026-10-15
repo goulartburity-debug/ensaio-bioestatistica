@@ -90,8 +90,8 @@ test('Rotas alternativas preservam efeito padronizado, correlação intrapar e p
  assert.match(h.html(),/278 unidades na amostra/);assert.match(h.html(),/população finita: 1000/);
 });
 
-test('A versão do motor e resultados não são modificados pela revisão de interface',()=>{
- assert.equal(VERSION,'1.0.0');
+test('A ampliação do motor preserva os resultados dos exemplos da fase 1',()=>{
+ assert.equal(VERSION,'1.1.0');
  assert.equal(calculate({...defaults(),method:'proportion',...examples.proportion}).n,385);
  assert.equal(calculate({...defaults(),method:'anova',...examples.anova}).n,50);
  assert.equal(calculate({...defaults(),method:'blocks',...examples.blocks}).n,14);

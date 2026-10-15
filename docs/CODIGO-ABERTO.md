@@ -1,4 +1,4 @@
-# Código aberto, proveniência e licenças — tamanho amostral v1.0.0
+# Código aberto, proveniência e licenças — tamanho amostral v1.1.0
 
 Auditoria realizada em 15/10/2026. Esta documentação distingue código efetivamente distribuído, bibliotecas numéricas, fórmulas implementadas a partir da literatura e ferramentas apenas consultadas. A licença do módulo não altera automaticamente a titularidade dos materiais didáticos preexistentes.
 
@@ -11,7 +11,7 @@ Auditoria realizada em 15/10/2026. Esta documentação distingue código efetiva
 - Commit fixado: `72f367f6dbd45c2d903053ee3f9981489912cad4`.
 - Origem: `dist/jstat.js`; destino: `sample-size/vendor/jstat.mjs`.
 - Licença: MIT; copyright (c) 2013 jStat, texto integral em `sample-size/licenses/jstat-MIT.txt` e no próprio módulo.
-- Adaptação: somente remoção do invólucro UMD e adição de `export {jStat}`. Algoritmos internos preservados. Biblioteca distribuída localmente, sem dependência de CDN.
+- Adaptação inicial: remoção do invólucro UMD e adição de `export {jStat}`. No ciclo 2 foram omitidas as implementações não utilizadas de `tukeyWprob`, `tukeyQinv`, `tukey.cdf` e `tukey.inv`, que o próprio código identifica como transcrições de rotinas de R. O cálculo novo de Tukey usa o núcleo SciPy descrito abaixo. As funções usadas anteriormente e as demais partes da biblioteca foram preservadas. Distribuição local, sem CDN.
 - Funções usadas: `normal.inv`, `centralF.inv`, `studentt.inv`, `noncentralt.cdf`, `ibeta` e suas dependências internas.
 - Uso: quantis de todos os métodos; t pareado unilateral; beta incompleta na avaliação própria da F não central; quantis F e t nos modelos normais.
 - A série própria da F usa uma identidade de mistura Poisson–beta, com soma centrada no modo. Não é uma rotina de R traduzida. Foi validada contra SciPy/Boost. A distribuição t não central do jStat é usada somente na faixa de não centralidade até 20; o guia rejeita parâmetros além da faixa em vez de confiar no comportamento da biblioteca em toda a reta.
@@ -30,6 +30,19 @@ Auditoria realizada em 15/10/2026. Esta documentação distingue código efetiva
 - Método: aproximação normal para duas médias de Rosner; DPs distintos e alocação desigual permitidos. A extensão unilateral é explícita: muda o quantil crítico para a cauda especificada. Não é anunciada como cálculo exato de Welch.
 - Não foram copiados o framework de interface legado, `Norm`, `ANorm`, rotinas de John C. Pezzullo, nem outros componentes embutidos. Os arquivos `SSPropor.js` e `SSCohort.js` informam origem em Pezzullo; suas licenças componentes não foram presumidas como MIT apenas porque estavam no pacote. Eles serviram somente à comparação de resultados.
 
+### SciPy 1.17.0 — código incorporado no segundo ciclo
+
+- Projeto: https://github.com/scipy/scipy ; tag `v1.17.0`.
+- Arquivo de origem: [`scipy/stats/_stats.pyx`](https://github.com/scipy/scipy/blob/v1.17.0/scipy/stats/_stats.pyx).
+- SHA-256 do arquivo original examinado: `de1368dab08c654cce5a321fb47a590b9dc415336a61defd97e4c34be484f7dc`.
+- Funções aproveitadas: núcleo de `_studentized_range_cdf_logconst`, `_studentized_range_cdf` e a fatoração normal em `_studentized_range_cdf_asymptotic`. O cálculo final continua integrando os graus de liberdade finitos; não foi adotada a aproximação de graus de liberdade infinitos.
+- Destino: `sample-size/vendor/scipy-range.mjs`, funções `sdLogDensity` e `normalRangeTerm`, utilizadas em `multiple-numeric.mjs`.
+- Licença: BSD-3-Clause, copyright (c) 2001–2002 Enthought, Inc. 2003, SciPy Developers. Texto integral em `sample-size/licenses/scipy-BSD-3-Clause.txt`.
+- Adaptações: Cython → JavaScript; fatoração das densidades normal e qui; mudança de variável `y = sqrt(2*df)*(s−1)`; integração por quadratura de Gauss–Legendre e busca de quantil do Ensaio, em vez do integrador adaptativo do SciPy. As quantidades são comparadas com as rotinas originais, sem substituir silenciosamente a distribuição por uma normal.
+- Dunnett: também foi examinado `_params_dunnett`/`_pvalue_dunnett` em [`scipy/stats/_multicomp.py`](https://github.com/scipy/scipy/blob/v1.17.0/scipy/stats/_multicomp.py), SHA-256 `8cf3185c8d0d0ebeb7e94c82c67b282a1d40b32cfcfa480b34e4bba832fc0be8`. O modelo e a correlação das comparações foram usados como referência; não foi portado o integrador QMC multivariado. O Ensaio integra a representação condicional válida para o caso balanceado, com a densidade de mistura reaproveitada acima.
+- Referências: documentação `scipy.stats.studentized_range`, Batista et al. (2017), DOI 10.1590/1413-70542017414047716; Dunnett (1955), JASA 50:1096–1121.
+- A verificação independente usa SciPy 1.17.0, `studentized_range`, `multivariate_t`, `nct` e `ncf`, além de uma integração adaptativa em Python. Essa verificação não é dependência do navegador.
+
 ## Métodos e origem, um a um
 
 | Método do Ensaio | Código reaproveitado | Implementação da regra estatística / referência |
@@ -40,13 +53,16 @@ Auditoria realizada em 15/10/2026. Esta documentação distingue código efetiva
 | Pareado | jStat, MIT | Teste t não central e busca inteira do Ensaio; Cohen (1988), cap. 2 |
 | Duas proporções | jStat, MIT | Fórmula publicada de Fleiss (1981), implementação própria; confrontada com coluna Fleiss do OpenEpi |
 | ANOVA | jStat, MIT | F não central e balanceamento do Ensaio; Cohen (1988), cap. 8 |
-| Fatorial | jStat, MIT | Decomposição de médias e F do modelo fixo do Ensaio; Montgomery (2012), cap. 5 |
+| Fatorial sem blocos ou em DBC completo aditivo | jStat, MIT | Decomposição de médias e F do modelo fixo do Ensaio; Montgomery (2012), caps. 4–5 |
 | DBC | jStat, MIT | Modelo aditivo e busca de blocos do Ensaio; Montgomery (2012), cap. 4 |
 | Correlação | jStat, MIT | Aproximação z de Fisher; não é transcrição de `wp.correlation` ou `pwr.r.test` |
 | Regressão | jStat, MIT | Teste F com λ=Nf²; modelo linear fixo e comparação aninhada |
+| Dunnett balanceado | Densidade de mistura SciPy, BSD-3-Clause; jStat, MIT | Integração da distribuição t multivariada com correlação 0,5, busca inteira e poder marginal do Ensaio; Dunnett (1955) |
+| Tukey balanceado | Núcleo SciPy 1.17.0, BSD-3-Clause; jStat, MIT | Integral de amplitude estudentizada com graus de liberdade finitos; poder de um par por t²/F não central e busca inteira do Ensaio |
+| Contraste planejado | jStat, MIT | Equações publicadas de variância do contraste (NIST), poder t²/F não central e busca inteira do Ensaio; nenhum código R de pwrss/Superpower foi portado |
 | Conglomerados descritivos | jStat, MIT | DEFF=1+(m−1)ICC de Kish (1965), implementação própria; Cochran (1977) |
 
-As adaptações e os arquivos novos dentro de `sample-size/` são disponibilizados sob MIT em `sample-size/LICENSE.txt`. Os avisos dos terceiros permanecem com eles. Isso não relicencia o restante do site nem os livros, artigos ou materiais da professora.
+Os arquivos de autoria do Ensaio dentro de `sample-size/` são disponibilizados sob MIT em `sample-size/LICENSE.txt`. O arquivo adaptado de SciPy mantém BSD-3-Clause; os avisos dos terceiros permanecem com eles. Isso não relicencia o restante do site nem os livros, artigos ou materiais da professora.
 
 ## Candidatas examinadas, não incorporadas
 

@@ -96,3 +96,6 @@
  .sample-params>div{grid-template-columns:1fr;gap:3px}
  .sample-entry-grid .result-panel{padding:22px}
 }
+
+/* Segundo ciclo: explicação curta do poder das comparações. */
+.sample-power-meaning{font-size:13px;line-height:1.7;color:var(--green);margin:0 0 22px;padding-left:14px;border-left:2px solid #b9cba7}
