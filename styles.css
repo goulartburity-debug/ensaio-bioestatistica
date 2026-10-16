@@ -95,3 +95,26 @@ html{scrollbar-gutter:stable}
 .choice:hover{border-color:#7D9ABD;background:#F8FAFC}.choice.selected:hover{background:#EFF6FF;border-color:#2563EB}
 .choice:focus-visible{outline:3px solid #2563EB;outline-offset:3px}
 .question-footer .btn:disabled{background:#E5E7EB;border-color:#D1D5DB;color:#5B6472;opacity:1;cursor:not-allowed}
+
+/* Mesa de trabalho: cards brancos sobre papel, sequência numerada. */
+.dashboard-heading{margin:0 0 28px}.dashboard-heading h1{font-size:clamp(38px,4vw,54px)}
+.dashboard-resume{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;background:#EAF0F3;border:1px solid #BACCD8;border-left:4px solid #2563EB;border-radius:22px;padding:26px 28px;margin:0 0 30px;box-shadow:0 3px 12px #0f172a06}
+.dashboard-label{display:block;color:#435D70;font-size:13px;margin-bottom:10px}.dashboard-resume h2{font-size:30px;margin:0 0 18px;overflow-wrap:anywhere}
+.dashboard-metrics{display:flex;gap:26px;flex-wrap:wrap;margin:0}.dashboard-metrics>div{min-width:110px;max-width:320px}.dashboard-metrics dt{font-size:12px;color:#526176;margin-bottom:6px}.dashboard-metrics dd{font-size:16px;color:#0F172A;margin:0;overflow-wrap:anywhere}
+.dashboard-resume-actions{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.research-flow{gap:18px}.cards.research-flow>.entry-card,.cards.research-flow>.entry-card:nth-child(even){background:#FFFFFF;border:1px solid #D1D5DB;box-shadow:0 3px 10px #0f172a07;border-radius:24px;padding:25px 28px}
+.cards.research-flow>.entry-card:hover{background:#FFFFFF;border-color:#8EA9C0;box-shadow:0 4px 12px #0f172a0c}
+.research-flow .number{display:flex;width:100%;align-items:center;justify-content:space-between;font:400 40px/1 Impact,"Arial Narrow Bold",sans-serif;letter-spacing:1px;color:#365D83;border-bottom:1px solid #E2E8F0;padding-bottom:16px;margin-bottom:20px}
+.research-flow .number .icon{width:25px;height:25px;color:#526E88}.research-flow .card-link{margin-top:auto}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+/* Somente na entrada de uma rota; respostas na mesma tela não recebem slide. */
+@media(prefers-reduced-motion:no-preference){
+.main.route-enter{animation:fadeInUp .4s ease-out both}
+.route-enter>.page-heading,.route-enter>.dashboard-resume,.route-enter>.hero{animation:fadeInUp .4s ease-out both}
+.route-enter>.work-layout>.question-card,.route-enter>.sample-page>.question-card,.route-enter>.sample-page>.sample-entry-grid,.route-enter>.sample-page>.sample-category-grid{animation:fadeInUp .4s ease-out .1s both}
+.route-enter>.work-layout>div:last-child:not(:first-child),.route-enter>.lesson-layout>div:last-child{animation:fadeInUp .4s ease-out .2s both}
+.route-enter .research-flow>.entry-card{animation:fadeInUp .4s ease-out both}
+.route-enter .research-flow>.entry-card:nth-child(1){animation-delay:.08s}.route-enter .research-flow>.entry-card:nth-child(2){animation-delay:.13s}.route-enter .research-flow>.entry-card:nth-child(3){animation-delay:.18s}.route-enter .research-flow>.entry-card:nth-child(4){animation-delay:.23s}
+}
+@media(prefers-reduced-motion:reduce){.main.route-enter,.route-enter *{animation:none!important}}
+@media(max-width:720px){.dashboard-resume{grid-template-columns:1fr;padding:22px;gap:20px}.dashboard-resume h2{font-size:26px}.dashboard-metrics{gap:18px}.dashboard-resume-actions{width:100%}.dashboard-resume-actions .btn{width:100%}.research-flow .number{font-size:34px}.cards.research-flow>.entry-card{padding:23px}}

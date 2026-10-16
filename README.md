@@ -52,3 +52,7 @@ Fundo geral marfim #FBF9F5, superfícies claras e painéis de apoio em tons past
 ## Seleção e contraste
 
 Cards de resposta selecionam sem avançar. Planejamento, análises e escolha do cálculo usam confirmação em botão separado; campos obrigatórios controlam sua disponibilidade. Opções brancas com borda cinza e indicador circular; seleção azul clara. Faixa superior contextual removida.
+
+## Home de trabalho
+
+Resumo ativo do planejamento salvo e retomada na primeira etapa incompleta. Quatro ferramentas organizadas como jornada da pesquisa. Animações de entrada apenas na abertura de telas, com cascata discreta e respeito à preferência de movimento reduzido.
