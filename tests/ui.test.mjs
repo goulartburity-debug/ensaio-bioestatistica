@@ -25,7 +25,7 @@ test('Ajuda aberta continua aberta após escolher, sem abrir ajuda de outra perg
 
 test('Navegação principal expõe tamanho amostral sem exigir planejamento',()=>{
  click('sample');assert.match(html(),/Quantas unidades preciso/);assert.match(html(),/Calcular diretamente/);
- click('sample-direct');click('sample-category','estimate');click('sample-method','mean');
+ click('sample-direct');click('sample-category','estimate');click('sample-continue-category');click('sample-method','mean');click('sample-continue-method');
  assert.match(html(),/Margem de erro desejada/);assert.match(html(),/data-sample="sd"/);
  click('wizard');assert.match(html(),/Resumo do planejamento/);
 });

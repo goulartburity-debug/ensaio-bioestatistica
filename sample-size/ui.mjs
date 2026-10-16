@@ -193,7 +193,7 @@ function resultView(r,s,plan,snapshot,preview,scenarioRows=null,busy=false){
 function coverage(){return disclosure('coverage','Não encontrei meu tipo de estudo',`<p>Estas situações ainda precisam de um cálculo próprio no CoDel-Stat.</p>${pendingMethods.map(([t,d])=>`<div class="sample-pending"><strong>${esc(t)}</strong><p>${esc(d)}</p></div>`).join('')}`);}
 
 export function createSampleModule({getPlan,setPlan,render,navigate,compute=runCalculation,computeScenarios=runScenarios}){
- let s=defaults(),result=null,snapshot='',error='',notice='',preview=false,seed=null,scenarioRows=null,busy=false,jobNumber=0;
+ let pendingMethod='',s=defaults(),result=null,snapshot='',error='',notice='',preview=false,seed=null,scenarioRows=null,busy=false,jobNumber=0;
  try{
   const saved=JSON.parse(localStorage.getItem('ensaio-sample-v1')||'null');
   if([VERSION,'1.2.0','1.1.0','1.0.0'].includes(saved?.version)&&saved.inputs){for(const k of Object.keys(defaults()))if(typeof saved.inputs[k]==='string')s[k]=saved.inputs[k].slice(0,3000);s.stage='start';notice='Seus valores anteriores estão salvos. Recalcule para obter um resultado atualizado.';}
@@ -205,7 +205,8 @@ export function createSampleModule({getPlan,setPlan,render,navigate,compute=runC
   const heading=`<div class="page-heading sample-heading"><div><h1>Quantas unidades preciso?</h1></div>${s.stage!=='start'?button('Trocar objetivo','home'):''}</div>`;
   const banners=`${notice?`<div class="example-note" role="status">${esc(notice)}</div>`:''}${error?`<p class="errors" role="alert" id="sample-error" tabindex="-1">${esc(error)}</p>`:''}`;
   if(s.stage==='start')return `<div class="sample-page">${heading}${banners}${seed?panel('Informações que serão aproveitadas',`<p>${esc(seed.contextNote)}</p><p>${seed.method?esc(methods[seed.method].name):'Você escolherá o tipo de resposta'}${seed.groups?` · ${esc(seed.groups)} tratamentos`:''}${seed.a?` · ${esc(seed.a)} opções em A e ${esc(seed.b)} em B`:''}.</p><p>Os valores de efeito e variabilidade ainda precisarão ser informados. O planejamento só muda se você aplicar um resultado.</p><div class="result-actions">${button('Confirmar e usar esta estrutura','seed',true)}${button('Cancelar','cancel-seed')}</div>`):''}<div class="sample-entry-grid">${panel('Calcular diretamente','<p>Escolha seu objetivo, mesmo sem ter preenchido um planejamento.</p>'+button('Escolher meu objetivo','direct',true))}${panel('Usar meu planejamento','<p>Aproveite a estrutura que já registrou e complete os valores que faltam.</p>'+button('Revisar meu planejamento','plan'))}</div>${Object.hasOwn(methods,s.method)?`<p class="sample-resume">${button('Retomar meus valores','resume')}</p>`:''}${coverage()}</div>`;
-  if(s.stage==='choose')return `<div class="sample-page">${heading}${banners}<div class="sample-category-grid">${categories.map(([id,title,desc])=>`<button type="button" class="entry-card ${s.category===id?'sample-active':''}" data-act="sample-category" data-id="${id}" aria-pressed="${s.category===id}"><h3>${title}</h3><p>${desc}</p></button>`).join('')}</div>${s.category?`<section class="result-panel"><h2>Qual situação descreve sua pergunta?</h2><div class="choices">${Object.entries(methods).filter(([,m])=>m.category===s.category).map(([id,m])=>`<button type="button" class="choice" data-act="sample-method" data-id="${id}"><span><strong>${esc(m.name)}</strong><small>${esc(guidance[id].question)}</small></span></button>`).join('')}</div></section>`:''}${coverage()}</div>`;
+  if(s.stage==='choose')return `<div class="sample-page">${heading}${banners}<section class="question-card"><h2>Qual é o objetivo?</h2><div class="choices" role="group" aria-label="Objetivo do cálculo">${categories.map(([id,title,desc])=>`<button type="button" class="choice ${s.category===id?'selected':''}" data-act="sample-category" data-id="${id}" aria-pressed="${s.category===id}"><i class="radio" aria-hidden="true"></i><span><strong>${title}</strong><small>${desc}</small></span></button>`).join('')}</div><div class="question-footer">${button('Avançar','continue-category',true,s.category?'':'disabled')}</div></section>${coverage()}</div>`;
+  if(s.stage==='methods')return `<div class="sample-page">${heading}${banners}<section class="question-card"><h2>Qual situação descreve sua pergunta?</h2><div class="choices" role="group" aria-label="Método de dimensionamento">${Object.entries(methods).filter(([,m])=>m.category===s.category).map(([id,m])=>`<button type="button" class="choice ${pendingMethod===id?'selected':''}" data-act="sample-method" data-id="${id}" aria-pressed="${pendingMethod===id}"><i class="radio" aria-hidden="true"></i><span><strong>${esc(m.name)}</strong><small>${esc(guidance[id].question)}</small></span></button>`).join('')}</div><div class="question-footer">${button('Voltar','back-category')}${button('Avançar','continue-method',true,pendingMethod?'':'disabled')}</div></section>${coverage()}</div>`;
   const meta=Object.hasOwn(methods,s.method)?methods[s.method]:null;if(!meta){s.stage='choose';return renderView();}
   const help=guidance[s.method];
   if(s.method==='replicatedBlocks'&&s.cellKind==='subsamples'||s.method==='repeated'&&s.rmCovariance==='other'||s.method==='clusterTrial'&&s.clusterAllocation==='individual')return `<div class="sample-page sample-form-page">${heading}${banners}<section class="question-card"><h2>${esc(meta.name)}</h2>${parameters(s)}${button('Escolher outro cálculo','home')}</section></div>`;
@@ -219,12 +220,15 @@ export function createSampleModule({getPlan,setPlan,render,navigate,compute=runC
   if(a==='resume'&&Object.hasOwn(methods,s.method)){s.stage='form';result=null;scenarioRows=null;preview=false;notice='Valores recuperados. Recalcule antes de usar a quantidade.';}
   if(a==='cancel-seed')seed=null;
   if(a==='seed'&&seed){s=seed;s.stage=s.method?'form':'choose';seed=null;result=null;preview=false;}
-  if(a==='direct'){s.stage='choose';seed=null;}
-  if(a==='category'){s.category=el.dataset.id;s.stage='choose';}
-  if(a==='method'){
-   if(!Object.hasOwn(methods,el.dataset.id))return true;
+  if(a==='direct'){s.stage='choose';s.category='';pendingMethod='';seed=null;}
+  if(a==='category'&&categories.some(([id])=>id===el.dataset.id)){s.category=el.dataset.id;pendingMethod='';s.stage='choose';}
+  if(a==='continue-category'&&s.category)s.stage='methods';
+  if(a==='back-category')s.stage='choose';
+  if(a==='method'){if(!Object.hasOwn(methods,el.dataset.id))return true;pendingMethod=el.dataset.id;s.category=methods[pendingMethod].category;s.stage='methods';}
+  if(a==='continue-method'){
+   if(!Object.hasOwn(methods,pendingMethod))return true;
    const {contextNote,unitName,groups,a,b,design,unitsPerCell}=s;
-   s={...defaults(),contextNote,unitName,groups,a,b,design,unitsPerCell,method:el.dataset.id,category:methods[el.dataset.id].category,stage:'form'};
+   s={...defaults(),contextNote,unitName,groups,a,b,design,unitsPerCell,method:pendingMethod,category:methods[pendingMethod].category,stage:'form'};
    result=null;preview=false;
   }
   if(a==='example'){const {method}=s;s={...defaults(),method,category:methods[method].category,stage:'form',...examples[method]};result=null;preview=false;notice='Exemplo fictício preenchido. Troque os valores antes de planejar sua pesquisa.';}

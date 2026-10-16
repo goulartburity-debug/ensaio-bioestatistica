@@ -19,9 +19,9 @@ function harness(options={}){
 }
 
 test('Escolha pelo objetivo expõe Dunnett, Tukey e contraste sem voltar a mostrar texto pronto',async()=>{
- storage.clear();const h=harness();await h.click('direct');await h.click('category','compare');
+ storage.clear();const h=harness();await h.click('direct');await h.click('category','compare');await h.click('continue-category');
  assert.match(h.html(),/testemunha \(Dunnett\)/);assert.match(h.html(),/tratamentos \(Tukey\)/);assert.match(h.html(),/comparação específica/);
- await h.click('method','dunnett');assert.match(h.html(),/contando a testemunha/);
+ await h.click('method','dunnett');await h.click('continue-method');assert.match(h.html(),/contando a testemunha/);
  assert.match(h.html(),/O poder será calculado por comparação/);
  assert.doesNotMatch(h.html(),/sample-summary|sample-copy|TAMANHO-AMOSTRAL\.md|<aside/);
  assert.match(h.html(),/data-sample="delta"[^>]*value=""/);
@@ -29,7 +29,7 @@ test('Escolha pelo objetivo expõe Dunnett, Tukey e contraste sem voltar a mostr
 });
 
 test('Resultado apresenta quantidade, poder marginal e cenários sob demanda sem alterar o plano',async()=>{
- storage.clear();const h=harness();await h.click('method','dunnett');await h.click('example');await h.click('calculate');
+ storage.clear();const h=harness();await h.click('method','dunnett');await h.click('continue-method');await h.click('example');await h.click('calculate');
  assert.match(h.html(),/53 por tratamento/);assert.match(h.html(),/212 unidades experimentais/);
  assert.match(h.html(),/Não é a probabilidade de detectar todas/);assert.match(h.html(),/Comparar estes cenários/);
  assert.equal(h.plan().replicates,'4');
@@ -41,7 +41,7 @@ test('Resultado apresenta quantidade, poder marginal e cenários sob demanda sem
 });
 
 test('Diferença percentual exige referência e não mantém um campo absoluto concorrente',async()=>{
- storage.clear();const h=harness();await h.click('method','tukey');await h.click('example');
+ storage.clear();const h=harness();await h.click('method','tukey');await h.click('continue-method');await h.click('example');
  h.input('differenceMode','percent','SELECT');
  assert.doesNotMatch(h.html(),/data-sample="delta"/);
  assert.match(h.html(),/data-sample="referenceMean"/);assert.match(h.html(),/não é margem de erro/);
@@ -52,7 +52,7 @@ test('Diferença percentual exige referência e não mantém um campo absoluto c
 });
 
 test('Modelo em blocos e mínimo de GL permanecem visíveis quando escolhidos',async()=>{
- storage.clear();const h=harness();await h.click('method','contrast');await h.click('example');
+ storage.clear();const h=harness();await h.click('method','contrast');await h.click('continue-method');await h.click('example');
  h.input('design','blocks','SELECT');h.input('minResidualDf','15');h.input('loss','10');await h.click('calculate');
  assert.match(h.html(),/mínimo adicional de GL: 15/);
  assert.match(h.html(),/Desvio-padrão residual após considerar os blocos/);
@@ -71,7 +71,7 @@ test('Respostas antigas de 1.0.0 são preservadas, mas um resultado antigo não 
 test('Editar enquanto calcula descarta a resposta antiga e reabilita o formulário',async()=>{
  storage.clear();let finish;
  const h=harness({compute:inputs=>new Promise(resolve=>{finish=()=>resolve(calculate(inputs));})});
- await h.click('method','dunnett');await h.click('example');
+ await h.click('method','dunnett');await h.click('continue-method');await h.click('example');
  const pending=h.click('calculate');assert.match(h.html(),/Calculando…/);assert.match(h.html(),/disabled aria-busy="true"/);
  h.input('delta','6');assert.doesNotMatch(h.html(),/disabled aria-busy/);
  finish();await pending;assert.doesNotMatch(h.html(),/53 por tratamento|aria-label="Resultado do tamanho amostral"/);
@@ -80,7 +80,7 @@ test('Editar enquanto calcula descarta a resposta antiga e reabilita o formulár
 test('Plano alterado durante o trabalho numérico bloqueia aplicação do resultado',async()=>{
  storage.clear();let finish;
  const h=harness({compute:inputs=>new Promise(resolve=>{finish=()=>resolve(calculate(inputs));})});
- await h.click('method','dunnett');await h.click('example');const pending=h.click('calculate');
+ await h.click('method','dunnett');await h.click('continue-method');await h.click('example');const pending=h.click('calculate');
  h.setPlan({...h.plan(),replicates:'9'});finish();await pending;
  assert.match(h.html(),/O planejamento mudou desde o cálculo/);
  assert.doesNotMatch(h.html(),/Revisar o que será atualizado/);

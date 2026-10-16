@@ -23,7 +23,7 @@ function harness(){
 }
 
 test('Formulário e resultado não oferecem quadro lateral, link de métodos ou texto pronto',async()=>{
- store.clear();const h=harness();await h.click('method','means');
+ store.clear();const h=harness();await h.click('method','means');await h.click('continue-method');
  assert.doesNotMatch(h.html(),/<aside|sample-layout|sample-summary|sample-copy|TAMANHO-AMOSTRAL\.md/);
  assert.doesNotMatch(h.html(),/Resposta contínua, erros normais|Carregar exemplo fictício \(substitui/);
  await h.click('example');await h.click('calculate');
@@ -33,7 +33,7 @@ test('Formulário e resultado não oferecem quadro lateral, link de métodos ou 
 });
 
 test('Ajustes ficam recolhidos e valores atuais são explícitos, inclusive após edição',async()=>{
- store.clear();const h=harness();await h.click('method','means');
+ store.clear();const h=harness();await h.click('method','means');await h.click('continue-method');
  assert.match(h.html(),/Poder: 80% · Significância: 5% · Perdas: 0%/);
  assert.match(h.html(),/<details class="sample-details" data-help-id="sample-settings-means">/);
  assert.doesNotMatch(h.html(),/<details[^>]*\sopen(?:\s|>)/);
@@ -44,7 +44,7 @@ test('Ajustes ficam recolhidos e valores atuais são explícitos, inclusive apó
 });
 
 test('Nenhum efeito ou variabilidade é presumido; 50% exige ação e preserva os outros campos',async()=>{
- store.clear();const h=harness();await h.click('method','proportion');
+ store.clear();const h=harness();await h.click('method','proportion');await h.click('continue-method');
  assert.match(h.html(),/data-sample="p"[^>]*value=""/);
  assert.doesNotMatch(h.html(),/data-sample="p"[^>]*value="50"/);
  h.input('margin','3,5');await h.click('conservative');
@@ -55,7 +55,7 @@ test('Nenhum efeito ou variabilidade é presumido; 50% exige ação e preserva o
 
 for(const id of Object.keys(methods)){
  test(`Rota ${id}: exemplo continua calculável e ajuda corresponde à unidade`,async()=>{
-  store.clear();const h=harness();await h.click('method',id);
+  store.clear();const h=harness();await h.click('method',id);await h.click('continue-method');
   assert.match(h.html(),/Como conseguir os valores pedidos/);
   assert.ok(h.html().includes(guidance[id].idea));
   await h.click('example');await h.click('calculate');
@@ -67,26 +67,26 @@ for(const id of Object.keys(methods)){
 }
 
 test('DBC exibe blocos analisáveis e iniciais; não atribui redução automática ao bloqueamento',async()=>{
- store.clear();const h=harness();await h.click('method','blocks');await h.click('example');h.input('loss','10');await h.click('calculate');
+ store.clear();const h=harness();await h.click('method','blocks');await h.click('continue-method');await h.click('example');h.input('loss','10');await h.click('calculate');
  assert.match(h.html(),/14 blocos completos/);assert.match(h.html(),/16 blocos completos/);
  assert.match(h.html(),/42 unidades experimentais/);assert.match(h.html(),/48 unidades no total/);
  assert.match(h.html(),/escolher blocos não reduz a amostra automaticamente/);
 });
 
 test('Conglomerados distinguem conjuntos e observações e informam todos os parâmetros do exemplo',async()=>{
- store.clear();const h=harness();await h.click('method','cluster');await h.click('example');await h.click('calculate');
+ store.clear();const h=harness();await h.click('method','cluster');await h.click('continue-method');await h.click('example');await h.click('calculate');
  assert.match(h.html(),/38 conglomerados/);assert.match(h.html(),/760 observações vinculadas/);
  assert.match(h.html(),/margem de 5 pontos, confiança de 95%/);
  assert.match(h.html(),/não compara tratamentos/);
 });
 
 test('Rotas alternativas preservam efeito padronizado, correlação intrapar e população finita',async()=>{
- store.clear();const h=harness();await h.click('method','paired');h.input('scale','standard','SELECT');h.input('d','0,5');await h.click('calculate');
+ store.clear();const h=harness();await h.click('method','paired');await h.click('continue-method');h.input('scale','standard','SELECT');h.input('d','0,5');await h.click('calculate');
  assert.match(h.html(),/34 pares completos/);
  h.input('scale','real','SELECT');h.input('pairScale','correlation','SELECT');
  h.input('delta','5');h.input('sd1','8');h.input('sd2','8');h.input('rho','0,5');await h.click('calculate');
  assert.match(h.html(),/23 pares completos/);
- await h.click('method','proportion');await h.click('example');h.input('population','finite','SELECT');h.input('populationN','1000');await h.click('calculate');
+ await h.click('method','proportion');await h.click('continue-method');await h.click('example');h.input('population','finite','SELECT');h.input('populationN','1000');await h.click('calculate');
  assert.match(h.html(),/278 unidades na amostra/);assert.match(h.html(),/população finita: 1000/);
 });
 
