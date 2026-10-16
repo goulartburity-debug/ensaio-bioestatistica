@@ -56,3 +56,7 @@ Cards de resposta selecionam sem avançar. Planejamento, análises e escolha do 
 ## Home de trabalho
 
 Resumo ativo do planejamento salvo e retomada na primeira etapa incompleta. Quatro ferramentas organizadas como jornada da pesquisa. Animações de entrada apenas na abertura de telas, com cascata discreta e respeito à preferência de movimento reduzido.
+
+## Recepção da home
+
+Saudação de entrada, grafismo vetorial decorativo, ícones maiores em duas cores e banner Dica do Guia. Retomada do planejamento e fluxo de pesquisa preservados.
