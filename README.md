@@ -19,52 +19,10 @@ Documentação:
 - [Código aberto e licenças](docs/CODIGO-ABERTO.md)
 - [Validação e exemplos numéricos](docs/VALIDACAO-AMOSTRAL.md)
 
-## Identidade visual
-
-Interface em preto/azul, navegação grafite e área de trabalho branca. O logotipo fornecido pelo responsável está em `assets/codel-stat-logo.png`, preservado sem alterações. Os esquemas mantêm rótulos e cores por tratamento. Dados previamente salvos e a versão 1.3.0 dos cálculos foram preservados.
-
 ## Sobre o código
 
 Aplicação estática, sem servidor ou CDN. Código estatístico separado da interface e das regras de integração em `sample-size/`. Textos de apoio em `sample-size/guidance.mjs`.
 
 Referências numéricas reprodutíveis e verificações de regressão em `tests/`, sem uso de Python/R em produção. Registros: [Segundo ciclo — comparações](docs/CICLO-2-COMPARACOES.md) e [Terceiro ciclo — estruturas](docs/CICLO-3-ESTRUTURAS.md) e [Quarto ciclo — dependência](docs/CICLO-4-DEPENDENCIA.md).
 
-Os parâmetros da calculadora são salvos apenas no navegador e os resultados precisam ser recalculados após reabertura. Aplicações confirmadas ao planejamento registram método, parâmetros e versão; mudanças de plano geram aviso para revisão.
-
 As partes reaproveitadas de jStat, OpenEpi e Superpower têm licença MIT. O núcleo de integração da amplitude estudentizada utiliza código adaptado do SciPy sob BSD-3-Clause. Os avisos e as adaptações estão documentados. Não foi incorporado código GPL do WebPower. Consulte a documentação de proveniência antes de acrescentar novas dependências.
-
-## Interface e abrangência
-
-Navegação lateral com recolhimento automático nos módulos em computadores, expansão manual e nomes acessíveis para os ícones. Identificação gráfica e créditos foram removidos da coluna lateral; autoria e fontes permanecem em Sobre e referências. A home apresenta o nome e a frase principal. Exemplos de educação, produção, materiais e saúde ampliam a aplicação didática para diferentes áreas, preservando os métodos e suas limitações.
-
-## Tipografia e apresentação
-
-Títulos usam Impact quando instalada no dispositivo, com fontes de reserva. Anonymous Pro regular e negrito estão incluídas localmente sob SIL Open Font License 1.1 (assets/fonts/OFL.txt), sem requisições a fontes externas. Removidos slogans e subtítulos introdutórios das páginas, preservadas as explicações das escolhas. Cards da home recebem cantos assimétricos; botões e tags usam cápsulas, com gradientes leves nos painéis. Arquivo de verificação do Google preservado na raiz.
-
-## Transições de etapas
-
-Conteúdo das perguntas com cross-fade de 240 ms, altura mínima e preservação da rolagem no mesmo módulo. Movimento reduzido respeitado. Conteúdo longo permanece acessível por rolagem normal. Detalhes em docs/TRANSICOES.md.
-
-## Paleta de leitura
-
-Fundo geral marfim #FBF9F5, superfícies claras e painéis de apoio em tons pastel dessaturados. Tipografia, navegação e transições preservadas.
-
-## Seleção e contraste
-
-Cards de resposta selecionam sem avançar. Planejamento, análises e escolha do cálculo usam confirmação em botão separado; campos obrigatórios controlam sua disponibilidade. Opções brancas com borda cinza e indicador circular; seleção azul clara. Faixa superior contextual removida.
-
-## Home de trabalho
-
-Resumo ativo do planejamento salvo e retomada na primeira etapa incompleta. Quatro ferramentas organizadas como jornada da pesquisa. Animações de entrada apenas na abertura de telas, com cascata discreta e respeito à preferência de movimento reduzido.
-
-## Recepção da home
-
-Saudação de entrada, grafismo vetorial decorativo, ícones maiores em duas cores e banner Dica do Guia. Retomada do planejamento e fluxo de pesquisa preservados.
-
-## Navegação superior
-
-Cabeçalho fixo substitui a barra lateral. Logo enviada integrada, exclusão do planejamento com confirmação e eixo horizontal do grafismo estendido à largura do container. Detalhes em docs/HEADER-E-RETOMADA.md.
-
-## Cabeçalho e dicas
-
-Menu azul-gelo #EEF2F6, logo transparente e links azul-marinho. Dicas sorteadas ao abrir a home, sem repetição imediata, com fade-in de 0,5 segundo.
