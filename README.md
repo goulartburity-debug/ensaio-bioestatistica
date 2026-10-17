@@ -64,3 +64,7 @@ Saudação de entrada, grafismo vetorial decorativo, ícones maiores em duas cor
 ## Navegação superior
 
 Cabeçalho fixo substitui a barra lateral. Logo enviada integrada, exclusão do planejamento com confirmação e eixo horizontal do grafismo estendido à largura do container. Detalhes em docs/HEADER-E-RETOMADA.md.
+
+## Cabeçalho e dicas
+
+Menu azul-gelo #EEF2F6, logo transparente e links azul-marinho. Dicas sorteadas ao abrir a home, sem repetição imediata, com fade-in de 0,5 segundo.
