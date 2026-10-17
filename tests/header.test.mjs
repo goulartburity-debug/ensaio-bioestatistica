@@ -6,7 +6,7 @@ globalThis.document={querySelector:node,querySelectorAll:()=>[],addEventListener
 await import('../app.mjs');const html=()=>node('#app').innerHTML;const click=act=>events.click({target:{closest:q=>q==='[data-act]'?{dataset:{act}}:null}});
 test('Cabeçalho único tem logo e sete destinos; não há barra lateral',()=>{
  assert.match(html(),/<header class="app-header">/);assert.match(html(),/class="header-logo"/);assert.doesNotMatch(html(),/class="sidebar"|class="mobile-nav"|toggle-menu|Revisar planejamento/);
- assert.equal((html().match(/aria-current="page"/g)||[]).length,1);assert.match(html(),/Esquecer estes dados/);
+ assert.doesNotMatch(html(),/class="header-nav"/);assert.match(html(),/aria-expanded="false"/);click('toggle-nav');assert.match(html(),/role="dialog" aria-modal="true"/);assert.equal((html().match(/aria-current="page"/g)||[]).length,1);assert.match(html(),/Sobre e referências/);click('close-nav');assert.match(html(),/Esquecer estes dados/);
 });
 test('Excluir pede confirmação e cancelar preserva planejamento e registro aplicado',()=>{
  const before=storage.get('ensaio-guide-v2');click('clear-plan');assert.match(html(),/Esquecer estes dados\?/);assert.equal(storage.get('ensaio-guide-v2'),before);click('cancel');assert.equal(storage.get('ensaio-guide-v2'),before);assert.equal(storage.get('ensaio-sample-applied-v1'),'registro');
@@ -14,4 +14,13 @@ test('Excluir pede confirmação e cancelar preserva planejamento e registro apl
 test('Confirmar exclusão limpa só o planejamento e seu registro de aplicação',()=>{
  click('clear-plan');click('confirm');assert.doesNotMatch(html(),/class="dashboard-resume"/);assert.equal(storage.has('ensaio-sample-applied-v1'),false);assert.equal(storage.get('ensaio-analysis-v1'),'{}');assert.ok(Object.values(JSON.parse(storage.get('ensaio-guide-v2')).study).every(v=>!v));
  assert.match(html(),/class="welcome-baseline"/);assert.match(html(),/class="welcome-graphic"/);
+});
+
+test('Sobre pertence à home abaixo das dicas; entrada pelo menu usa a mesma seção',()=>{
+ click('home');assert.ok(html().indexOf('class="home-about"')>html().indexOf('class="guide-tip"'));
+ assert.equal((html().match(/id="sobre-referencias"/g)||[]).length,1);assert.match(html(),/Referências de apoio/);assert.match(html(),/doi.org/);
+ click('wizard');assert.doesNotMatch(html(),/id="sobre-referencias"/);click('toggle-nav');click('about');assert.match(html(),/O que vamos analisar hoje/);assert.match(html(),/id="sobre-referencias"/);assert.doesNotMatch(html(),/class="nav-drawer"/);
+});
+test('Escape fecha o menu sem sair da home',()=>{
+ click('toggle-nav');assert.match(html(),/class="nav-drawer"/);events.keydown({key:'Escape'});assert.doesNotMatch(html(),/class="nav-drawer"/);assert.match(html(),/O que vamos analisar hoje/);
 });
