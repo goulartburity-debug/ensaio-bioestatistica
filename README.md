@@ -60,3 +60,7 @@ Resumo ativo do planejamento salvo e retomada na primeira etapa incompleta. Quat
 ## Recepção da home
 
 Saudação de entrada, grafismo vetorial decorativo, ícones maiores em duas cores e banner Dica do Guia. Retomada do planejamento e fluxo de pesquisa preservados.
+
+## Navegação superior
+
+Cabeçalho fixo substitui a barra lateral. Logo enviada integrada, exclusão do planejamento com confirmação e eixo horizontal do grafismo estendido à largura do container. Detalhes em docs/HEADER-E-RETOMADA.md.

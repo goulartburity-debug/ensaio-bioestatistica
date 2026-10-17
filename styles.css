@@ -134,3 +134,22 @@ html{scrollbar-gutter:stable}
 .guide-tip strong{display:block;font-size:13px;color:#40566A;margin-bottom:7px}.guide-tip p{font-size:15px;line-height:1.65;margin:0;color:#425464}
 @media(prefers-reduced-motion:no-preference){.route-enter>.home-welcome{animation:fadeInUp .4s ease-out both}.route-enter>.guide-tip{animation:fadeInUp .4s ease-out .25s both}}
 @media(max-width:720px){.home-welcome{min-height:190px;padding:22px 0;margin-bottom:23px}.home-welcome h1{font-size:38px}.welcome-graphic{width:100%;right:-75px;opacity:.08}.welcome-name{margin-bottom:12px}.guide-tip{align-items:flex-start;gap:14px;padding:20px}.research-flow .home-duotone{width:48px;height:48px;flex-basis:48px}.home-welcome p{font-size:16px}}
+
+/* Navigation supérieure fixe; aucun volet latéral. */
+:root{--app-header-height:88px}
+.shell{display:block;padding-top:var(--app-header-height)}
+.app-header{position:fixed;inset:0 0 auto;z-index:40;height:var(--app-header-height);display:flex;align-items:center;justify-content:space-between;gap:22px;padding:12px 26px;background:#0F172A;border-bottom:1px solid #253248;box-shadow:0 2px 8px #0f172a10}
+.header-brand{display:flex;align-items:center;gap:10px;border:0;background:transparent;color:#F8FAFC;padding:0;flex:0 0 auto;text-align:left}
+.header-brand span{font-size:17px;white-space:nowrap}.header-logo{display:block;width:60px;height:60px;object-fit:contain;background:#FBF9F5;border-radius:10px;padding:3px}
+.header-nav{display:flex;align-items:center;justify-content:flex-end;gap:3px;min-width:0}
+.header-nav button{font-family:inherit;background:transparent;border:1px solid transparent;color:#CFD8E5;font-size:12px;line-height:1.4;padding:9px 10px;min-height:42px;border-radius:50px;white-space:nowrap}
+.header-nav button:hover{background:#1C2B42;color:#FFFFFF}.header-nav button.active{color:#FFFFFF;background:#203C61;border-color:#3C5B82}.app-header :focus-visible{outline:2px solid #93C5FD;outline-offset:3px}
+.clear-plan-btn{display:inline-flex;align-items:center;gap:7px;border:0;background:transparent;padding:5px 0;color:#5B6472;font-size:13px;line-height:1.5;text-decoration:none}.clear-plan-btn .icon{width:15px;height:15px}.clear-plan-btn:hover{color:#374151;text-decoration:underline;text-underline-offset:3px}
+/* Même taille/hauteur de cloche; axe indépendant sur toute la largeur du conteneur. */
+.home-welcome{--bell-scale:1;overflow:hidden}
+.welcome-baseline{position:absolute;left:0;right:0;top:calc(50% + 75px);width:100%;height:1px;stroke:#365D83;stroke-width:1;opacity:.11;pointer-events:none;z-index:0}
+@media(max-width:1250px){:root{--app-header-height:142px}.app-header{flex-wrap:wrap;gap:6px;padding:10px 22px}.header-brand{height:58px}.header-logo{width:54px;height:54px}.header-nav{width:100%;justify-content:flex-start;overflow-x:auto;padding:3px 0 6px;scrollbar-width:thin;scrollbar-color:#48617D #0F172A;overscroll-behavior-x:contain}.header-nav button{flex:0 0 auto;font-size:12px}}
+@media(max-width:720px){:root{--app-header-height:132px}.app-header{padding:8px 16px;gap:4px}.header-brand{height:52px}.header-logo{width:48px;height:48px}.header-brand span{font-size:16px}.header-nav button{font-size:11px;padding:9px}.welcome-baseline{opacity:.08}}
+@media print{.app-header{display:none}.shell{padding-top:0}}
+
+.header-nav{overflow-x:auto;scrollbar-width:thin;scrollbar-color:#48617D #0F172A}
