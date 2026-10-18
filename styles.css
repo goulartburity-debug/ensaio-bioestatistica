@@ -187,3 +187,16 @@ html{scrollbar-gutter:stable}
 @media(max-width:1200px){.home-about{margin-left:-26px;margin-right:-26px;padding-left:26px;padding-right:26px;width:calc(100% + 52px)}}
 @media(max-width:720px){:root{--app-header-height:76px}.app-header{padding:10px 18px}.header-brand{height:auto}.header-logo{width:48px;height:48px}.hamburger-toggle{width:46px;height:46px;flex-basis:46px}.nav-drawer{padding:24px 20px}.home-about{margin:28px -18px 0;padding:36px 18px 42px;width:calc(100% + 36px)}.home-about #about-title{font-size:30px}.home-about .about-grid{gap:12px}}
 @media print{.app-header,.nav-backdrop,.nav-drawer{display:none!important}.home-about{margin:20px 0 0;width:100%;background:#fff;color:#000;padding:20px 0}.home-about h2,.home-about h3,.home-about p,.home-about strong,.home-about small,.home-about a{color:#000}}
+
+/* Cabeçalho sem linha de corte: a zona sólida acompanha a rolagem e deixa o fade. */
+.app-header{height:calc(var(--app-header-height) + 48px);padding-bottom:60px;background:linear-gradient(to bottom,#EEF2F6 0,#EEF2F6 calc(var(--app-header-height) - 12px),#EEF2F6cc var(--app-header-height),#EEF2F600 100%);border:0;box-shadow:none;will-change:transform}
+.header-brand .header-wordmark{font-family:Impact,"Haettenschweiler","Arial Narrow Bold",sans-serif;font-size:28px;font-weight:400;letter-spacing:.4px;line-height:1;color:#0F172A}
+/* La gaveta ne possède plus de surface: seules les actions flottent sur le flou. */
+.nav-drawer{background:transparent;border:0;box-shadow:none;pointer-events:none}
+.drawer-heading,.drawer-nav{pointer-events:auto}.drawer-heading h2{color:#FBF9F5}
+.drawer-close{background:#EEF2F6e8;border-color:#FFFFFF70;box-shadow:0 3px 12px #0f172a12}
+.drawer-nav button{display:flex;align-items:center;justify-content:space-between;gap:20px;background:#FBF9F5eb;color:#183047;border:1px solid #FFFFFF90;box-shadow:0 4px 18px #0f172a0b;backdrop-filter:blur(6px)}
+.drawer-nav button:hover{background:#FFFFFF;border-color:#C5D6E5}.drawer-nav button.active{background:#DCE7F1f2;border-color:#A6BDD1}.drawer-nav .icon{width:22px;height:22px;flex:0 0 22px}
+@media(max-width:720px){.app-header{padding-bottom:58px}.header-brand .header-wordmark{font-size:24px}}
+@media print{.app-header{display:none!important}}
+.app-header{pointer-events:none}.header-brand,.hamburger-toggle{pointer-events:auto}

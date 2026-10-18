@@ -72,3 +72,7 @@ Menu azul-gelo #EEF2F6, logo transparente e links azul-marinho. Dicas sorteadas 
 ## Home one-page
 
 Cabeçalho minimalista com logo e menu circular. Sobre e referências integrado após as dicas em faixa azul-petróleo de largura total. Navegação por menu em gaveta acessível.
+
+## Cabeçalho esfumaçado
+
+Degradê sem borda, área sólida que acompanha a rolagem e nome CoDel-Stat em Impact ao lado do símbolo. Menu sem painel sólido, com blur preservado e setas à esquerda nas ações.
