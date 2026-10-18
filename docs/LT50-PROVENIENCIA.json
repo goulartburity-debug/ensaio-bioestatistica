@@ -1,0 +1,29 @@
+[
+  {
+    "project": "lifelines",
+    "version": "0.30.0",
+    "file": "log_logistic_fitter.py",
+    "url": "https://github.com/CamDavidsonPilon/lifelines/blob/v0.30.0/lifelines/fitters/log_logistic_fitter.py",
+    "sha256": "8931fdee2f53acba792150486470bc9f1e6bbd29f6f8a33ec1fbf5c11fd848f5",
+    "license": "MIT",
+    "incorporated": false
+  },
+  {
+    "project": "lifelines",
+    "version": "0.30.0",
+    "file": "log_normal_fitter.py",
+    "url": "https://github.com/CamDavidsonPilon/lifelines/blob/v0.30.0/lifelines/fitters/log_normal_fitter.py",
+    "sha256": "34b9f50c2c49f5626b55a6a2ac93dc3aefe54a1928ffebf0a17c3a828451e36c",
+    "license": "MIT",
+    "incorporated": false
+  },
+  {
+    "project": "lifelines",
+    "version": "0.30.0",
+    "file": "LICENSE",
+    "url": "https://github.com/CamDavidsonPilon/lifelines/blob/v0.30.0/LICENSE",
+    "sha256": "01ab03783d77f529d375f5db2a037804cc8c801951cbd605b3ad2d36b078c1fd",
+    "license": "MIT",
+    "incorporated": false
+  }
+]

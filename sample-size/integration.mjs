@@ -24,6 +24,7 @@ export function fromPlan(plan){
 }
 export function transferProposal(plan,result,snapshot){
  const fail=reason=>({ok:false,reason,changes:[]});
+ if(result?.method==='lt50')return fail('O cálculo dimensiona uma condição com tempos até o evento, censura e horários fixos. O planejamento atual não registra essa estrutura e não deve receber o total como repetições por tratamento. Use a composição informada separadamente.');
  if(result?.method==='lc50')return fail('Este cálculo dimensiona concentrações numéricas e controle separado. O planejamento atual não registra as concentrações, o modelo binário, o tempo fixo nem o ICC. Use a composição indicada; o número não será aplicado automaticamente a tratamentos genéricos.');
  if(!result||result.version!==VERSION)return fail('Calcule novamente com a versão atual antes de transferir.');
  if(snapshot!==fingerprint(plan))return fail('O planejamento mudou desde o cálculo. Use “Usar meu planejamento” e recalcule; o resultado anterior não será transferido.');

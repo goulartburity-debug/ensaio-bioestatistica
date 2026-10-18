@@ -1,0 +1,27 @@
+{
+  "seed": 20261018,
+  "software": "SciPy 1.17.0",
+  "note": "Raw event times generated, then coarsened to inspection intervals. Illustrative diagnostic, not a coverage guarantee.",
+  "cases": [
+    {
+      "model": "lognormal",
+      "n": 86,
+      "replications": 400,
+      "fitFailures": 0,
+      "coverageIncludingFailures": 0.9525,
+      "mcStandardError": 0.010635289135702893,
+      "plannedFactor": 1.1997560915695848,
+      "medianObservedFactor": 1.19644611781481
+    },
+    {
+      "model": "loglogistic",
+      "n": 91,
+      "replications": 400,
+      "fitFailures": 0,
+      "coverageIncludingFailures": 0.9425,
+      "mcStandardError": 0.01163977555625537,
+      "plannedFactor": 1.199909769812774,
+      "medianObservedFactor": 1.1974567492133832
+    }
+  ]
+}
