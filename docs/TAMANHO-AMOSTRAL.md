@@ -1,4 +1,6 @@
-# Tamanho amostral no Ensaio — versão 1.3.0
+# Tamanho amostral no Ensaio — versão 1.4.0
+
+Atualização 18/10/2026: precisão da CL50 em tempo fixo por logit/probit, binomial ou beta-binomial com ICC conhecido. Ver [CICLO-5-CL50.md](CICLO-5-CL50.md) e [CL50-PROVENIENCIA.json](CL50-PROVENIENCIA.json). Novas distribuições reutilizam o jStat MIT já incluído; nenhuma rotina GPL foi incorporada. 41 referências numéricas independentes e quatro cenários simulados. Os registros abaixo documentam também ciclos anteriores.
 
 Quarto ciclo: medidas repetidas e comparação de médias entre conjuntos iguais estão disponíveis; ver [CICLO-4-DEPENDENCIA.md](CICLO-4-DEPENDENCIA.md).
 

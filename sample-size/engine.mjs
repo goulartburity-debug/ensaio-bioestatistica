@@ -1,3 +1,4 @@
+import {calculateLC50} from './dose-response.mjs';
 import {isDependent,planDependence} from './dependence.mjs';
 import {isStructured,planStructured} from './structured.mjs';
 import {normalQuantile,fPower,pairedPower,integerSearch} from './numeric.mjs';
@@ -28,6 +29,7 @@ function fEffect(s,kind,k,a,b){
  return f;
 }
 export function calculate(s){
+ if(s.method==='lc50')return calculateLC50(s,{number});
  const meta=Object.hasOwn(methods,s.method)?methods[s.method]:null;if(!meta)throw Error('Escolha um método disponível.');
  const method=s.method,estimate=['mean','proportion','cluster'].includes(method),loss=number(s.loss,'perdas (%)',0,90)/100;
  const params={},warnings=[],units=[];let n,total,power=null,level='unidades',type=meta.type,blocks=null,clusters=null,composition='',raw=null,details={};
@@ -124,4 +126,4 @@ export function calculate(s){
  warnings.push(meta.limits);
  return {version:VERSION,method,params,n,total,initialTotal,units,initialUnits,level,power,blocks,clusters,composition,type,warnings,source:meta.source,ref:meta.ref,url:meta.url,raw,inputs:{...s},...details};
 }
-export function summary(r){return `${methods[r.method].name}. Método: ${r.type}. Parâmetros: ${Object.entries(r.params).map(([k,v])=>`${k}: ${v}`).join('; ')}. Necessário analisável: ${r.units.map(x=>`${x.n} ${x.label.toLowerCase()}`).join('; ')}; total ${r.total}${r.method==='cluster'?' observações vinculadas, não independentes':r.method==='paired'?' pares':r.method==='clusterTrial'?' observações vinculadas':isStructured(r.method)?' unidades nos níveis descritos abaixo':' unidades independentes sob o modelo'}. Inclusão inicial: ${r.initialUnits.map(x=>`${x.n} ${x.label.toLowerCase()}`).join('; ')}; total ${r.initialTotal}. ${r.composition} ${r.power===null?'Poder não recalculado após arredondamento nesta aproximação.':`Poder na composição analisável: ${(100*r.power).toFixed(2)}%.`} Limitações: ${r.warnings.join(' ')} Fonte: ${r.source} ${r.ref} ${r.url}. CoDel-Stat — cálculo v${r.version}. O tamanho não garante representatividade, significância ou validade do estudo.`;}
+export function summary(r){if(r.method==='lc50')return `Precisão da CL50. ${r.composition} Parâmetros: ${Object.entries(r.params).map(([k,v])=>`${k}: ${v}`).join('; ')}. Aproximação por informação de Fisher, não poder de teste. ${r.warnings.join(' ')} Fonte: ${r.source}. Versão ${r.version}.`;return `${methods[r.method].name}. Método: ${r.type}. Parâmetros: ${Object.entries(r.params).map(([k,v])=>`${k}: ${v}`).join('; ')}. Necessário analisável: ${r.units.map(x=>`${x.n} ${x.label.toLowerCase()}`).join('; ')}; total ${r.total}${r.method==='cluster'?' observações vinculadas, não independentes':r.method==='paired'?' pares':r.method==='clusterTrial'?' observações vinculadas':isStructured(r.method)?' unidades nos níveis descritos abaixo':' unidades independentes sob o modelo'}. Inclusão inicial: ${r.initialUnits.map(x=>`${x.n} ${x.label.toLowerCase()}`).join('; ')}; total ${r.initialTotal}. ${r.composition} ${r.power===null?'Poder não recalculado após arredondamento nesta aproximação.':`Poder na composição analisável: ${(100*r.power).toFixed(2)}%.`} Limitações: ${r.warnings.join(' ')} Fonte: ${r.source} ${r.ref} ${r.url}. CoDel-Stat — cálculo v${r.version}. O tamanho não garante representatividade, significância ou validade do estudo.`;}

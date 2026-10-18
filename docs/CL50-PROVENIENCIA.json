@@ -1,0 +1,32 @@
+[
+  {
+    "project": "jStat 1.9.6",
+    "incorporated": true,
+    "sha256": "5faaffbb9302a941b604443e0e66dc5ebd1ba225ff843c4f6f7f088a1c21b790",
+    "reason": "Reutilizado: normal.inv/cdf/pdf e gammaln. Licença MIT; commit fixado 72f367f6dbd45c2d903053ee3f9981489912cad4."
+  },
+  {
+    "project": "drc 4.0-0",
+    "incorporated": false,
+    "sha256": "0151bda669e95fba0d69bf5376ebd10171d86940c6f0828cad54d8e1732c6f35",
+    "reason": "GPL-2; ED calcula doses de modelo ajustado, não é calculadora pronta de amostra prospectiva. Nenhum código incorporado."
+  },
+  {
+    "project": "DoseFinding 1.4-2",
+    "incorporated": false,
+    "sha256": "5a8adb12f99aefbb8777a103dd4d7789fa72a544393e42deccef316028d11a47",
+    "reason": "GPL-3; métodos MCP-Mod/design não equivalem diretamente a esta precisão de CL50 beta-binomial. Não incorporado."
+  },
+  {
+    "project": "drda 2.0.5",
+    "incorporated": false,
+    "sha256": "f22ad9d5370df12e12f212a9f9b0a124dbb836603d30fec8d920d72dc59850ad",
+    "reason": "MIT; implementação disponível se destina a resposta contínua, não à mortalidade binomial desta rota. Não incorporado."
+  },
+  {
+    "project": "statsmodels v0.14.6",
+    "incorporated": false,
+    "sha256": "b1575ce0a9df615729ee78ef1a667fc371c0f1abc8b37d2228286e8baf2d1ca4",
+    "reason": "BSD-3-Clause; GLM.hessian_factor/information consultados como referência da informação binomial. Nenhum código Python portado ou distribuído."
+  }
+]

@@ -1,4 +1,6 @@
-# Código aberto, proveniência e licenças — tamanho amostral v1.3.0
+# Código aberto, proveniência e licenças — tamanho amostral v1.4.0
+
+Atualização 18/10/2026: precisão da CL50 em tempo fixo por logit/probit, binomial ou beta-binomial com ICC conhecido. Ver [CICLO-5-CL50.md](CICLO-5-CL50.md) e [CL50-PROVENIENCIA.json](CL50-PROVENIENCIA.json). Novas distribuições reutilizam o jStat MIT já incluído; nenhuma rotina GPL foi incorporada. 41 referências numéricas independentes e quatro cenários simulados. Os registros abaixo documentam também ciclos anteriores.
 
 Auditoria realizada em 15/10/2026. Esta documentação distingue código efetivamente distribuído, bibliotecas numéricas, fórmulas implementadas a partir da literatura e ferramentas apenas consultadas. A licença do módulo não altera automaticamente a titularidade dos materiais didáticos preexistentes.
 

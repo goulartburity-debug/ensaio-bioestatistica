@@ -24,6 +24,7 @@ export function fromPlan(plan){
 }
 export function transferProposal(plan,result,snapshot){
  const fail=reason=>({ok:false,reason,changes:[]});
+ if(result?.method==='lc50')return fail('Este cálculo dimensiona concentrações numéricas e controle separado. O planejamento atual não registra as concentrações, o modelo binário, o tempo fixo nem o ICC. Use a composição indicada; o número não será aplicado automaticamente a tratamentos genéricos.');
  if(!result||result.version!==VERSION)return fail('Calcule novamente com a versão atual antes de transferir.');
  if(snapshot!==fingerprint(plan))return fail('O planejamento mudou desde o cálculo. Use “Usar meu planejamento” e recalcule; o resultado anterior não será transferido.');
  if(plan.purpose!=='assigned')return fail('A transferência automática está disponível apenas para um experimento com condições atribuídas. O resultado pode ser consultado separadamente.');
