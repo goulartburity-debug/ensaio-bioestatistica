@@ -1,0 +1,1635 @@
+{
+  "reference": "lifelines 0.30.0 original functions, SciPy 1.17.0, quad for administrative event probability",
+  "cases": [
+    {
+      "id": "hr-0.3-ratio-0.5",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "0.5",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.3"
+      },
+      "expected": {
+        "nCon": 21,
+        "nExp": 11,
+        "total": 32,
+        "initialTotal": 32,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.5170318355375771,
+        "hr": 0.3,
+        "power": 0.8131474607912309,
+        "expectedEvents": 24.83119489029866,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          37,
+          19
+        ],
+        "sourcePowerAtSourceSizes": 0.8182080118639286
+      }
+    },
+    {
+      "id": "hr-0.3-ratio-1",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.3"
+      },
+      "expected": {
+        "nCon": 19,
+        "nExp": 19,
+        "total": 38,
+        "initialTotal": 38,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.5170318355375771,
+        "hr": 0.3,
+        "power": 0.801063806089912,
+        "expectedEvents": 27.144226269895917,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          19,
+          19
+        ],
+        "sourcePowerAtSourceSizes": 0.801063806089912
+      }
+    },
+    {
+      "id": "hr-0.3-ratio-2",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "2",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.3"
+      },
+      "expected": {
+        "nCon": 13,
+        "nExp": 26,
+        "total": 39,
+        "initialTotal": 39,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.5170318355375771,
+        "hr": 0.3,
+        "power": 0.8144599795228202,
+        "expectedEvents": 25.293779204548866,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          11,
+          22
+        ],
+        "sourcePowerAtSourceSizes": 0.8165773072006917
+      }
+    },
+    {
+      "id": "hr-0.5-ratio-0.5",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "0.5",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.5"
+      },
+      "expected": {
+        "nCon": 59,
+        "nExp": 30,
+        "total": 89,
+        "initialTotal": 89,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.7026982212493197,
+        "hr": 0.5,
+        "power": 0.8092431577335876,
+        "expectedEvents": 74.86603412622881,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          78,
+          39
+        ],
+        "sourcePowerAtSourceSizes": 0.8015931866767514
+      }
+    },
+    {
+      "id": "hr-0.5-ratio-1",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.5"
+      },
+      "expected": {
+        "nCon": 44,
+        "nExp": 44,
+        "total": 88,
+        "initialTotal": 88,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.7026982212493197,
+        "hr": 0.5,
+        "power": 0.8021535753395932,
+        "expectedEvents": 71.02963443844405,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          44,
+          44
+        ],
+        "sourcePowerAtSourceSizes": 0.8021535753395932
+      }
+    },
+    {
+      "id": "hr-0.5-ratio-2",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "2",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.5"
+      },
+      "expected": {
+        "nCon": 32,
+        "nExp": 64,
+        "total": 96,
+        "initialTotal": 96,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.7026982212493197,
+        "hr": 0.5,
+        "power": 0.803338776307774,
+        "expectedEvents": 74.14425903521027,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          28,
+          55
+        ],
+        "sourcePowerAtSourceSizes": 0.8084449272732905
+      }
+    },
+    {
+      "id": "hr-0.6666666666666666-ratio-0.5",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "0.5",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.6666666666666666"
+      },
+      "expected": {
+        "nCon": 164,
+        "nExp": 82,
+        "total": 246,
+        "initialTotal": 246,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.801574868503975,
+        "hr": 0.6666666666666666,
+        "power": 0.8007188407082333,
+        "expectedEvents": 215.23345020300172,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          192,
+          96
+        ],
+        "sourcePowerAtSourceSizes": 0.8012713694540734
+      }
+    },
+    {
+      "id": "hr-0.6666666666666666-ratio-1",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.6666666666666666"
+      },
+      "expected": {
+        "nCon": 115,
+        "nExp": 115,
+        "total": 230,
+        "initialTotal": 230,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.801574868503975,
+        "hr": 0.6666666666666666,
+        "power": 0.8015824098808586,
+        "expectedEvents": 197.01644989840048,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          115,
+          115
+        ],
+        "sourcePowerAtSourceSizes": 0.8015824098808586
+      }
+    },
+    {
+      "id": "hr-0.6666666666666666-ratio-2",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "2",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.6666666666666666"
+      },
+      "expected": {
+        "nCon": 86,
+        "nExp": 171,
+        "total": 257,
+        "initialTotal": 257,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.801574868503975,
+        "hr": 0.6666666666666666,
+        "power": 0.8019023582109799,
+        "expectedEvents": 215.46790461642433,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          77,
+          153
+        ],
+        "sourcePowerAtSourceSizes": 0.8014536978747292
+      }
+    },
+    {
+      "id": "hr-0.8-ratio-0.5",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "0.5",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.8"
+      },
+      "expected": {
+        "nCon": 530,
+        "nExp": 265,
+        "total": 795,
+        "initialTotal": 795,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.8564127056253705,
+        "hr": 0.8,
+        "power": 0.8004244099540732,
+        "expectedEvents": 710.1035427371144,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          575,
+          288
+        ],
+        "sourcePowerAtSourceSizes": 0.8011225795565307
+      }
+    },
+    {
+      "id": "hr-0.8-ratio-1",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.8"
+      },
+      "expected": {
+        "nCon": 360,
+        "nExp": 360,
+        "total": 720,
+        "initialTotal": 720,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.8564127056253705,
+        "hr": 0.8,
+        "power": 0.8004495657728736,
+        "expectedEvents": 636.4887688717388,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          360,
+          360
+        ],
+        "sourcePowerAtSourceSizes": 0.8004495657728736
+      }
+    },
+    {
+      "id": "hr-0.8-ratio-2",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "2",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.8"
+      },
+      "expected": {
+        "nCon": 271,
+        "nExp": 541,
+        "total": 812,
+        "initialTotal": 812,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.8564127056253705,
+        "hr": 0.8,
+        "power": 0.8008100455426819,
+        "expectedEvents": 710.3660315306312,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          253,
+          506
+        ],
+        "sourcePowerAtSourceSizes": 0.8004443764739952
+      }
+    },
+    {
+      "id": "hr-1.25-ratio-0.5",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "0.5",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "1.25"
+      },
+      "expected": {
+        "nCon": 512,
+        "nExp": 256,
+        "total": 768,
+        "initialTotal": 768,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9518059117060018,
+        "hr": 1.25,
+        "power": 0.8005920809897766,
+        "expectedEvents": 710.4074794007975,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          478,
+          239
+        ],
+        "sourcePowerAtSourceSizes": 0.8000009727878216
+      }
+    },
+    {
+      "id": "hr-1.25-ratio-1",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "1.25"
+      },
+      "expected": {
+        "nCon": 342,
+        "nExp": 342,
+        "total": 684,
+        "initialTotal": 684,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9518059117060018,
+        "hr": 1.25,
+        "power": 0.8009415993568769,
+        "expectedEvents": 637.2888069077278,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          342,
+          342
+        ],
+        "sourcePowerAtSourceSizes": 0.8009415993568769
+      }
+    },
+    {
+      "id": "hr-1.25-ratio-2",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "2",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "1.25"
+      },
+      "expected": {
+        "nCon": 252,
+        "nExp": 504,
+        "total": 756,
+        "initialTotal": 756,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9518059117060018,
+        "hr": 1.25,
+        "power": 0.8000559011341901,
+        "expectedEvents": 709.4363158924486,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          274,
+          547
+        ],
+        "sourcePowerAtSourceSizes": 0.8009321679701593
+      }
+    },
+    {
+      "id": "hr-1.5-ratio-0.5",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "0.5",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "1.5"
+      },
+      "expected": {
+        "nCon": 154,
+        "nExp": 77,
+        "total": 231,
+        "initialTotal": 231,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9737219870233215,
+        "hr": 1.5,
+        "power": 0.8009577236955328,
+        "expectedEvents": 215.36478746295472,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          138,
+          69
+        ],
+        "sourcePowerAtSourceSizes": 0.8014063309031665
+      }
+    },
+    {
+      "id": "hr-1.5-ratio-1",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "1.5"
+      },
+      "expected": {
+        "nCon": 105,
+        "nExp": 105,
+        "total": 210,
+        "initialTotal": 210,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9737219870233215,
+        "hr": 1.5,
+        "power": 0.8034478980839022,
+        "expectedEvents": 197.9600321343753,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          105,
+          105
+        ],
+        "sourcePowerAtSourceSizes": 0.8034478980839022
+      }
+    },
+    {
+      "id": "hr-1.5-ratio-2",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "2",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "1.5"
+      },
+      "expected": {
+        "nCon": 76,
+        "nExp": 151,
+        "total": 227,
+        "initialTotal": 227,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9737219870233215,
+        "hr": 1.5,
+        "power": 0.803532201586085,
+        "expectedEvents": 216.31450561924933,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          88,
+          176
+        ],
+        "sourcePowerAtSourceSizes": 0.8006747107765428
+      }
+    },
+    {
+      "id": "hr-2-ratio-0.5",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "0.5",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "2"
+      },
+      "expected": {
+        "nCon": 53,
+        "nExp": 27,
+        "total": 80,
+        "initialTotal": 80,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9921875,
+        "hr": 2.0,
+        "power": 0.8107038453757405,
+        "expectedEvents": 75.10448007463913,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          45,
+          23
+        ],
+        "sourcePowerAtSourceSizes": 0.8064305409518686
+      }
+    },
+    {
+      "id": "hr-2-ratio-1",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "2"
+      },
+      "expected": {
+        "nCon": 38,
+        "nExp": 38,
+        "total": 76,
+        "initialTotal": 76,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9921875,
+        "hr": 2.0,
+        "power": 0.8092726469974404,
+        "expectedEvents": 72.3443677893639,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          38,
+          38
+        ],
+        "sourcePowerAtSourceSizes": 0.8092726469974404
+      }
+    },
+    {
+      "id": "hr-2-ratio-2",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "2",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "2"
+      },
+      "expected": {
+        "nCon": 26,
+        "nExp": 51,
+        "total": 77,
+        "initialTotal": 77,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9921875,
+        "hr": 2.0,
+        "power": 0.8066557265823111,
+        "expectedEvents": 74.30346546114372,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          34,
+          68
+        ],
+        "sourcePowerAtSourceSizes": 0.8014049633881208
+      }
+    },
+    {
+      "id": "hr-3-ratio-0.5",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "0.5",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "3"
+      },
+      "expected": {
+        "nCon": 21,
+        "nExp": 11,
+        "total": 32,
+        "initialTotal": 32,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9993094660339975,
+        "hr": 3.0,
+        "power": 0.8171377947411314,
+        "expectedEvents": 30.136248825759285,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          18,
+          9
+        ],
+        "sourcePowerAtSourceSizes": 0.81357769051924
+      }
+    },
+    {
+      "id": "hr-3-ratio-1",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "3"
+      },
+      "expected": {
+        "nCon": 17,
+        "nExp": 17,
+        "total": 34,
+        "initialTotal": 34,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9993094660339975,
+        "hr": 3.0,
+        "power": 0.8132256052084366,
+        "expectedEvents": 32.48565901255654,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          17,
+          17
+        ],
+        "sourcePowerAtSourceSizes": 0.8132256052084366
+      }
+    },
+    {
+      "id": "hr-3-ratio-2",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "2",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "3"
+      },
+      "expected": {
+        "nCon": 11,
+        "nExp": 21,
+        "total": 32,
+        "initialTotal": 32,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9993094660339975,
+        "hr": 3.0,
+        "power": 0.8278979175224984,
+        "expectedEvents": 31.013226962582443,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          17,
+          34
+        ],
+        "sourcePowerAtSourceSizes": 0.8111408689857238
+      }
+    },
+    {
+      "id": "variant-24",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "medians",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "96",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two"
+      },
+      "expected": {
+        "nCon": 108,
+        "nExp": 108,
+        "total": 216,
+        "initialTotal": 216,
+        "pCon": 0.9521809634407755,
+        "pExp": 0.8705036218488468,
+        "hr": 0.6666666666666666,
+        "power": 0.8012516350773775,
+        "expectedEvents": 196.84993521127922,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          108,
+          108
+        ],
+        "sourcePowerAtSourceSizes": 0.8012516350773775
+      }
+    },
+    {
+      "id": "variant-25",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "medians",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "240",
+        "survFollow": "24",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two"
+      },
+      "expected": {
+        "nCon": 132,
+        "nExp": 132,
+        "total": 264,
+        "initialTotal": 264,
+        "pCon": 0.8023479822218721,
+        "pExp": 0.6905611908621886,
+        "hr": 0.6666666666666666,
+        "power": 0.8016768011461528,
+        "expectedEvents": 197.064010847096,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          132,
+          132
+        ],
+        "sourcePowerAtSourceSizes": 0.8016768011461528
+      }
+    },
+    {
+      "id": "variant-26",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "medians",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "12",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two"
+      },
+      "expected": {
+        "nCon": 732,
+        "nExp": 732,
+        "total": 1464,
+        "initialTotal": 1464,
+        "pCon": 0.1591035847462855,
+        "pExp": 0.10910128185966073,
+        "hr": 0.6666666666666666,
+        "power": 0.8002076996669583,
+        "expectedEvents": 196.32596235555263,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          732,
+          732
+        ],
+        "sourcePowerAtSourceSizes": 0.8002076996669583
+      }
+    },
+    {
+      "id": "variant-27",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "medians",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "90",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two"
+      },
+      "expected": {
+        "nCon": 154,
+        "nExp": 154,
+        "total": 308,
+        "initialTotal": 308,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.801574868503975,
+        "hr": 0.6666666666666666,
+        "power": 0.9012330413092876,
+        "expectedEvents": 263.8307242117711,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          154,
+          154
+        ],
+        "sourcePowerAtSourceSizes": 0.9012330413092876
+      }
+    },
+    {
+      "id": "variant-28",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "medians",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "1",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two"
+      },
+      "expected": {
+        "nCon": 171,
+        "nExp": 171,
+        "total": 342,
+        "initialTotal": 342,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.801574868503975,
+        "hr": 0.6666666666666666,
+        "power": 0.8016015651115618,
+        "expectedEvents": 292.95489506631725,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          171,
+          171
+        ],
+        "sourcePowerAtSourceSizes": 0.8016015651115618
+      }
+    },
+    {
+      "id": "variant-29",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "medians",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "3",
+        "loss": "0",
+        "sides": "two"
+      },
+      "expected": {
+        "nCon": 153,
+        "nExp": 153,
+        "total": 306,
+        "initialTotal": 306,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.801574868503975,
+        "hr": 0.6666666666666666,
+        "power": 0.8006734221650759,
+        "expectedEvents": 262.11753769091547,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          153,
+          153
+        ],
+        "sourcePowerAtSourceSizes": 0.8006734221650759
+      }
+    },
+    {
+      "id": "variant-30",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "medians",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "10",
+        "sides": "two"
+      },
+      "expected": {
+        "nCon": 115,
+        "nExp": 115,
+        "total": 230,
+        "initialTotal": 256,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.801574868503975,
+        "hr": 0.6666666666666666,
+        "power": 0.8015824098808586,
+        "expectedEvents": 197.01644989840048,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          115,
+          115
+        ],
+        "sourcePowerAtSourceSizes": 0.8015824098808586
+      }
+    },
+    {
+      "id": "variant-31",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "medians",
+        "survMedianCon": "480",
+        "survMedianExp": "720",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "1680",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two"
+      },
+      "expected": {
+        "nCon": 115,
+        "nExp": 115,
+        "total": 230,
+        "initialTotal": 230,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.801574868503975,
+        "hr": 0.6666666666666666,
+        "power": 0.8015824098808586,
+        "expectedEvents": 197.01644989840048,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          115,
+          115
+        ],
+        "sourcePowerAtSourceSizes": 0.8015824098808586
+      }
+    },
+    {
+      "id": "variant-32",
+      "inputs": {
+        "survApprox": "freedman",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": ".99"
+      },
+      "expected": {
+        "nCon": 170684,
+        "nExp": 170684,
+        "total": 341368,
+        "initialTotal": 341368,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.90944111534032,
+        "hr": 0.99,
+        "power": 0.8000013679916473,
+        "expectedEvents": 310824.5706007416,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          170684,
+          170684
+        ],
+        "sourcePowerAtSourceSizes": 0.8000013679916473
+      }
+    },
+    {
+      "id": "schoenfeld-0.5-0.5",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "0.5",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.5"
+      },
+      "expected": {
+        "nCon": 59,
+        "nExp": 30,
+        "total": 89,
+        "initialTotal": 89,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.7026982212493197,
+        "hr": 0.5,
+        "power": 0.8092431577335876,
+        "expectedEvents": 74.86603412622881,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          78,
+          39
+        ],
+        "sourcePowerAtSourceSizes": 0.8015931866767514
+      }
+    },
+    {
+      "id": "schoenfeld-0.5-1",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.5"
+      },
+      "expected": {
+        "nCon": 41,
+        "nExp": 41,
+        "total": 82,
+        "initialTotal": 82,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.7026982212493197,
+        "hr": 0.5,
+        "power": 0.8049932269314273,
+        "expectedEvents": 66.18670481764104,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          44,
+          44
+        ],
+        "sourcePowerAtSourceSizes": 0.8021535753395932
+      }
+    },
+    {
+      "id": "schoenfeld-0.5-2",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "2",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.5"
+      },
+      "expected": {
+        "nCon": 32,
+        "nExp": 64,
+        "total": 96,
+        "initialTotal": 96,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.7026982212493197,
+        "hr": 0.5,
+        "power": 0.803338776307774,
+        "expectedEvents": 74.14425903521027,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          28,
+          55
+        ],
+        "sourcePowerAtSourceSizes": 0.8084449272732905
+      }
+    },
+    {
+      "id": "schoenfeld-0.8-0.5",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "0.5",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.8"
+      },
+      "expected": {
+        "nCon": 530,
+        "nExp": 265,
+        "total": 795,
+        "initialTotal": 795,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.8564127056253705,
+        "hr": 0.8,
+        "power": 0.8004244099540732,
+        "expectedEvents": 710.1035427371144,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          575,
+          288
+        ],
+        "sourcePowerAtSourceSizes": 0.8011225795565307
+      }
+    },
+    {
+      "id": "schoenfeld-0.8-1",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.8"
+      },
+      "expected": {
+        "nCon": 357,
+        "nExp": 357,
+        "total": 714,
+        "initialTotal": 714,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.8564127056253705,
+        "hr": 0.8,
+        "power": 0.8004129530165848,
+        "expectedEvents": 631.1846957978075,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          360,
+          360
+        ],
+        "sourcePowerAtSourceSizes": 0.8004495657728736
+      }
+    },
+    {
+      "id": "schoenfeld-0.8-2",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "2",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "0.8"
+      },
+      "expected": {
+        "nCon": 271,
+        "nExp": 541,
+        "total": 812,
+        "initialTotal": 812,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.8564127056253705,
+        "hr": 0.8,
+        "power": 0.8008100455426819,
+        "expectedEvents": 710.3660315306312,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          253,
+          506
+        ],
+        "sourcePowerAtSourceSizes": 0.8004443764739952
+      }
+    },
+    {
+      "id": "schoenfeld-1.5-0.5",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "0.5",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "1.5"
+      },
+      "expected": {
+        "nCon": 154,
+        "nExp": 77,
+        "total": 231,
+        "initialTotal": 231,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9737219870233215,
+        "hr": 1.5,
+        "power": 0.8009577236955328,
+        "expectedEvents": 215.36478746295472,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          138,
+          69
+        ],
+        "sourcePowerAtSourceSizes": 0.8014063309031665
+      }
+    },
+    {
+      "id": "schoenfeld-1.5-1",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "1",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "1.5"
+      },
+      "expected": {
+        "nCon": 102,
+        "nExp": 102,
+        "total": 204,
+        "initialTotal": 204,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9737219870233215,
+        "hr": 1.5,
+        "power": 0.8027274986312,
+        "expectedEvents": 192.3040312162503,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          105,
+          105
+        ],
+        "sourcePowerAtSourceSizes": 0.8034478980839022
+      }
+    },
+    {
+      "id": "schoenfeld-1.5-2",
+      "inputs": {
+        "survApprox": "schoenfeld",
+        "survUnit": "individual",
+        "survObservation": "exact",
+        "survPH": "yes",
+        "survEffect": "hr",
+        "survMedianCon": "48",
+        "survMedianExp": "72",
+        "survRatio": "2",
+        "survEntry": "0",
+        "survFollow": "168",
+        "survTimeUnit": "horas",
+        "alpha": "5",
+        "power": "80",
+        "comparisons": "1",
+        "loss": "0",
+        "sides": "two",
+        "survHR": "1.5"
+      },
+      "expected": {
+        "nCon": 76,
+        "nExp": 151,
+        "total": 227,
+        "initialTotal": 227,
+        "pCon": 0.9116116523516815,
+        "pExp": 0.9737219870233215,
+        "hr": 1.5,
+        "power": 0.803532201586085,
+        "expectedEvents": 216.31450561924933,
+        "roundingIterations": 0,
+        "sourceSizes": [
+          88,
+          176
+        ],
+        "sourcePowerAtSourceSizes": 0.8006747107765428
+      }
+    }
+  ]
+}

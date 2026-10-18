@@ -1,0 +1,21 @@
+{
+  "project": "lifelines",
+  "version": "0.30.0",
+  "sourceURL": "https://github.com/CamDavidsonPilon/lifelines/blob/v0.30.0/lifelines/statistics.py",
+  "sourceSHA256": "7432cfcf614d6442353cd90bf697c07d04e85d2beb0e05dd3b142ca25b93c39a",
+  "functions": [
+    "sample_size_necessary_under_cph",
+    "power_under_cph"
+  ],
+  "license": "MIT",
+  "copyright": "Copyright (c) 2017 Cameron Davidson-Pilon",
+  "distributedFile": "sample-size/vendor/lifelines-logrank.mjs",
+  "originalFunctions": "tests/reference-source/lifelines-cph.py",
+  "changes": [
+    "scalar JavaScript port",
+    "jStat normal quantile/CDF in place of SciPy",
+    "events target exposed",
+    "caller validates and checks rounded power",
+    "Freedman unequal allocation blocked after simulation; Schoenfeld separate explicit implementation"
+  ]
+}

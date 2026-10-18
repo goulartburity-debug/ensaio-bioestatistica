@@ -1,0 +1,61 @@
+{
+  "seed": 20261018,
+  "software": "NumPy/SciPy 1.17.0",
+  "note": "Diagnostic under exponential proportional hazards; not a guarantee for all settings.",
+  "cases": [
+    {
+      "inputs": {},
+      "nCon": 115,
+      "nExp": 115,
+      "replications": 6000,
+      "nominalPower": 0.8,
+      "approxPower": 0.8015824098808586,
+      "simulatedLogrankPower": 0.8046666666666666,
+      "mcStandardError": 0.005118238991134585,
+      "meanEvents": 197.10216666666668,
+      "expectedEvents": 197.01644989840048
+    },
+    {
+      "inputs": {
+        "survRatio": "2"
+      },
+      "nCon": 77,
+      "nExp": 153,
+      "replications": 6000,
+      "nominalPower": 0.8,
+      "approxPower": 0.8014536978747292,
+      "simulatedLogrankPower": 0.7685,
+      "mcStandardError": 0.005445299961128558,
+      "meanEvents": 192.8585,
+      "expectedEvents": 192.83505211218767
+    },
+    {
+      "inputs": {
+        "survEntry": "96"
+      },
+      "nCon": 108,
+      "nExp": 108,
+      "replications": 6000,
+      "nominalPower": 0.8,
+      "approxPower": 0.8012516350773775,
+      "simulatedLogrankPower": 0.8041666666666667,
+      "mcStandardError": 0.005123192996704446,
+      "meanEvents": 196.91666666666666,
+      "expectedEvents": 196.84993521127922
+    },
+    {
+      "inputs": {
+        "survMedianExp": "96"
+      },
+      "nCon": 44,
+      "nExp": 44,
+      "replications": 6000,
+      "nominalPower": 0.8,
+      "approxPower": 0.8021535753395932,
+      "simulatedLogrankPower": 0.8283333333333334,
+      "mcStandardError": 0.004868217028547211,
+      "meanEvents": 70.98516666666667,
+      "expectedEvents": 71.02963443844405
+    }
+  ]
+}

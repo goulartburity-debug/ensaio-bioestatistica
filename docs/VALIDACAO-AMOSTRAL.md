@@ -1,5 +1,7 @@
 # Validação — tamanho amostral 1.3.0
 
+Atualização 18/10/2026: comparação bilateral de duas sobrevivências independentes, Freedman via lifelines MIT ou Schoenfeld explícito. Conversão de duração para eventos exponencial, censura administrativa e inclusão uniforme. Freedman desigual bloqueado após simulação. Ver [CICLO-7-SOBREVIVENCIA.md](CICLO-7-SOBREVIVENCIA.md). Fonte, licença, 42 referências numéricas e diagnóstico por simulação incluídos.
+
 Atualização 18/10/2026: LT50 por precisão com lognormal/log-logística, indivíduos independentes, visitas fixas, morte em intervalo e censura administrativa. Ver [CICLO-6-LT50.md](CICLO-6-LT50.md). jStat MIT reutilizado; lifelines MIT inspecionado sem incorporação. 24 referências numéricas independentes. Os registros anteriores continuam documentando CL50 e demais rotas.
 
 Atualização 18/10/2026: precisão da CL50 em tempo fixo por logit/probit, binomial ou beta-binomial com ICC conhecido. Ver [CICLO-5-CL50.md](CICLO-5-CL50.md) e [CL50-PROVENIENCIA.json](CL50-PROVENIENCIA.json). Novas distribuições reutilizam o jStat MIT já incluído; nenhuma rotina GPL foi incorporada. 41 referências numéricas independentes e quatro cenários simulados. Os registros abaixo documentam também ciclos anteriores.

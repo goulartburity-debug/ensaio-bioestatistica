@@ -91,7 +91,7 @@ test('Rotas alternativas preservam efeito padronizado, correlação intrapar e p
 });
 
 test('A ampliação do motor preserva os resultados dos exemplos da fase 1',()=>{
- assert.equal(VERSION,'1.5.0');
+ assert.equal(VERSION,'1.6.0');
  assert.equal(calculate({...defaults(),method:'proportion',...examples.proportion}).n,385);
  assert.equal(calculate({...defaults(),method:'anova',...examples.anova}).n,50);
  assert.equal(calculate({...defaults(),method:'blocks',...examples.blocks}).n,14);
