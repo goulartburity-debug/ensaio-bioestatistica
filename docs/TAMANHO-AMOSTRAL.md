@@ -1,4 +1,6 @@
-# Tamanho amostral no Ensaio — versão 1.6.0
+# Tamanho amostral no Ensaio — versão 1.7.0
+
+Atualização 18/10/2026: comparação de duas CL50 independentes por Wald/Fisher, binomial ou beta-binomial com ICC conhecido. Ver [CICLO-8-COMPARACAO-CL50.md](CICLO-8-COMPARACAO-CL50.md). Reutilização MIT; sem código GPL incorporado. 40 referências numéricas independentes e diagnóstico por simulação.
 
 Atualização 18/10/2026: comparação bilateral de duas sobrevivências independentes, Freedman via lifelines MIT ou Schoenfeld explícito. Conversão de duração para eventos exponencial, censura administrativa e inclusão uniforme. Freedman desigual bloqueado após simulação. Ver [CICLO-7-SOBREVIVENCIA.md](CICLO-7-SOBREVIVENCIA.md). Fonte, licença, 42 referências numéricas e diagnóstico por simulação incluídos.
 

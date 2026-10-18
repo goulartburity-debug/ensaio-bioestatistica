@@ -1,0 +1,58 @@
+{
+  "seed": 20261018,
+  "note": "Known ICC; illustrative Wald finite-sample diagnostic, failures counted as nonrejections; not a guarantee.",
+  "cases": [
+    {
+      "link": "logit",
+      "unit": "individual",
+      "allocation": "1",
+      "replications": 600,
+      "n1": 116,
+      "n2": 116,
+      "plannedPower": 0.8007425035264133,
+      "rejections": 476,
+      "fitFailures": 0,
+      "unconditionalPower": 0.7933333333333333,
+      "mcStandardError": 0.016530555322168072
+    },
+    {
+      "link": "probit",
+      "unit": "individual",
+      "allocation": "2",
+      "replications": 600,
+      "n1": 79,
+      "n2": 158,
+      "plannedPower": 0.8021981761111217,
+      "rejections": 477,
+      "fitFailures": 0,
+      "unconditionalPower": 0.795,
+      "mcStandardError": 0.01648104972384951
+    },
+    {
+      "link": "logit",
+      "unit": "container",
+      "allocation": "1",
+      "replications": 600,
+      "n1": 17,
+      "n2": 17,
+      "plannedPower": 0.8119708907884694,
+      "rejections": 468,
+      "fitFailures": 0,
+      "unconditionalPower": 0.78,
+      "mcStandardError": 0.01691153452528776
+    },
+    {
+      "link": "probit",
+      "unit": "container",
+      "allocation": ".5",
+      "replications": 600,
+      "n1": 23,
+      "n2": 12,
+      "plannedPower": 0.823741363355243,
+      "rejections": 487,
+      "fitFailures": 0,
+      "unconditionalPower": 0.8116666666666666,
+      "mcStandardError": 0.0159616148352273
+    }
+  ]
+}

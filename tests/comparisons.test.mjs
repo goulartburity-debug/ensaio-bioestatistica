@@ -122,5 +122,5 @@ test('Fatorial em DBC importa e aplica apenas estrutura completa com mesmos fato
  const wrong={...p,levelsB:'4'};assert.equal(transferProposal(wrong,r,fingerprint(wrong)).ok,false);
  assert.equal(transferProposal({...p,blockCount:'9'},r,fingerprint(p)).ok,false);
  const stale={...r,version:'1.0.0'};assert.equal(transferProposal(p,stale,fingerprint(p)).ok,false);
- assert.equal(VERSION,'1.6.0');
+ assert.equal(VERSION,'1.7.0');
 });

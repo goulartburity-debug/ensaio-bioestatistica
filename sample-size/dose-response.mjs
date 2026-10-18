@@ -14,7 +14,7 @@ export function meanInformation(p,m,rho){
  if(!Number.isFinite(normalizer)||Math.abs(normalizer-1)>1e-7)throw Error('A distribuição beta-binomial não convergiu na faixa numérica permitida.');
  return mass.reduce((v,w,i)=>v+w/sum*scores[i]**2,0);
 }
-export function calculateLC50(s,{number}){
+export function calculateLC50(s,{number,informationOnly=false}){
  const num=(k,label,min,max,int=false)=>number(s[k],label,min,max,int),meta=methods.lc50;
  if(s.lcAssumption!=='zero')throw Error('Esta rota exige mortalidade de fundo nula e limite superior de 100%. Se isso não for plausível, é necessário outro modelo.');
  if(!['logit','probit'].includes(s.lcLink))throw Error('Escolha logit ou probit.');
@@ -46,7 +46,8 @@ export function calculateLC50(s,{number}){
  });
  const det=a*d-b*b;
  if(!(det>1e-10*a*d&&Number.isFinite(det)))throw Error('A matriz de informação é singular ou instável. Amplie a faixa útil de concentrações.');
- const varianceOne=d/det,raw=z*z*varianceOne/(h*h),r=Math.max(1,Math.ceil(raw)),initialR=Math.ceil(r/(1-loss)),groups=doses.length+control,total=r*groups,initialTotal=initialR*groups;
+ const varianceOne=d/det;if(informationOnly)return {varianceOne,lc50,slope,m,rho,control,doses,predictions};
+ const raw=z*z*varianceOne/(h*h),r=Math.max(1,Math.ceil(raw)),initialR=Math.ceil(r/(1-loss)),groups=doses.length+control,total=r*groups,initialTotal=initialR*groups;
  if(!Number.isSafeInteger(total)||initialTotal>1e7)throw Error('A precisão solicitada exige mais de 10 milhões de unidades; não foi produzido um tamanho utilizável.');
  const actualHalf=z*Math.sqrt(varianceOne/r),factor=Math.exp(actualHalf),lower=lc50/factor,upper=lc50*factor;
  const label=s.lcUnit==='individual'?'Indivíduos tratados separadamente por concentração':'Recipientes independentes por concentração';

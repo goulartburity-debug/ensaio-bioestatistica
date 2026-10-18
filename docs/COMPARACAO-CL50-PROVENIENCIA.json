@@ -1,0 +1,53 @@
+{
+  "version": "1.7.0",
+  "method": "lcCompare",
+  "date": "2026-10-18",
+  "reused": [
+    {
+      "project": "CoDel-Stat",
+      "version": "1.6.0 Fisher module, information-only extension 1.7.0",
+      "file": "sample-size/dose-response.mjs",
+      "function": "calculateLC50",
+      "license": "MIT",
+      "adaptation": "Returns expected inverse-information variance before computing single-curve n."
+    },
+    {
+      "project": "jStat",
+      "version": "1.9.6",
+      "file": "sample-size/vendor/jstat.mjs",
+      "functions": [
+        "normal.cdf",
+        "normal.inv",
+        "gammaln"
+      ],
+      "license": "MIT",
+      "adaptation": "Unchanged bundled implementation, including beta-binomial information dependency."
+    }
+  ],
+  "new": [
+    "sample-size/dose-comparison.mjs: independent variance sum, bilateral normal Wald power, integer allocation search"
+  ],
+  "consultedNotCopied": [
+    {
+      "project": "drc",
+      "version": "3.0-1 EDcomp documentation; 4.0-0 source inspected in CL50 research",
+      "license": "GPL-2",
+      "url": "https://search.r-project.org/CRAN/refmans/drc/html/EDcomp.html",
+      "reason": "Effective-dose comparisons and delta/log transformations; not a browser sample-size implementation."
+    }
+  ],
+  "references": [
+    "10.1093/toxsci/kfs209",
+    "10.1080/02664763.2021.1880556",
+    "10.1098/rsif.2018.0186"
+  ],
+  "validation": {
+    "software": "SciPy 1.17.0",
+    "cases": 40,
+    "continuousRelativeTolerance": 2e-06,
+    "integerTolerance": 0,
+    "fixture": "tests/dose-comparison-reference.json",
+    "simulation": "tests/dose-comparison-simulation.json"
+  },
+  "architecture": "Browser-only; no remote service, R runtime or server."
+}
