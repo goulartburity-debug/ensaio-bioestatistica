@@ -24,6 +24,7 @@ export function fromPlan(plan){
 }
 export function transferProposal(plan,result,snapshot){
  const fail=reason=>({ok:false,reason,changes:[]});
+ if(result?.method==='survivalCluster')return fail('O planejamento atual não registra a correlação dos resíduos, o modelo marginal e a censura. Recipientes e organismos não serão convertidos automaticamente em repetições genéricas.');
  if(result?.method==='lcCompare')return fail('O planejamento não representa duas listas de concentrações, curvas independentes e quantidades por curva. O resultado não será convertido em um único número de repetições por tratamento.');
  if(result?.method==='survival')return fail('O planejamento atual não registra riscos proporcionais, duração de inclusão, evento e censura. O resultado permanece separado para evitar aplicar uma quantidade incompatível ou perder a alocação desigual.');
  if(result?.method==='lt50')return fail('O cálculo dimensiona uma condição com tempos até o evento, censura e horários fixos. O planejamento atual não registra essa estrutura e não deve receber o total como repetições por tratamento. Use a composição informada separadamente.');

@@ -1,4 +1,6 @@
-# Código aberto, proveniência e licenças — tamanho amostral v1.7.0
+# Código aberto, proveniência e licenças — tamanho amostral v1.8.0
+
+Atualização 18/10/2026: sobrevivência em recipientes com tempos exatos, dois grupos balanceados e correlação dos resíduos de martingale (Gangnon–Kosorok). Resultados com poucos recipientes são identificados como preliminares após diagnóstico de inflação do erro tipo I. Ver [CICLO-9-SOBREVIVENCIA-AGRUPADA.md](CICLO-9-SOBREVIVENCIA-AGRUPADA.md). 42 referências numéricas, 24.000 ensaios simulados e 637 testes. Sem porte GPL; README preservado.
 
 Atualização 18/10/2026: comparação de duas CL50 independentes por Wald/Fisher, binomial ou beta-binomial com ICC conhecido. Ver [CICLO-8-COMPARACAO-CL50.md](CICLO-8-COMPARACAO-CL50.md). Reutilização MIT; sem código GPL incorporado. 40 referências numéricas independentes e diagnóstico por simulação.
 

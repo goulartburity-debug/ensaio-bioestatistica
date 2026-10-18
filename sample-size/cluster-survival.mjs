@@ -1,0 +1,34 @@
+import {jStat} from './vendor/jstat.mjs';
+import {integerSearch} from './numeric.mjs';
+import {eventProbability} from './survival-comparison.mjs';
+import {methods,VERSION} from './methods.mjs';
+// Gangnon & Kosorok (2004), section 4: whole-cluster assignment.
+// rho is the martingale-residual correlation under H0, not raw-time/binary ICC.
+export function clusteredSurvivalPower(k,m,rho,eventProbability,logHR,alpha){
+ const deff=1+(m-1)*rho,events=2*k*m*eventProbability;
+ return jStat.normal.cdf(Math.sqrt(events/(4*deff))*Math.abs(logHR)-jStat.normal.inv(1-alpha/2,0,1),0,1);
+}
+export function calculateClusterSurvival(s,{number}){
+ const num=(k,label,min,max,int=false)=>number(s[k],label,min,max,int),meta=methods.survivalCluster;
+ if(s.csStructure!=='whole')throw Error('Esta rota exige recipientes independentes, cada um inteiro sorteado para um de dois grupos, com o mesmo número de organismos analisáveis. Não inclui pares, blocos nem tratamentos dentro do mesmo recipiente.');
+ if(s.csObservation!=='exact')throw Error('Esta rota exige tempos de evento registrados e censura à direita. Avaliações em visitas com mortes conhecidas apenas entre horários exigem censura intervalar e ainda não são dimensionadas aqui.');
+ if(s.csPH!=='yes')throw Error('É necessário justificar riscos proporcionais marginais. Não use esta rota para curvas que cruzam ou efeitos que mudam com o tempo.');
+ if(s.csCorrelation!=='martingale')throw Error('Confirme que a correlação é dos resíduos de martingale sob H0, para o acompanhamento planejado. ICC de mortalidade final, correlação dos tempos, tau de Kendall e variância de frailty não são intercambiáveis.');
+ if(s.sides!=='two')throw Error('A comparação de sobrevivência agrupada desta versão é bilateral.');
+ if(!String(s.csTimeUnit||'').trim())throw Error('Informe a unidade de tempo comum às medianas e ao acompanhamento.');
+ const m=num('csM','organismos analisáveis por recipiente',2,100,true),rho=num('csRho','correlação dos resíduos de martingale',.001,.5),median1=num('csMedian1','mediana marginal esperada do grupo 1',1e-9,1e9),median2=num('csMedian2','mediana marginal esperada do grupo 2',1e-9,1e9),follow=num('csFollow','acompanhamento comum',1e-9,1e9);
+ const hr=median1/median2;
+ if(hr<.5||hr>2||Math.abs(hr-1)<1e-6)throw Error('Use medianas que definam HR marginal entre 0,5 e 2, diferente de 1. Efeitos fora dessa faixa não foram habilitados nesta aproximação local.');
+ const familyAlpha=num('alpha','significância da família (%)',.1,20),comparisons=num('comparisons','hipóteses na família',1,100,true),alpha=familyAlpha/100/comparisons,target=num('power','poder (%)',50,99.9)/100,loss=num('loss','perdas de recipientes inteiros (%)',0,90)/100;
+ const p1=eventProbability(Math.LN2/median1,0,follow),p2=eventProbability(Math.LN2/median2,0,follow),pooled=(p1+p2)/2,deff=1+(m-1)*rho;
+ if(Math.min(p1,p2)<1e-6)throw Error('O acompanhamento prevê poucos eventos para a faixa numérica permitida.');
+ const powerAt=k=>clusteredSurvivalPower(k,m,rho,pooled,Math.log(hr),alpha),solved=integerSearch(powerAt,target,2,1000000),k=solved.n,total=2*k,individuals=total*m,initialK=Math.ceil(k/(1-loss)),initialTotal=2*initialK;
+ if(!Number.isSafeInteger(individuals)||initialTotal*m>1e7)throw Error('A inclusão excede dez milhões de organismos. Nenhum tamanho utilizável foi recomendado.');
+ const expectedEvents=k*m*(p1+p2),za=jStat.normal.inv(1-alpha/2,0,1),zb=jStat.normal.inv(target,0,1),eventTarget=4*deff*(za+zb)**2/Math.log(hr)**2;
+ const warnings=[meta.limits,'A correlação deve corresponder aos resíduos de martingale sob H0 e ao esquema de censura planejado. Não use diretamente o ICC de mortalidade final, dos tempos, de CL50 ou um parâmetro de frailty. Se alterar o acompanhamento, revise essa correlação.','Poder por aproximação local assintótica do log-rank com variância robusta por recipiente; não é poder de um log-rank comum que ignora agrupamento, nem garantia de poder real.','Organismos vivos no encerramento são censurados, não perdas. O ajuste opcional de perdas é apenas para recipientes inteiros sem informação. Não modela perdas internas nem abandono informativo.'];
+ if(k<30)warnings.push('Menos de 30 recipientes por grupo: esta versão classifica a saída como preliminar, pois a simulação identificou inflação do erro tipo I com poucos recipientes. O limite de triagem do software não é um limiar universal de validade, e não há aumento automático de n. Confirme por simulação do ensaio e da análise.');
+ if(expectedEvents<30)warnings.push('Menos de 30 eventos esperados: a aproximação é frágil.');
+ if(hr<.67||hr>1.5)warnings.push('Efeito distante da hipótese nula: a aproximação local pode divergir mais do desempenho real.');
+ const params={'Método':'Gangnon–Kosorok (2004), atribuição de recipientes inteiros','Hipótese':'HR marginal = 1; bilateral','Análise planejada':'Log-rank com variância robusta por recipiente','Estrutura':'Dois grupos balanceados; recipientes de tamanho igual; todos iniciam juntos','Tempos marginais':'Exponenciais; censura administrativa comum','Unidade de tempo':String(s.csTimeUnit).slice(0,80),'Mediana marginal grupo 1':median1,'Mediana marginal grupo 2':median2,'HR marginal grupo 2 / grupo 1':hr,'Acompanhamento comum':follow,'Organismos analisáveis por recipiente':m,'Correlação dos resíduos sob H0':rho,'Fator de agrupamento dos resíduos':deff,'Probabilidade de evento grupo 1 (%)':100*p1,'Probabilidade de evento grupo 2 (%)':100*p2,'Probabilidade média de evento (%)':100*pooled,'Eventos-alvo aproximados':eventTarget,'Eventos esperados no tamanho final':expectedEvents,'Significância da família (%)':familyAlpha,'Hipóteses na família (Bonferroni)':comparisons,'Significância por hipótese (%)':100*alpha,'Poder desejado (%)':100*target,'Perdas de recipientes inteiros (%)':100*loss};
+ return {provisional:k<30,statusReason:k<30?'Estimativa preliminar: a validação identificou inflação do erro tipo I com poucos recipientes. A quantidade abaixo é a saída da fórmula, não uma recomendação final. Exige planejamento por simulação específico; não altere o efeito esperado apenas para sair desta faixa.':'',version:VERSION,method:'survivalCluster',params,n:k,total,initialTotal,units:[{label:'Recipientes independentes por grupo',n:k}],initialUnits:[{label:'Recipientes iniciais por grupo',n:initialK}],level:'recipientes independentes por grupo',power:solved.power,blocks:null,clusters:total,composition:`Dois grupos: ${k} + ${k} = ${total} recipientes independentes, com ${m} organismos cada (${individuals} organismos vinculados). Inclusão inicial: ${initialK} + ${initialK} = ${initialTotal} recipientes e ${initialTotal*m} organismos.`,type:meta.type,warnings,source:meta.source,ref:meta.ref,url:meta.url,inputs:{...s},hr,p1,p2,pooled,deff,expectedEvents,eventTarget,individuals,initialIndividuals:initialTotal*m};
+}

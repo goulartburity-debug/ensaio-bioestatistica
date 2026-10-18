@@ -1,0 +1,77 @@
+{
+  "method": "survivalCluster",
+  "version": "1.8.0",
+  "date": "2026-10-18",
+  "implemented": "Gangnon-Kosorok 2004, section 4, whole-cluster assignment; normal local-alternative power; balanced clusters; exponential marginal event probabilities",
+  "referenceDOI": "10.1093/biomet/91.2.263",
+  "reused": [
+    {
+      "project": "jStat",
+      "version": "1.9.6",
+      "license": "MIT",
+      "file": "sample-size/vendor/jstat.mjs",
+      "functions": [
+        "normal.cdf",
+        "normal.inv"
+      ],
+      "adaptations": "None"
+    },
+    {
+      "project": "CoDel-Stat",
+      "version": "1.7.0",
+      "license": "MIT",
+      "files": [
+        "sample-size/numeric.mjs",
+        "sample-size/survival-comparison.mjs"
+      ],
+      "functions": [
+        "integerSearch",
+        "eventProbability"
+      ],
+      "adaptations": "None; event probability called with simultaneous entry."
+    }
+  ],
+  "newFile": "sample-size/cluster-survival.mjs",
+  "consultedNotCopied": [
+    {
+      "project": "frailtypack",
+      "version": "3.8.1",
+      "license": "GPL >=2",
+      "sourceURL": "https://raw.githubusercontent.com/cran/frailtypack/master/R/frailtyDesign.R",
+      "filesInspected": [
+        "DESCRIPTION",
+        "R/frailtyDesign.R"
+      ],
+      "functionsInspected": [
+        "SFM.power",
+        "SFM.ssize"
+      ],
+      "sha256": "a7bf0c1451ad8537d4d09923d3fe999b73713a0b00834747af7fa76829e7629f",
+      "reasonNotReused": "Different frailty analysis and architecture; no GPL code incorporated."
+    },
+    {
+      "project": "CRTSize",
+      "version": "1.2",
+      "license": "GPL >=2",
+      "inspection": "Documentation method list; no clustered survival route found; no source copied."
+    }
+  ],
+  "validation": {
+    "referenceSoftware": "SciPy 1.17.0",
+    "referenceCases": 42,
+    "integerTolerance": 0,
+    "continuousTolerance": "2e-7 * max(1,abs(reference))",
+    "simulationTrials": 24000,
+    "simulationFile": "tests/cluster-survival-simulation.json",
+    "smallSampleDiagnostic": "Type-I error inflation; k<30 labeled provisional, no automatic inflation. This software screen is not a universal validity threshold.",
+    "testCount": 637,
+    "browserQA": false
+  },
+  "limitations": [
+    "Exact times/right censoring only",
+    "Balanced whole-cluster assignment and equal size",
+    "Martingale-residual correlation under H0; no raw ICC conversion",
+    "No finite-sample correction or guarantee of type-I error",
+    "No transfer to generic planning structure"
+  ]
+}
